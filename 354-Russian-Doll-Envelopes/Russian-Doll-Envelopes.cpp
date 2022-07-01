@@ -42,11 +42,25 @@ public:
     }
 
     /*
-        sort by sume of H and W
+        sort by sum of H and W
     */
     vector<vector<int>> Envelopes getSorted(vector<vector<int>>& envelopes) {
 
-        int sum = envelopeA[0] + envelopeB[1];
+        vector<int> rowSums;
+
+        for(int i = 0; i < envelopes.size(); i++) {
+
+            rowSums.push_back(envelopes[i] + envelopes[i+1]);
+        }
+
+        int smallest = 0;
+
+        for(int j = 0; j < rowSums.size(); rowSums++) {
+
+            if(smallest < rowSums[j]) {
+
+            }
+        }
 
         return sum;
     }
