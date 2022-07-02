@@ -20,31 +20,18 @@ class Solution {
 public:
     int maxEnvelopes(vector<vector<int>>& envelopes) {
 
-        int A = 0;
-        int B = 0;
         int count = 1; // russian doll'd envelopes
 
-        getSorted(envelopes); // sort by sum of H && W
-
-        for(; A < envelopes.size(); A++) {
-
-            if((A + 1) >= envelopes.size()) { break;} // check if last envelope
-
-            for(B = A + 1; B < envelopes.size(); B++) {
-
-                checkIfAFitsInB(envelopes[A], envelopes[B]);
-
-                count++;
-            }
-        }
+        sortEnvelopes(envelopes);
+        count = getRussianDollCount(envelopes);
 
         return count;
     }
 
     /*
-        sort by sum of H and W
+        sort by sum: H + W
     */
-    vector<vector<int>> Envelopes getSorted(vector<vector<int>>& envelopes) {
+    void sortEnvelopes(vector<vector<int>>& envelopes) {
 
         vector<int> rowSums;
 
@@ -65,11 +52,34 @@ public:
         return sum;
     }
 
+    int getRussianDollCount(vector<vector<int>>& envelopes) {
+
+      int A = 0;
+      int B = 0;
+      int count = 0;
+
+      for(; A < envelopes.size(); A++) {
+
+          if((A + 1) >= envelopes.size()) { break;} // check if last envelope
+
+          for(B = A + 1; B < envelopes.size(); B++) {
+
+              checkIfAFitsInB(envelopes[A], envelopes[B]);
+
+              count++;
+          }
+      }
+
+      return count;
+
+    }
+
     /**
      check if envelope A will fit in B
      needs to at least be B(A) ~ B(Wi + 1, Hi + 1) vs A(Wi, Hi)
     */
     int checkIfAFitsInB(vector<int> A, vector<int> B) {
+
 
     }
 };
