@@ -46,6 +46,7 @@ public:
 
             if(smallest < rowSums[j]) {
 
+                
             }
         }
 
