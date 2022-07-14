@@ -35,7 +35,7 @@ public:
         int count = 1;
 
         envelopes = sortEnvelopes(envelopes);
-        //count = getRussianDollCount(envelopes);
+        count = getRussianDollCount(envelopes);
 
         return count;
     }
@@ -45,13 +45,13 @@ public:
     */
     vector<vector<int>> sortEnvelopes(vector<vector<int>>& envelopes) {
 
-        int smallestSum = 0;
+        int smallSum = 0;
         int currentSum = 0;
         vector<vector<int>> orderedEnvelopes;
         vector<vector<int>> iter;
 
-        smallestSum = envelopes[0][0] + envelopes[0][1]; // initial envelope's height + width
         orderedEnvelopes.push_back(envelopes[0]);                          // initial envelope's order position is '0'
+        smallSum = orderedEnvelopes[0][0] + orderedEnvelopes[0][1]; // initial envelope's height + width
 
         for (int i = 1; i < envelopes.size(); i++) {
 
@@ -59,39 +59,43 @@ public:
 
             for (int j = 0; j < orderedEnvelopes.size(); j ++) { // order: initially <0>, then <0, 1, (^), 2, ...>
 
-                if (currentSum < smallestSum) {
+                smallSum = orderedEnvelopes[j][0] + orderedEnvelopes[j][1];
 
-                    iter = orderedEnvelopes.insert(orderedEnvelopes.begin(), envelopes[i]);
-                    smallestSum = currentSum;
-                }
-                else {
+                if (currentSum < smallSum) {
 
-                    orderedEnvelopes.push_back(envelopes[i]);
+                    iter = orderedEnvelopes.insert(orderedEnvelopes.begin() + j, envelopes[i]);
+                    break;
                 }
             }
+
+            orderedEnvelopes.push_back(envelopes[i]);
 
         }
 
         return orderedEnvelopes;
     }
 
+    /*
+        With envelopes now sorted,
+        we will russian doll the envelopes seeing to see how many can fit around eachother
+        Each next envelope will need to be at least < H+1, W+1>
+    */
     int getRussianDollCount(vector<vector<int>>& envelopes) {
 
-        int A = 0;
-        int B = 0;
         int count = 0;
 
-        //for (; A < envelopes.size(); A++) {
+        for (int A = 0; A < envelopes.size(); A++) {
 
-        //    if ((A + 1) >= envelopes.size()) { break; } // check if last envelope
+           if ((A + 1) >= envelopes.size()) { break; } // exit if last envelope
 
-        //    for (B = A + 1; B < envelopes.size(); B++) {
+           for (int B = A + 1; B < envelopes.size(); B++) {
 
-        //        checkIfAFitsInB(envelopes[A], envelopes[B]);
+               if(checkIfAFitsInB(envelopes[A], envelopes[B])) {
 
-        //        count++;
-        //    }
-        //}
+                  count++;
+               }
+           }
+        }
 
         return count;
     }
@@ -112,7 +116,7 @@ int main() {
     Solution solution;
     int count = 0; // russian doll'd envelopes
     vector<vector<int>> envelopes = { {1, 1}, {1, 1}, {1, 1} };
-    
+
     count = solution.maxEnvelopes(envelopes);
 
     cout << count << endl;
