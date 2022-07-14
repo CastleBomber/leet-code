@@ -27,6 +27,9 @@ using namespace std;
 
 class Solution {
 public:
+    /*
+        Gets the maximum number from highest russian doll envelope set
+    */
     int maxEnvelopes(vector<vector<int>>& envelopes) {
 
         int count = 1;
@@ -38,32 +41,35 @@ public:
     }
 
     /*
-        sort by sum: H + W
+        sort each envelope in ascending order by sum of: height + width
     */
     vector<vector<int>> sortEnvelopes(vector<vector<int>>& envelopes) {
 
         int smallestSum = 0;
         int currentSum = 0;
-        vector<int> order;
         vector<vector<int>> orderedEnvelopes;
+        vector<vector<int>> iter;
 
-        smallestSum = envelopes[0][0] + envelopes[0][1]; // initial envelope
-        order.push_back(0);
+        smallestSum = envelopes[0][0] + envelopes[0][1]; // initial envelope's height + width
+        orderedEnvelopes.push_back(envelopes[0]);                          // initial envelope's order position is '0'
 
         for (int i = 1; i < envelopes.size(); i++) {
 
-            currentSum = envelopes[i][0] + envelopes[i][1]; // height + width
+            currentSum = envelopes[i][0] + envelopes[i][1]; // sequential envelopes h + w
 
-            for (int j = 0; j < order.size(); j ++) {
+            for (int j = 0; j < orderedEnvelopes.size(); j ++) { // order: initially <0>, then <0, 1, (^), 2, ...>
 
                 if (currentSum < smallestSum) {
 
-                    //order.insert(order.begin(), 0);
+                    iter = orderedEnvelopes.insert(orderedEnvelopes.begin(), envelopes[i]);
+                    smallestSum = currentSum;
                 }
                 else {
-                    order.push_back(i);
+
+                    orderedEnvelopes.push_back(envelopes[i]);
                 }
             }
+
         }
 
         return orderedEnvelopes;
