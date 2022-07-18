@@ -35,7 +35,7 @@ public:
         int count = 1;
 
         envelopes = sortEnvelopes(envelopes);
-        count = getRussianDollCount(envelopes);
+        //count = getRussianDollCount(envelopes);
 
         return count;
     }
@@ -49,6 +49,8 @@ public:
         int currentSum = 0;
         vector<vector<int>> orderedEnvelopes;
         vector<vector<int>> iter;
+        vector<vector<int>> row;
+        vector<int> col;
 
         orderedEnvelopes.push_back(envelopes[0]);                          // initial envelope's order position is '0'
         smallSum = orderedEnvelopes[0][0] + orderedEnvelopes[0][1]; // initial envelope's height + width
@@ -104,10 +106,10 @@ public:
      check if envelope A will fit in B
      needs to at least be B(A) ~ B(Wi + 1, Hi + 1) vs A(Wi, Hi)
     */
-    /*int checkIfAFitsInB(vector<int> A, vector<int> B) {
+    int checkIfAFitsInB(vector<int> A, vector<int> B) {
 
-
-    }*/
+        return 0;
+    }
 };
 
 
@@ -115,7 +117,7 @@ int main() {
 
     Solution solution;
     int count = 0; // russian doll'd envelopes
-    vector<vector<int>> envelopes = { {1, 1}, {1, 1}, {1, 1} };
+    vector<vector<int>> envelopes = { {5, 4}, {6, 4}, {6, 7}, {2, 3} };
 
     count = solution.maxEnvelopes(envelopes);
 

@@ -1,2 +1,18 @@
 ﻿  Russian-Doll-Envelopes.cpp
-  Russian-Doll-Envelopes.vcxproj -> C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\x64\Debug\Russian-Doll-Envelopes.exe
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(68,1): error C2679: binary '=': no operator found which takes a right-hand operand of type 'std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>' (or there is no acceptable conversion)
+          with
+          [
+              _Ty=std::vector<int,std::allocator<int>>
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\vector(1350,26): message : could be 'std::vector<std::vector<int,std::allocator<int>>,std::allocator<std::vector<int,std::allocator<int>>>> &std::vector<std::vector<int,std::allocator<int>>,std::allocator<std::vector<int,std::allocator<int>>>>::operator =(std::initializer_list<_Ty>)'
+          with
+          [
+              _Ty=std::vector<int,std::allocator<int>>
+          ]
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\vector(1329,26): message : or       'std::vector<std::vector<int,std::allocator<int>>,std::allocator<std::vector<int,std::allocator<int>>>> &std::vector<std::vector<int,std::allocator<int>>,std::allocator<std::vector<int,std::allocator<int>>>>::operator =(const std::vector<std::vector<int,std::allocator<int>>,std::allocator<std::vector<int,std::allocator<int>>>> &)'
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.32.31326\include\vector(759,26): message : or       'std::vector<std::vector<int,std::allocator<int>>,std::allocator<std::vector<int,std::allocator<int>>>> &std::vector<std::vector<int,std::allocator<int>>,std::allocator<std::vector<int,std::allocator<int>>>>::operator =(std::vector<std::vector<int,std::allocator<int>>,std::allocator<std::vector<int,std::allocator<int>>>> &&) noexcept'
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(68,1): message : while trying to match the argument list '(std::vector<std::vector<int,std::allocator<int>>,std::allocator<std::vector<int,std::allocator<int>>>>, std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>)'
+          with
+          [
+              _Ty=std::vector<int,std::allocator<int>>
+          ]
