@@ -79,8 +79,11 @@ public:
 
     /*
         With envelopes now sorted,
-        we will russian doll the envelopes seeing to see how many can fit around eachother
+        we will russian doll the envelopes to see how many can fit around eachother
         Each next envelope will need to be at least < H+1, W+1>
+
+        ex1: in = [[2,3], [5,4], [6,4], [6,7]]     out = 3
+                    ^A     ^B     ^B'    ^B''
     */
     int getRussianDollCount(vector<vector<int>>& envelopes) {
 
@@ -88,7 +91,7 @@ public:
 
         for (int A = 0; A < envelopes.size(); A++) {
 
-           if ((A + 1) >= envelopes.size()) { break; } // exit if last envelope
+           if ((A + 1) >= envelopes.size()) { break; } // exits if last envelope
 
            for (int B = A + 1; B < envelopes.size(); B++) {
 
@@ -105,8 +108,20 @@ public:
     /**
      check if envelope A will fit in B
      needs to at least be B(A) ~ B(Wi + 1, Hi + 1) vs A(Wi, Hi)
+
+     ex1: in = [[2,3], [5,4]     out = true
+                 ^A     ^B
+
+      ex2: in = [[5,4], [6,4]     out = false
+                  ^A     ^B
     */
     int checkIfAFitsInB(vector<int> A, vector<int> B) {
+
+        if() {
+
+
+          return 1;
+        }
 
         return 0;
     }
