@@ -97,7 +97,7 @@ public:
             for (B = A + 1; B < envelopes.size(); B++) {
 
                 if(checkIfAFitsInsideB(envelopes[A], envelopes[B])) {
-                    
+
                     A = B;
                     count++;
                 }
@@ -111,12 +111,12 @@ public:
          Checks if envelope A will fit inside B
          needs to at least be B(Wi + 1, Hi + 1) vs A(Wi, Hi)
 
-         ex1: 
+         ex1:
          in = [[2,3], [5,4]     out = true
                 ^A     ^B
 
 
-         ex2: 
+         ex2:
          in = [[5,4], [6,4]     out = false
                 ^A     ^B
     */
@@ -142,8 +142,9 @@ int main() {
     Solution solution;
     int count = 0; // russian doll'd envelopes
     //vector<vector<int>> envelopes = { {5, 4}, {6, 4}, {6, 7}, {2, 3} };
-    vector<vector<int>> envelopes = 
-    { {15,8},{2,20},{2,14},{4,17},{8,19},{8,9},{5,7},{11,19},{8,11},{13,11},{2,13},{11,19},{8,11},{13,11},{2,13},{11,19},{16,1},{18,13},{14,17},{18,19} };
+    vector<vector<int>> envelopes =
+    { {15,8},{2,20},{2,14},{4,17},{8,19},{8,9},{5,7},{11,19},{8,11},{13,11},
+    {2,13},{11,19},{8,11},{13,11},{2,13},{11,19},{16,1},{18,13},{14,17},{18,19} };
 
     count = solution.maxEnvelopes(envelopes);
 
