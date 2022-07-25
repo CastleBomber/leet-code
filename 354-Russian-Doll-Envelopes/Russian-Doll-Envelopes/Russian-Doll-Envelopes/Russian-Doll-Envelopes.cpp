@@ -29,28 +29,51 @@ class Solution {
 public:
     /*
         Gets the maximum number from highest russian doll envelope set
+
+        Using three different approaches to find max
+        Envelopes are organized by:
+
+        Sum of Sides
+        Widths
+        Heights
+
+        Will compare the three countes and return the greater value
     */
     int maxEnvelopes(vector<vector<int>>& envelopes) {
 
-        int count = 1;
+        int countFromSumOfSides = 1;
+        int countFromHeights = 1;
+        int countFromWidths = 1;
+        int greatestCount = 1;
 
-        envelopes = sortEnvelopes(envelopes);
-        count = getRussianDollCount(envelopes);
+        vector<vector<int>> envelopesBySumOfSides;
+        vector<vector<int>> envelopesByHeights;
+        vector<vector<int>> envelopesByWidths;
 
-        return count;
+        envelopesBySumOfSides = sortEnvelopesBySumOfSides(envelopes);
+        envelopesByHeights = sortEnvelopesByHeights(envelopes);
+        //envelopesByWidths = sortEnvelopesByWidths(envelopes);
+
+        countFromSumOfSides = getRussianDollCount(envelopesBySumOfSides);
+        countFromHeights = getRussianDollCount(envelopesByHeights);
+        //countFromWidths = getRussianDollCount(envelopesByWidths);
+
+        //greatestCount = getGreatestCount(countFromSumOfSides, countFromHeights, countFromWidths);
+
+        return countFromSumOfSides;
     }
 
     /*
         sort each envelope in ascending order by sum of: height + width
     */
-    vector<vector<int>> sortEnvelopes(vector<vector<int>>& envelopes) {
+    vector<vector<int>> sortEnvelopesBySumOfSides(vector<vector<int>>& envelopes) {
 
         int i = 1;
         int j = 0;
         int smallSum = 0;
         int currentSum = 0;
         vector<vector<int>> sortedEnvelopes;
-        sortedEnvelopes.push_back(envelopes[0]);               // initial envelope's order position is '0'
+        sortedEnvelopes.push_back(envelopes[0]);  // initial envelope's order position is '0'
 
         for (i = 1; i < envelopes.size(); i++) {
 
@@ -67,11 +90,77 @@ public:
                 }
             }
 
-            if (currentSum > smallSum) {
+            if (currentSum >= smallSum) {
+
                 sortedEnvelopes.push_back(envelopes[i]);
             }
 
         }
+
+        return sortedEnvelopes;
+    }
+
+    vector<vector<int>> sortEnvelopesByHeights(vector<vector<int>>& envelopes) {
+
+        int i = 0;
+        int j = 0;
+        int smallHeight = 0;
+        int currentHeight = 0;
+        int smallWidth = 0;
+        int currentWidth = 0;
+        vector<vector<int>> sortedEnvelopes;
+        sortedEnvelopes.push_back(envelopes[0]);
+
+        for (i = 1; i < envelopes.size(); i++) {
+
+            currentHeight = envelopes[i][0];
+
+            for (j = 0; j < sortedEnvelopes.size(); j++) {
+
+                smallHeight = sortedEnvelopes[j][0];
+
+                if (currentHeight < smallHeight) {
+
+                    sortedEnvelopes.insert(sortedEnvelopes.begin() + j, envelopes[i]);
+                    break;
+                }
+                else if (currentHeight == smallHeight) {
+
+                    currentWidth = envelopes[i][1];
+                    smallWidth = sortedEnvelopes[j][1];
+
+                    if (currentWidth < smallWidth) {
+
+                        sortedEnvelopes.insert(sortedEnvelopes.begin() + j, envelopes[i]);
+                        break;
+                    }
+                }
+            }
+
+            if (currentHeight >= smallHeight) {
+
+                sortedEnvelopes.push_back(envelopes[i]);
+            }
+        }
+
+        return sortedEnvelopes;
+
+    }
+    
+    vector<vector<int>> sortEnvelopesByWidths(vector<vector<int>>& envelopes) {
+
+        int i = 0;
+        int j = 0;
+        int smallWidth = 0;
+        vector<vector<int>> sortedEnvelopes;
+        sortedEnvelopes.push_back(envelopes[0]);
+
+        /*for (i = 0; i < envelopes.size(); i++) {
+
+            for (j = 0; j < sortedEnvelopes.size(); j++) {
+
+            }
+        }*/
 
         return sortedEnvelopes;
     }
@@ -134,6 +223,17 @@ public:
 
         return 0;
     }
+
+    int getGreatestCount(int a, int b, int c) {
+
+        int greatest = 1;
+
+        /*if () {
+
+        }*/
+
+        return greatest;
+    }
 };
 
 
@@ -142,9 +242,11 @@ int main() {
     Solution solution;
     int count = 0; // russian doll'd envelopes
     //vector<vector<int>> envelopes = { {5, 4}, {6, 4}, {6, 7}, {2, 3} };
-    vector<vector<int>> envelopes =
-    { {15,8},{2,20},{2,14},{4,17},{8,19},{8,9},{5,7},{11,19},{8,11},{13,11},
-    {2,13},{11,19},{8,11},{13,11},{2,13},{11,19},{16,1},{18,13},{14,17},{18,19} };
+    //vector<vector<int>> envelopes =
+    //{ {15,8},{2,20},{2,14},{4,17},{8,19},{8,9},{5,7},{11,19},{8,11},{13,11},
+    //{2,13},{11,19},{8,11},{13,11},{2,13},{11,19},{16,1},{18,13},{14,17},{18,19} };
+
+    vector<vector<int>> envelopes = { {17, 15},{17, 18},{2, 8},{7, 2},{17, 2},{17, 8},{6, 15} };
 
     count = solution.maxEnvelopes(envelopes);
 
