@@ -25,6 +25,12 @@
 
 using namespace std;
 
+struct Node {
+
+    int key;
+    vector<Node*> child;
+};
+
 class Solution {
     public:
         /*
@@ -208,9 +214,12 @@ class Solution {
         */
         int getRussianDollCount(vector<vector<int>>& envelopes) {
 
-            int count = 1;
             int A = 0;
             int B = A + 1;
+            int count = 1;
+            vector<int> counts;
+
+            counts.push_back(count); // handles 1 envelope case
 
             for (A = 0; A < envelopes.size(); A++) {
 
@@ -224,7 +233,12 @@ class Solution {
                         count++;
                     }
                 }
+
+                counts.push_back(count); // reached the end, try with different envelopes
+                count = 1;
             }
+
+            count = getLargestCount(counts);
 
             return count;
         }
@@ -257,6 +271,9 @@ class Solution {
             return 0;
         }
 
+        /*
+            Takes in three integers && returns the greatest
+        */
         int getGreatestCount(int a, int b, int c) {
 
             int greatest = a;
@@ -273,6 +290,24 @@ class Solution {
 
             return greatest;
         }
+
+        /*
+            Takes in a vector as input and returns the largest value
+        */
+        int getLargestCount(vector<int> numbers) {
+
+            int count = 0;
+
+            for (int i = 0; i < numbers.size(); i++) {
+
+                if (numbers[i] > count) {
+
+                    count = numbers[i];
+                }
+            }
+
+            return count;
+        }
 };
 
 
@@ -281,7 +316,8 @@ int main() {
     Solution solution;
     int count = 0; // russian doll'd envelopes
 
-    vector<vector<int>> envelopes = { {{7,8},{12,16},{12,5},{1,8},{4,19},{3,15},{4,10},{9,16}} };
+    vector<vector<int>> envelopes = { {{15,8},{2,20},{2,14},{4,17},{8,19},{8,9},{5,7},{11,19},{8,11},{13,11},
+        {2,13},{11,19},{8,11},{13,11},{2,13},{11,19},{16,1},{18,13},{14,17},{18,19}} };
 
     count = solution.maxEnvelopes(envelopes);
 
