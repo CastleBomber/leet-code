@@ -31,6 +31,14 @@ struct Node {
     vector<Node*> child;
 };
 
+Node *newNode (int key) {
+
+    Node *tmp = new Node;
+    tmp->key = key;
+
+    return tmp;
+}
+
 class Solution {
     public:
         /*
@@ -157,7 +165,7 @@ class Solution {
             return sortedEnvelopes;
 
         }
-    
+
         vector<vector<int>> sortEnvelopesByWidths(vector<vector<int>>& envelopes) {
 
             int i = 0;
@@ -174,7 +182,7 @@ class Solution {
 
                 currentHeight = envelopes[i][0];
                 currentWidth = envelopes[i][1];
-                 
+
                 for (j = 0; j < sortedEnvelopes.size(); j++) {
 
                     smallHeight = sortedEnvelopes[j][0];
@@ -279,7 +287,7 @@ class Solution {
             int greatest = a;
 
             if (b > greatest) {
-                
+
                 greatest = b;
             }
 
