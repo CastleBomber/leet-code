@@ -329,5 +329,7 @@ int main() {
 
     count = solution.maxEnvelopes(envelopes);
 
+    Node* root = new Node();
+
     cout << count << endl;
 }
