@@ -22,6 +22,7 @@
 #include <string>
 #include <vector>
 #include <regex>
+#include <queue>
 
 using namespace std;
 
@@ -121,44 +122,57 @@ class Solution {
         */
         vector<vector<int>> sortEnvelopesByHeights(vector<vector<int>>& envelopes) {
 
-            int i = 0;
-            int j = 0;
-            int smallHeight = 0;
-            int currentHeight = 0;
-            int smallWidth = 0;
-            int currentWidth = 0;
+            int e = 0; // envelopes position
+            int sE = 0; // sortedEnvelopes position
+            int sortedHeight = 0;
+            int sortedWidth = 0;
+            int unsortedHeight = 0;
+            int unsortedWidth = 0;
             vector<vector<int>> sortedEnvelopes;
 
             sortedEnvelopes.push_back(envelopes[0]);
 
-            for (i = 1; i < envelopes.size(); i++) {
+            // compare the unsorted envelopes with sortedEnvelopes
+            for (e = 1; e < envelopes.size(); e++) {
 
-                currentHeight = envelopes[i][0];
-                currentWidth = envelopes[i][1];
+                // take next from envelopes
+                unsortedHeight = envelopes[e][0];
+                unsortedWidth = envelopes[e][1];
 
-                for (j = 0; j < sortedEnvelopes.size(); j++) {
+                // compare with each in sortedEnvelopes, starts with smallest height
+                for (sE = 0; sE < sortedEnvelopes.size(); sE++) {
 
-                    smallHeight = sortedEnvelopes[j][0];
-                    smallWidth = sortedEnvelopes[j][1];
+                    sortedHeight = sortedEnvelopes[sE][0];
+                    sortedWidth = sortedEnvelopes[sE][1];
 
-                    if (currentHeight < smallHeight) {
+                    if (unsortedHeight < sortedHeight) { // shorter
 
-                        sortedEnvelopes.insert(sortedEnvelopes.begin() + j, envelopes[i]);
+                        sortedEnvelopes.insert(sortedEnvelopes.begin() + sE, envelopes[e]);
                         break;
                     }
-                    else if (currentHeight == smallHeight) {
+                    else if (unsortedHeight == sortedHeight) {
 
-                        if (currentWidth < smallWidth) {
+                        if (unsortedWidth <= sortedWidth) {
 
-                            sortedEnvelopes.insert(sortedEnvelopes.begin() + j, envelopes[i]);
+                            sortedEnvelopes.insert(sortedEnvelopes.begin() + sE, envelopes[e]);
+                            break;
+                        }
+                        else {
+
+                            sortedEnvelopes.insert(sortedEnvelopes.begin() + sE + 1, envelopes[e]);
                             break;
                         }
                     }
-                }
+                    else if (unsortedHeight > sortedHeight) {
+                        // no op
+                    }
 
-                if ((currentHeight >= smallHeight) && (currentWidth >= smallWidth)) {
+                    // have reached the end, tallest to add at the end
+                    if ((sE+1) == sortedEnvelopes.size()) {
 
-                    sortedEnvelopes.push_back(envelopes[i]);
+                        sortedEnvelopes.push_back(envelopes[e]);
+                        break;
+                    }
                 }
             }
 
@@ -324,12 +338,18 @@ int main() {
     Solution solution;
     int count = 0; // russian doll'd envelopes
 
-    vector<vector<int>> envelopes = { {{15,8},{2,20},{2,14},{4,17},{8,19},{8,9},{5,7},{11,19},{8,11},{13,11},
-        {2,13},{11,19},{8,11},{13,11},{2,13},{11,19},{16,1},{18,13},{14,17},{18,19}} };
+    vector<vector<int>> envelopes = { 
+        {{15,8},{2,20},{2,14},{4,17},{8,19},
+        {8,9},{5,7},{11,19},{8,11},{13,11},
+        {2,13},{11,19},{8,11},{13,11},{2,13},
+        {11,19},{16,1},{18,13},{14,17},{18,19}} };
 
     count = solution.maxEnvelopes(envelopes);
 
-    Node* root = new Node();
+    /*Node* root = new Node();
+
+    queue<Node*> q;
+    (root->child).push_back(newNode(1));*/
 
     cout << count << endl;
 }
