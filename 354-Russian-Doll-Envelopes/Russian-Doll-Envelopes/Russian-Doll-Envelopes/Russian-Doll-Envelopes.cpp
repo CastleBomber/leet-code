@@ -69,9 +69,9 @@ class Solution {
             envelopesByHeights = sortEnvelopesByHeights(envelopes);
             envelopesByWidths = sortEnvelopesByWidths(envelopes);
 
-            countFromSumOfSides = getRussianDollCount(envelopesBySumOfSides);
-            countFromHeights = getRussianDollCount(envelopesByHeights);
-            countFromWidths = getRussianDollCount(envelopesByWidths);
+            //countFromSumOfSides = getRussianDollCount(envelopesBySumOfSides);
+            //countFromHeights = getRussianDollCount(envelopesByHeights);
+            //countFromWidths = getRussianDollCount(envelopesByWidths);
 
             greatestCount = getGreatestCount(countFromSumOfSides, countFromHeights, countFromWidths);
 
@@ -182,44 +182,55 @@ class Solution {
 
         vector<vector<int>> sortEnvelopesByWidths(vector<vector<int>>& envelopes) {
 
-            int i = 0;
-            int j = 0;
-            int smallHeight = 0;
-            int currentHeight = 0;
-            int smallWidth = 0;
-            int currentWidth = 0;
+            int e = 0; // envelopes position
+            int sE = 0; // sortedEnvelopes position
+            int sortedHeight = 0;
+            int sortedWidth = 0;
+            int unsortedHeight = 0;
+            int unsortedWidth = 0;
             vector<vector<int>> sortedEnvelopes;
 
             sortedEnvelopes.push_back(envelopes[0]);
 
-            for (i = 1; i < envelopes.size(); i++) {
+            for (e = 1; e < envelopes.size(); e++) {
 
-                currentHeight = envelopes[i][0];
-                currentWidth = envelopes[i][1];
+                unsortedHeight = envelopes[e][0];
+                unsortedWidth = envelopes[e][1];
 
-                for (j = 0; j < sortedEnvelopes.size(); j++) {
+                for (sE = 0; sE < sortedEnvelopes.size(); sE++) {
 
-                    smallHeight = sortedEnvelopes[j][0];
-                    smallWidth = sortedEnvelopes[j][1];
+                    sortedHeight = sortedEnvelopes[sE][0];
+                    sortedWidth = sortedEnvelopes[sE][1];
 
-                    if (currentWidth < smallWidth) {
+                    if (unsortedWidth < sortedWidth) {
 
-                        sortedEnvelopes.insert(sortedEnvelopes.begin() + j, envelopes[i]);
+                        sortedEnvelopes.insert(sortedEnvelopes.begin() + sE, envelopes[e]);
                         break;
                     }
-                    else if (currentWidth == smallWidth) {
+                    else if (unsortedWidth == sortedWidth) {
 
-                        if (currentHeight < smallHeight) {
+                        if (unsortedHeight < sortedHeight) {
 
-                            sortedEnvelopes.insert(sortedEnvelopes.begin() + j, envelopes[i]);
+                            sortedEnvelopes.insert(sortedEnvelopes.begin() + sE, envelopes[e]);
+                            break;
+                        }
+                        else {
+
+                            sortedEnvelopes.insert(sortedEnvelopes.begin() + sE + 1, envelopes[e]);
                             break;
                         }
                     }
-                }
+                    else if (unsortedWidth > sortedWidth) {
 
-                if ((currentWidth >= smallWidth) && (currentHeight >= smallHeight)) {
+                        // no op
+                    }
 
-                    sortedEnvelopes.push_back(envelopes[i]);
+                    // have reached the end, tallest to add at the end
+                    if ((sE + 1) == sortedEnvelopes.size()) {
+
+                        sortedEnvelopes.push_back(envelopes[e]);
+                        break;
+                    }
                 }
             }
 
@@ -346,10 +357,18 @@ int main() {
 
     count = solution.maxEnvelopes(envelopes);
 
-    /*Node* root = new Node();
-
-    queue<Node*> q;
-    (root->child).push_back(newNode(1));*/
-
     cout << count << endl;
+
+    // general graph tree
+    Node* root = new Node();
+    queue<Node*> q;
+    int b = 0;
+
+    for (int a = 0; a < envelopes.size(); a++) {
+
+        if (envelopes[a][b] < envelopes[a][b]) {
+
+            (root->child).push_back(newNode(envelopes[a][b]));
+        }
+    }
 }
