@@ -370,5 +370,10 @@ int main() {
 
             (root->child).push_back(newNode(envelopes[a][b]));
         }
+
+        if (true) {
+
+            (root->child[b]->child).push_back(newNode(13));
+        }
     }
 }
