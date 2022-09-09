@@ -43,76 +43,28 @@ Node *newNode (int key) {
 class Solution {
     public:
         /*
-            Gets the maximum number from highest russian doll envelope set
 
-            Using three different approaches to find max
-            Envelopes are organized by:
-
-            Sum of Sides
-            Widths
-            Heights
-
-            Will compare the three countes and return the greater value
         */
         int maxEnvelopes(vector<vector<int>>& envelopes) {
 
-            int countFromSumOfSides = 1;
-            int countFromHeights = 1;
-            int countFromWidths = 1;
-            int greatestCount = 1;
+            int count = 1;
 
-            vector<vector<int>> envelopesBySumOfSides;
             vector<vector<int>> envelopesByHeights;
-            vector<vector<int>> envelopesByWidths;
 
-            envelopesBySumOfSides = sortEnvelopesBySumOfSides(envelopes);
             envelopesByHeights = sortEnvelopesByHeights(envelopes);
-            envelopesByWidths = sortEnvelopesByWidths(envelopes);
+            envelopesByHeights = removeDuplicates(envelopesByHeights);
 
-            //countFromSumOfSides = getRussianDollCount(envelopesBySumOfSides);
-            //countFromHeights = getRussianDollCount(envelopesByHeights);
-            //countFromWidths = getRussianDollCount(envelopesByWidths);
+            // general graph tree
+            Node* root = new Node();
+            queue<Node*> q;
 
-            greatestCount = getGreatestCount(countFromSumOfSides, countFromHeights, countFromWidths);
+            // create nodes from each unique envelope and push to queue
+            for (int N = 0; N < envelopesByHeights.size(); N++) {
 
-            return greatestCount;
-        }
-
-        /*
-            sort each envelope in ascending order by sum of: height + width
-        */
-        vector<vector<int>> sortEnvelopesBySumOfSides(vector<vector<int>>& envelopes) {
-
-            int i = 1;
-            int j = 0;
-            int smallSum = 0;
-            int currentSum = 0;
-            vector<vector<int>> sortedEnvelopes;
-            sortedEnvelopes.push_back(envelopes[0]);  // initial envelope's order position is '0'
-
-            for (i = 1; i < envelopes.size(); i++) {
-
-                currentSum = envelopes[i][0] + envelopes[i][1]; // sequential envelopes h + w
-
-                for (j = 0; j < sortedEnvelopes.size(); j ++) { // order: initially <0>, then <0, 1, (^), 2, ...>
-
-                    smallSum = sortedEnvelopes[j][0] + sortedEnvelopes[j][1];
-
-                    if (currentSum < smallSum) {
-
-                        sortedEnvelopes.insert(sortedEnvelopes.begin() + j, envelopes[i]);
-                        break;
-                    }
-                }
-
-                if (currentSum >= smallSum) {
-
-                    sortedEnvelopes.push_back(envelopes[i]);
-                }
-
+                q.push(envelopesByHeights[N]);
             }
 
-            return sortedEnvelopes;
+            return count;
         }
 
         /*
@@ -238,6 +190,44 @@ class Solution {
         }
 
         /*
+            sort each envelope in ascending order by sum of: height + width
+        */
+        vector<vector<int>> sortEnvelopesBySumOfSides(vector<vector<int>>& envelopes) {
+
+            int i = 1;
+            int j = 0;
+            int smallSum = 0;
+            int currentSum = 0;
+            vector<vector<int>> sortedEnvelopes;
+            sortedEnvelopes.push_back(envelopes[0]);  // initial envelope's order position is '0'
+
+            for (i = 1; i < envelopes.size(); i++) {
+
+                currentSum = envelopes[i][0] + envelopes[i][1]; // sequential envelopes h + w
+
+                for (j = 0; j < sortedEnvelopes.size(); j ++) { // order: initially <0>, then <0, 1, (^), 2, ...>
+
+                    smallSum = sortedEnvelopes[j][0] + sortedEnvelopes[j][1];
+
+                    if (currentSum < smallSum) {
+
+                        sortedEnvelopes.insert(sortedEnvelopes.begin() + j, envelopes[i]);
+                        break;
+                    }
+                }
+
+                if (currentSum >= smallSum) {
+
+                    sortedEnvelopes.push_back(envelopes[i]);
+                }
+
+            }
+
+            return sortedEnvelopes;
+        }
+
+
+        /*
             With envelopes now sorted,
             we will russian doll the envelopes to see how many can fit around eachother
             Each next envelope will need to be at least < H+1, W+1>
@@ -341,6 +331,20 @@ class Solution {
 
             return count;
         }
+
+        vector<vector<int>> removeDuplicates(envelopesByHeights){
+
+            vector<vector<int>> sortedEnvelopes;
+
+            for () {
+
+                if () {
+
+                }
+            }
+
+            return sortedEnvelopes;
+        }
 };
 
 
@@ -349,7 +353,7 @@ int main() {
     Solution solution;
     int count = 0; // russian doll'd envelopes
 
-    vector<vector<int>> envelopes = { 
+    vector<vector<int>> envelopes = {
         {{15,8},{2,20},{2,14},{4,17},{8,19},
         {8,9},{5,7},{11,19},{8,11},{13,11},
         {2,13},{11,19},{8,11},{13,11},{2,13},
@@ -358,22 +362,4 @@ int main() {
     count = solution.maxEnvelopes(envelopes);
 
     cout << count << endl;
-
-    // general graph tree
-    Node* root = new Node();
-    queue<Node*> q;
-    int b = 0;
-
-    for (int a = 0; a < envelopes.size(); a++) {
-
-        if (envelopes[a][b] < envelopes[a][b]) {
-
-            (root->child).push_back(newNode(envelopes[a][b]));
-        }
-
-        if (true) {
-
-            (root->child[b]->child).push_back(newNode(13));
-        }
-    }
 }
