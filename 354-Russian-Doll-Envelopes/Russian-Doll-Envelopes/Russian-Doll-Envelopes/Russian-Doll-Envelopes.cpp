@@ -56,12 +56,20 @@ class Solution {
 
             // general graph tree
             Node* root = new Node();
-            queue<Node*> q;
 
             // create nodes from each unique envelope and push to queue
             for (int N = 0; N < envelopesByHeights.size(); N++) {
 
-                q.push(envelopesByHeights[N]);
+                // need to create node
+                (root->child).push_back(newNode(0));
+            }
+
+            //
+            queue<Node*> q;
+
+            for () {
+
+                q.push(root);
             }
 
             return count;
@@ -332,7 +340,7 @@ class Solution {
             return count;
         }
 
-        vector<vector<int>> removeDuplicates(envelopesByHeights){
+        vector<vector<int>> removeDuplicates(vector<vector<int>> envelopesByHeights){
 
             vector<vector<int>> sortedEnvelopes;
 
