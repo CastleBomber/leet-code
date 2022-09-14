@@ -49,19 +49,28 @@ class Solution {
 
             int count = 1;
 
-            vector<vector<int>> envelopesByHeights;
-
-            envelopesByHeights = sortEnvelopesByHeights(envelopes);
-            envelopesByHeights = removeDuplicates(envelopesByHeights);
+            vector<vector<int>> sortedEnvelopes;
+            sortedEnvelopes = sortEnvelopesByHeights(envelopes);
+            sortedEnvelopes = removeDuplicates(sortedEnvelopes);
 
             // general graph tree
             Node* root = new Node();
+            int pos = 0;
 
             // create nodes from each unique envelope and push to queue
-            for (int N = 0; N < envelopesByHeights.size(); N++) {
+            for (int N = 0; N < sortedEnvelopes.size(); N++) {
 
-                // need to create node
-                (root->child).push_back(newNode(0));
+                pos = 0
+
+                for (int E = 0; E < sortedEnvelopes.size(); E++) {
+
+                    if (checkIfAFitsInsideB(sortedEnvelopes[E], sortedEnvelopes[N])) {
+
+                        // need to create node
+                        (root->child).push_back(newNode(0));
+                        pos++;
+                    }
+                }
             }
 
             //
