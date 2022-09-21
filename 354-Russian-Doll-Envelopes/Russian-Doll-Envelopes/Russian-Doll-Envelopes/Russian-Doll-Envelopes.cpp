@@ -60,7 +60,7 @@ class Solution {
             // create nodes from each unique envelope and push to queue
             for (int N = 0; N < sortedEnvelopes.size(); N++) {
 
-                pos = 0
+                pos = 0;
 
                 for (int E = 0; E < sortedEnvelopes.size(); E++) {
 
@@ -242,7 +242,6 @@ class Solution {
 
             return sortedEnvelopes;
         }
-
 
         /*
             With envelopes now sorted,
