@@ -42,9 +42,6 @@ Node *newNode (int key) {
 
 class Solution {
     public:
-        /*
-
-        */
         int maxEnvelopes(vector<vector<int>>& envelopes) {
 
             int count = 1;
@@ -360,9 +357,8 @@ class Solution {
             }
 
             return sortedEnvelopes;
-        }
+        }}
 };
-
 
 int main() {
 
