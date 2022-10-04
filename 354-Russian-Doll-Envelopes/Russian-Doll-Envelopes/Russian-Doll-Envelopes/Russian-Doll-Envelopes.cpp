@@ -49,6 +49,7 @@ class Solution {
             vector<vector<int>> sortedEnvelopes;
             sortedEnvelopes = sortEnvelopesByHeights(envelopes);
             sortedEnvelopes = removeDuplicates(sortedEnvelopes); // unique envelopes
+            sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
             // queue of general tree nodes with children being pointers to sub trees
 
@@ -328,19 +329,26 @@ class Solution {
             return count;
         }
 
-        vector<vector<int>> removeDuplicates(vector<vector<int>> envelopesByHeights){
+        /*
+            Removes duplicate envelopes
+        */
+        vector<vector<int>> removeDuplicates(vector<vector<int>> envelopes){
 
-            vector<vector<int>> sortedEnvelopes;
+            vector<vector<int>> uniqueEnvelopes;
 
-            for () {
+            for (auto envelope : envelopes) {
 
-                if () {
+                for (auto sortedEnvelope : uniqueEnvelopes) {
 
+                    if (envelope not in uniqueEnvelopes) {
+
+
+                    }
                 }
             }
 
             return sortedEnvelopes;
-        }}
+        }
 };
 
 int main() {
