@@ -48,11 +48,9 @@ class Solution {
 
             vector<vector<int>> sortedEnvelopes;
             sortedEnvelopes = sortEnvelopesByHeights(envelopes);
-            sortedEnvelopes = removeDuplicates(sortedEnvelopes); // unique envelopes
             sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
             // queue of general tree nodes with children being pointers to sub trees
-
             for () {
 
                 if () {
@@ -60,7 +58,6 @@ class Solution {
 
                 }
             }
-
 
             return count;
         }
@@ -189,6 +186,8 @@ class Solution {
 
         /*
             sort each envelope in ascending order by sum of: height + width
+
+            *algorithm could use more work
         */
         vector<vector<int>> sortEnvelopesBySumOfSides(vector<vector<int>>& envelopes) {
 
@@ -222,45 +221,6 @@ class Solution {
             }
 
             return sortedEnvelopes;
-        }
-
-        /*
-            With envelopes now sorted,
-            we will russian doll the envelopes to see how many can fit around eachother
-            Each next envelope will need to be at least < H+1, W+1>
-
-            ex1: in = [[2,3], [5,4], [6,4], [6,7]]     out = 3
-                        ^A     ^B     ^B'    ^B''
-        */
-        int getRussianDollCount(vector<vector<int>>& envelopes) {
-
-            int A = 0;
-            int B = A + 1;
-            int count = 1;
-            vector<int> counts;
-
-            counts.push_back(count); // handles 1 envelope case
-
-            for (A = 0; A < envelopes.size(); A++) {
-
-                if ((A+1) >= envelopes.size()) { break; } // exits if last envelope
-
-                for (B = A + 1; B < envelopes.size(); B++) {
-
-                    if(checkIfAFitsInsideB(envelopes[A], envelopes[B])) {
-
-                        A = B;
-                        count++;
-                    }
-                }
-
-                counts.push_back(count); // reached the end, try with different envelopes
-                count = 1;
-            }
-
-            count = getLargestCount(counts);
-
-            return count;
         }
 
         /**
@@ -309,45 +269,6 @@ class Solution {
             }
 
             return greatest;
-        }
-
-        /*
-            Takes in a vector as input and returns the largest value
-        */
-        int getLargestCount(vector<int> numbers) {
-
-            int count = 0;
-
-            for (int i = 0; i < numbers.size(); i++) {
-
-                if (numbers[i] > count) {
-
-                    count = numbers[i];
-                }
-            }
-
-            return count;
-        }
-
-        /*
-            Removes duplicate envelopes
-        */
-        vector<vector<int>> removeDuplicates(vector<vector<int>> envelopes){
-
-            vector<vector<int>> uniqueEnvelopes;
-
-            for (auto envelope : envelopes) {
-
-                for (auto sortedEnvelope : uniqueEnvelopes) {
-
-                    if (envelope not in uniqueEnvelopes) {
-
-
-                    }
-                }
-            }
-
-            return sortedEnvelopes;
         }
 };
 
