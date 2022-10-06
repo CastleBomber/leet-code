@@ -1,2 +1,6 @@
 ﻿  Russian-Doll-Envelopes.cpp
-  Russian-Doll-Envelopes.vcxproj -> C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\x64\Debug\Russian-Doll-Envelopes.exe
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(57,18): error C2143: syntax error: missing ';' before ')'
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(57,20): error C2143: syntax error: missing ';' before '{'
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(57,20): error C2143: syntax error: missing ')' before '{'
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(59,21): error C2059: syntax error: ')'
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(59,1): error C2143: syntax error: missing ';' before '{'
