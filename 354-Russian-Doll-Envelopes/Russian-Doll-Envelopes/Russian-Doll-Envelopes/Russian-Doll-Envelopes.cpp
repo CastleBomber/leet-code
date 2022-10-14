@@ -43,18 +43,19 @@ Node *newNode (int key) {
 class Solution {
     public:
         /*
-        
+
         */
         int maxEnvelopes(vector<vector<int>>& envelopes) {
 
             int count = 1;
-
             vector<vector<int>> sortedEnvelopes;
-            sortedEnvelopes = sortEnvelopesByHeights(envelopes);
+
+            // take out duplicate envelopes, sort by height
             sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
+            sortedEnvelopes = sortEnvelopesByHeights(envelopes);
 
             // queue of general tree nodes with children being pointers to sub trees
-            for () {
+            for (int A = 0; A < sortedEnvelopes.size(); A++) {
 
                 if () {
 
@@ -130,6 +131,11 @@ class Solution {
 
         }
 
+        /*
+            compares smallest width of sortedEnvelopes with the current envelope from envelopes,
+            if the current envelope is smaller in width, it will be put in appropriately
+            if the current envelope is larger in width, same deal
+        */
         vector<vector<int>> sortEnvelopesByWidths(vector<vector<int>>& envelopes) {
 
             int e = 0; // envelopes position
