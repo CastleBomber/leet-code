@@ -43,22 +43,27 @@ Node *newNode (int key) {
 class Solution {
     public:
         /*
-        
+            Maximum number of envelopes that would fit inside eachother
         */
         int maxEnvelopes(vector<vector<int>>& envelopes) {
 
             int count = 1;
 
+            // organize envelopes and remove duplicates
             vector<vector<int>> sortedEnvelopes;
             sortedEnvelopes = sortEnvelopesByHeights(envelopes);
             sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
-            // queue of general tree nodes with children being pointers to sub trees
+            queue<Node*> q; // queue of general tree nodes with children being pointers to sub trees
+            
+            //
             for () {
 
-                if () {
+                // with each addition of unique envelope, check if previously add envelopes would fit inside
+                // if yes,  add to child<>
+                if (checkIfAFitsInsideB())) {
 
-
+                    a.child.push_back();
                 }
             }
 
