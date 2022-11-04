@@ -54,17 +54,26 @@ class Solution {
             sortedEnvelopes = sortEnvelopesByHeights(envelopes);
             sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
+            int node = 0;
+            int checker = 0;
             queue<Node*> q; // queue of general tree nodes with children being pointers to sub trees
-            
+
             //
-            for () {
+            for (node = 0; ;) {
 
-                // with each addition of unique envelope, check if previously add envelopes would fit inside
-                // if yes,  add to child<>
-                if (checkIfAFitsInsideB())) {
+                for (checker = 0; ;) {
 
-                    a.child.push_back();
+                    // with each addition of unique envelope, check if previously add envelopes would fit inside
+                    // if yes,  add to child<>
+                    if (checkIfAFitsInsideB(sortedEnvelopes[node], sortedEnvelopes[checker]))) {
+
+                        a.child.push_back();
+                    }
                 }
+            }
+
+            while (!q.empty()) {
+
             }
 
             return count;
