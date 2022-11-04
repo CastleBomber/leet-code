@@ -32,261 +32,261 @@ struct Node {
     vector<Node*> child;
 };
 
-Node *newNode (int key) {
+Node* newNode(int key) {
 
-    Node *tmp = new Node;
+    Node* tmp = new Node;
     tmp->key = key;
 
     return tmp;
 }
 
 class Solution {
-    public:
-        /*
-            Maximum number of envelopes that would fit inside eachother
-        */
-        int maxEnvelopes(vector<vector<int>>& envelopes) {
+public:
+    /*
+        Maximum number of envelopes that would fit inside eachother
+    */
+    int maxEnvelopes(vector<vector<int>>& envelopes) {
 
-            int count = 1;
+        int count = 1;
 
-            // organize envelopes and remove duplicates
-            vector<vector<int>> sortedEnvelopes;
-            sortedEnvelopes = sortEnvelopesByHeights(envelopes);
-            sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
+        // organize envelopes and remove duplicates
+        vector<vector<int>> sortedEnvelopes;
+        sortedEnvelopes = sortEnvelopesByHeights(envelopes);
+        sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
-            int node = 0;
-            int checker = 0;
-            queue<Node*> q; // queue of general tree nodes with children being pointers to sub trees
+        int node = 0;
+        int checker = 0;
+        queue<Node*> q; // queue of general tree nodes with children being pointers to sub trees
 
-            //
-            for (node = 0; ;) {
+        //
+        for (node = 0; ;) {
 
-                for (checker = 0; ;) {
+            for (checker = 0; ;) {
 
-                    // with each addition of unique envelope, check if previously add envelopes would fit inside
-                    // if yes,  add to child<>
-                    if (checkIfAFitsInsideB(sortedEnvelopes[node], sortedEnvelopes[checker]))) {
+                // with each addition of unique envelope, check if previously add envelopes would fit inside
+                // if yes,  add to child<>
+                if (checkIfAFitsInsideB(sortedEnvelopes[node], sortedEnvelopes[checker]))) {
 
-                        a.child.push_back();
+                a.child.push_back();
                     }
-                }
             }
-
-            while (!q.empty()) {
-
-            }
-
-            return count;
         }
 
-        /*
-            compares smallest height of sortedEnvelopes with the current envelope from envelopes,
-            if the current envelope is smaller in height, it will be put in appropriately
-            if the current envelope is larger in height, same deal
-        */
-        vector<vector<int>> sortEnvelopesByHeights(vector<vector<int>>& envelopes) {
+        while (!q.empty()) {
 
-            int e = 0; // envelopes position
-            int sE = 0; // sortedEnvelopes position
-            int sortedHeight = 0;
-            int sortedWidth = 0;
-            int unsortedHeight = 0;
-            int unsortedWidth = 0;
-            vector<vector<int>> sortedEnvelopes;
+        }
 
-            sortedEnvelopes.push_back(envelopes[0]);
+        return count;
+    }
 
-            // compare the unsorted envelopes with sortedEnvelopes
-            for (e = 1; e < envelopes.size(); e++) {
+    /*
+        compares smallest height of sortedEnvelopes with the current envelope from envelopes,
+        if the current envelope is smaller in height, it will be put in appropriately
+        if the current envelope is larger in height, same deal
+    */
+    vector<vector<int>> sortEnvelopesByHeights(vector<vector<int>>& envelopes) {
 
-                // take next from envelopes
-                unsortedHeight = envelopes[e][0];
-                unsortedWidth = envelopes[e][1];
+        int e = 0; // envelopes position
+        int sE = 0; // sortedEnvelopes position
+        int sortedHeight = 0;
+        int sortedWidth = 0;
+        int unsortedHeight = 0;
+        int unsortedWidth = 0;
+        vector<vector<int>> sortedEnvelopes;
 
-                // compare with each in sortedEnvelopes, starts with smallest height
-                for (sE = 0; sE < sortedEnvelopes.size(); sE++) {
+        sortedEnvelopes.push_back(envelopes[0]);
 
-                    sortedHeight = sortedEnvelopes[sE][0];
-                    sortedWidth = sortedEnvelopes[sE][1];
+        // compare the unsorted envelopes with sortedEnvelopes
+        for (e = 1; e < envelopes.size(); e++) {
 
-                    if (unsortedHeight < sortedHeight) { // shorter
+            // take next from envelopes
+            unsortedHeight = envelopes[e][0];
+            unsortedWidth = envelopes[e][1];
+
+            // compare with each in sortedEnvelopes, starts with smallest height
+            for (sE = 0; sE < sortedEnvelopes.size(); sE++) {
+
+                sortedHeight = sortedEnvelopes[sE][0];
+                sortedWidth = sortedEnvelopes[sE][1];
+
+                if (unsortedHeight < sortedHeight) { // shorter
+
+                    sortedEnvelopes.insert(sortedEnvelopes.begin() + sE, envelopes[e]);
+                    break;
+                }
+                else if (unsortedHeight == sortedHeight) {
+
+                    if (unsortedWidth <= sortedWidth) {
 
                         sortedEnvelopes.insert(sortedEnvelopes.begin() + sE, envelopes[e]);
                         break;
                     }
-                    else if (unsortedHeight == sortedHeight) {
+                    else {
 
-                        if (unsortedWidth <= sortedWidth) {
-
-                            sortedEnvelopes.insert(sortedEnvelopes.begin() + sE, envelopes[e]);
-                            break;
-                        }
-                        else {
-
-                            sortedEnvelopes.insert(sortedEnvelopes.begin() + sE + 1, envelopes[e]);
-                            break;
-                        }
-                    }
-                    else if (unsortedHeight > sortedHeight) {
-                        // no op
-                    }
-
-                    // have reached the end, tallest to add at the end
-                    if ((sE+1) == sortedEnvelopes.size()) {
-
-                        sortedEnvelopes.push_back(envelopes[e]);
+                        sortedEnvelopes.insert(sortedEnvelopes.begin() + sE + 1, envelopes[e]);
                         break;
                     }
                 }
+                else if (unsortedHeight > sortedHeight) {
+                    // no op
+                }
+
+                // have reached the end, tallest to add at the end
+                if ((sE + 1) == sortedEnvelopes.size()) {
+
+                    sortedEnvelopes.push_back(envelopes[e]);
+                    break;
+                }
             }
-
-            return sortedEnvelopes;
-
         }
 
-        vector<vector<int>> sortEnvelopesByWidths(vector<vector<int>>& envelopes) {
+        return sortedEnvelopes;
 
-            int e = 0; // envelopes position
-            int sE = 0; // sortedEnvelopes position
-            int sortedHeight = 0;
-            int sortedWidth = 0;
-            int unsortedHeight = 0;
-            int unsortedWidth = 0;
-            vector<vector<int>> sortedEnvelopes;
+    }
 
-            sortedEnvelopes.push_back(envelopes[0]);
+    vector<vector<int>> sortEnvelopesByWidths(vector<vector<int>>& envelopes) {
 
-            for (e = 1; e < envelopes.size(); e++) {
+        int e = 0; // envelopes position
+        int sE = 0; // sortedEnvelopes position
+        int sortedHeight = 0;
+        int sortedWidth = 0;
+        int unsortedHeight = 0;
+        int unsortedWidth = 0;
+        vector<vector<int>> sortedEnvelopes;
 
-                unsortedHeight = envelopes[e][0];
-                unsortedWidth = envelopes[e][1];
+        sortedEnvelopes.push_back(envelopes[0]);
 
-                for (sE = 0; sE < sortedEnvelopes.size(); sE++) {
+        for (e = 1; e < envelopes.size(); e++) {
 
-                    sortedHeight = sortedEnvelopes[sE][0];
-                    sortedWidth = sortedEnvelopes[sE][1];
+            unsortedHeight = envelopes[e][0];
+            unsortedWidth = envelopes[e][1];
 
-                    if (unsortedWidth < sortedWidth) {
+            for (sE = 0; sE < sortedEnvelopes.size(); sE++) {
+
+                sortedHeight = sortedEnvelopes[sE][0];
+                sortedWidth = sortedEnvelopes[sE][1];
+
+                if (unsortedWidth < sortedWidth) {
+
+                    sortedEnvelopes.insert(sortedEnvelopes.begin() + sE, envelopes[e]);
+                    break;
+                }
+                else if (unsortedWidth == sortedWidth) {
+
+                    if (unsortedHeight < sortedHeight) {
 
                         sortedEnvelopes.insert(sortedEnvelopes.begin() + sE, envelopes[e]);
                         break;
                     }
-                    else if (unsortedWidth == sortedWidth) {
+                    else {
 
-                        if (unsortedHeight < sortedHeight) {
-
-                            sortedEnvelopes.insert(sortedEnvelopes.begin() + sE, envelopes[e]);
-                            break;
-                        }
-                        else {
-
-                            sortedEnvelopes.insert(sortedEnvelopes.begin() + sE + 1, envelopes[e]);
-                            break;
-                        }
-                    }
-                    else if (unsortedWidth > sortedWidth) {
-
-                        // no op
-                    }
-
-                    // have reached the end, tallest to add at the end
-                    if ((sE + 1) == sortedEnvelopes.size()) {
-
-                        sortedEnvelopes.push_back(envelopes[e]);
+                        sortedEnvelopes.insert(sortedEnvelopes.begin() + sE + 1, envelopes[e]);
                         break;
                     }
                 }
-            }
+                else if (unsortedWidth > sortedWidth) {
 
-            return sortedEnvelopes;
-        }
-
-        /*
-            sort each envelope in ascending order by sum of: height + width
-
-            *algorithm could use more work
-        */
-        vector<vector<int>> sortEnvelopesBySumOfSides(vector<vector<int>>& envelopes) {
-
-            int i = 1;
-            int j = 0;
-            int smallSum = 0;
-            int currentSum = 0;
-            vector<vector<int>> sortedEnvelopes;
-            sortedEnvelopes.push_back(envelopes[0]);  // initial envelope's order position is '0'
-
-            for (i = 1; i < envelopes.size(); i++) {
-
-                currentSum = envelopes[i][0] + envelopes[i][1]; // sequential envelopes h + w
-
-                for (j = 0; j < sortedEnvelopes.size(); j ++) { // order: initially <0>, then <0, 1, (^), 2, ...>
-
-                    smallSum = sortedEnvelopes[j][0] + sortedEnvelopes[j][1];
-
-                    if (currentSum < smallSum) {
-
-                        sortedEnvelopes.insert(sortedEnvelopes.begin() + j, envelopes[i]);
-                        break;
-                    }
+                    // no op
                 }
 
-                if (currentSum >= smallSum) {
+                // have reached the end, tallest to add at the end
+                if ((sE + 1) == sortedEnvelopes.size()) {
 
-                    sortedEnvelopes.push_back(envelopes[i]);
+                    sortedEnvelopes.push_back(envelopes[e]);
+                    break;
                 }
-
             }
-
-            return sortedEnvelopes;
         }
 
-        /**
-             Checks if envelope A will fit inside B
-             needs to at least be B(Wi + 1, Hi + 1) vs A(Wi, Hi)
+        return sortedEnvelopes;
+    }
 
-             ex1:
-             in = [[2,3], [5,4]     out = true
-                    ^A     ^B
+    /*
+        sort each envelope in ascending order by sum of: height + width
 
+        *algorithm could use more work
+    */
+    vector<vector<int>> sortEnvelopesBySumOfSides(vector<vector<int>>& envelopes) {
 
-             ex2:
-             in = [[5,4], [6,4]     out = false
-                    ^A     ^B
-        */
-        int checkIfAFitsInsideB(vector<int> A, vector<int> B) {
+        int i = 1;
+        int j = 0;
+        int smallSum = 0;
+        int currentSum = 0;
+        vector<vector<int>> sortedEnvelopes;
+        sortedEnvelopes.push_back(envelopes[0]);  // initial envelope's order position is '0'
 
-            int heightA = A[0];
-            int widthA = A[1];
-            int heightB = B[0];
-            int widthB = B[1];
+        for (i = 1; i < envelopes.size(); i++) {
 
-            if((heightB > heightA) && (widthB > widthA)) {
+            currentSum = envelopes[i][0] + envelopes[i][1]; // sequential envelopes h + w
 
-                return 1;
+            for (j = 0; j < sortedEnvelopes.size(); j++) { // order: initially <0>, then <0, 1, (^), 2, ...>
+
+                smallSum = sortedEnvelopes[j][0] + sortedEnvelopes[j][1];
+
+                if (currentSum < smallSum) {
+
+                    sortedEnvelopes.insert(sortedEnvelopes.begin() + j, envelopes[i]);
+                    break;
+                }
             }
 
-            return 0;
+            if (currentSum >= smallSum) {
+
+                sortedEnvelopes.push_back(envelopes[i]);
+            }
+
         }
 
-        /*
-            Takes in three integers && returns the greatest
-        */
-        int getGreatestCount(int a, int b, int c) {
+        return sortedEnvelopes;
+    }
 
-            int greatest = a;
+    /**
+         Checks if envelope A will fit inside B
+         needs to at least be B(Wi + 1, Hi + 1) vs A(Wi, Hi)
 
-            if (b > greatest) {
+         ex1:
+         in = [[2,3], [5,4]     out = true
+                ^A     ^B
 
-                greatest = b;
-            }
 
-            if (c > greatest) {
+         ex2:
+         in = [[5,4], [6,4]     out = false
+                ^A     ^B
+    */
+    int checkIfAFitsInsideB(vector<int> A, vector<int> B) {
 
-                greatest = c;
-            }
+        int heightA = A[0];
+        int widthA = A[1];
+        int heightB = B[0];
+        int widthB = B[1];
 
-            return greatest;
+        if ((heightB > heightA) && (widthB > widthA)) {
+
+            return 1;
         }
+
+        return 0;
+    }
+
+    /*
+        Takes in three integers && returns the greatest
+    */
+    int getGreatestCount(int a, int b, int c) {
+
+        int greatest = a;
+
+        if (b > greatest) {
+
+            greatest = b;
+        }
+
+        if (c > greatest) {
+
+            greatest = c;
+        }
+
+        return greatest;
+    }
 };
 
 int main() {
