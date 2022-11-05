@@ -54,12 +54,14 @@ public:
         sortedEnvelopes = sortEnvelopesByHeights(envelopes);
         sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
-        int node = 0;
-        int checker = 0;
+        int node = 0; //
+        int checker = 0; //
         queue<Node*> q; // queue of general tree nodes with children being pointers to sub trees
 
         //
         for (node = 0; ;) {
+
+            q.push(sortedEnvelopes[node]);
 
             for (checker = 0; ;) {
 
@@ -67,13 +69,14 @@ public:
                 // if yes,  add to child<>
                 if (checkIfAFitsInsideB(sortedEnvelopes[node], sortedEnvelopes[checker]))) {
 
-                a.child.push_back();
-                    }
+                    a.child.push_back();
+                    q.push(child)
+                }
             }
         }
 
         while (!q.empty()) {
-
+            q.pop();
         }
 
         return count;
