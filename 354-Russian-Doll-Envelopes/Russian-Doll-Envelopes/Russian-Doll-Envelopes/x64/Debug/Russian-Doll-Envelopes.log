@@ -1,6 +1,14 @@
-﻿  Russian-Doll-Envelopes.cpp
-C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(57,18): error C2143: syntax error: missing ';' before ')'
-C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(57,20): error C2143: syntax error: missing ';' before '{'
-C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(57,20): error C2143: syntax error: missing ')' before '{'
-C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(59,21): error C2059: syntax error: ')'
-C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(59,1): error C2143: syntax error: missing ';' before '{'
+﻿  General-Tree-Solution.cpp
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\General-Tree-Solution.cpp(49,25): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Russian-Doll-Envelopes.cpp
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(66,1): error C2664: 'Node *newNode(std::vector<std::vector<int,std::allocator<int>>,std::allocator<std::vector<int,std::allocator<int>>>>)': cannot convert argument 1 from '_Ty' to 'std::vector<std::vector<int,std::allocator<int>>,std::allocator<std::vector<int,std::allocator<int>>>>'
+          with
+          [
+              _Ty=std::vector<int,std::allocator<int>>
+          ]
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(66,59): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(36,7): message : see declaration of 'newNode'
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(75,21): error C2065: 'a': undeclared identifier
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(76,28): error C2065: 'child': undeclared identifier
+C:\Users\CastleBomber\Documents\GitHub\LeetCode\354-Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes\Russian-Doll-Envelopes.cpp(77,17): error C2143: syntax error: missing ';' before '}'
+  Generating Code...

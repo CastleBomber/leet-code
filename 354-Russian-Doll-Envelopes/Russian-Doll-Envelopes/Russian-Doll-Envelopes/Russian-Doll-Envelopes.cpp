@@ -28,14 +28,16 @@ using namespace std;
 
 struct Node {
 
-    int key;
+    int height;
+    int width;
     vector<Node*> child;
 };
 
-Node* newNode(int key) {
+Node* newNode(vector<int> envelope) {
 
     Node* tmp = new Node;
-    tmp->key = key;
+    tmp->height = envelope[0];
+    tmp->width = envelope[1];
 
     return tmp;
 }
@@ -47,36 +49,38 @@ public:
     */
     int maxEnvelopes(vector<vector<int>>& envelopes) {
 
-        int count = 1;
+        int count = 1; // Number of russian doll'd envelopes
 
         // organize envelopes and remove duplicates
         vector<vector<int>> sortedEnvelopes;
         sortedEnvelopes = sortEnvelopesByHeights(envelopes);
         sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
-        int node = 0; //
+        queue<Node*> initial_q; // starting queue for each of the sortedEnvelopes 
+        queue<Node*> final_q; // queue of general tree nodes with children being pointers to sub trees
+        int position = 0; // itererates through sortedEnvelopes to load the initial queue
         int checker = 0; //
-        queue<Node*> q; // queue of general tree nodes with children being pointers to sub trees
 
-        //
-        for (node = 0; ;) {
+        // Load up the inital queue
+        for (; position < sortedEnvelopes.size(); position++) {
 
-            q.push(sortedEnvelopes[node]);
+            Node *e = newNode(sortedEnvelopes[position]);
+            initial_q.push(e);   
+        }
 
-            for (checker = 0; ;) {
+        for (checker = 0; checker < ; checker++) {
 
-                // with each addition of unique envelope, check if previously add envelopes would fit inside
-                // if yes,  add to child<>
-                if (checkIfAFitsInsideB(sortedEnvelopes[node], sortedEnvelopes[checker]))) {
+            // with each addition of unique envelope, check if previously added envelopes would fit inside
+            // if yes,  add to child<>
+            if (checkIfAFitsInsideB(sortedEnvelopes[position], sortedEnvelopes[checker])) {
 
-                    a.child.push_back();
-                    q.push(child)
-                }
+                a.child.push_back();
+                initial_q.push(child)
             }
         }
 
-        while (!q.empty()) {
-            q.pop();
+        while (!initial_q.empty()) {
+            initial_q.pop();
         }
 
         return count;

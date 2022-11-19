@@ -18,5 +18,8 @@
     <ClCompile Include="Russian-Doll-Envelopes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="General-Tree-Solution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
