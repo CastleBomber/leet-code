@@ -46,33 +46,40 @@ class Solution {
 public:
     /*
         Maximum number of envelopes that would fit inside eachother
+
+                *
+               / \
+              *   *
+             / \
+            *   *
     */
     int maxEnvelopes(vector<vector<int>>& envelopes) {
 
         int count = 1; // Number of russian doll'd envelopes
 
-        // organize envelopes and remove duplicates
+        // Organize envelopes and remove duplicates
         vector<vector<int>> sortedEnvelopes;
         sortedEnvelopes = sortEnvelopesByHeights(envelopes);
         sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
+        // From the inital queue, we will compare each node's envelopes and build a descending general tree
         queue<Node*> initial_q; // starting queue for each of the sortedEnvelopes 
         queue<Node*> final_q; // queue of general tree nodes with children being pointers to sub trees
         int position = 0; // itererates through sortedEnvelopes to load the initial queue
-        int checker = 0; //
 
         // Load up the inital queue
         for (; position < sortedEnvelopes.size(); position++) {
 
-            Node *e = newNode(sortedEnvelopes[position]);
+            Node *e = newNode(sortedEnvelopes[position]); // Create node
             initial_q.push(e);   
         }
 
-        for (checker = 0; checker < ; checker++) {
+        // Build general tree
+        for ( = 0;  < ; ++) {
 
             // with each addition of unique envelope, check if previously added envelopes would fit inside
-            // if yes,  add to child<>
-            if (checkIfAFitsInsideB(sortedEnvelopes[position], sortedEnvelopes[checker])) {
+            // if yes,  add to child node vector
+            if (checkIfAFitsInsideB()) {
 
                 a.child.push_back();
                 initial_q.push(child)
