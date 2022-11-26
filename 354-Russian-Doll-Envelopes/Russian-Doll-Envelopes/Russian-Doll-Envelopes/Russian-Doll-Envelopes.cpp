@@ -62,30 +62,29 @@ public:
         sortedEnvelopes = sortEnvelopesByHeights(envelopes);
         sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
-        // From the inital queue, we will compare each node's envelopes and build a descending general tree
-        queue<Node*> initial_q; // starting queue for each of the sortedEnvelopes 
-        queue<Node*> final_q; // queue of general tree nodes with children being pointers to sub trees
-        int position = 0; // itererates through sortedEnvelopes to load the initial queue
+        // Used to create a descending general tree of nodes
+        queue<Node*> initial_q; // starting queue for each unique envelope 
+        queue<Node*> final_q; // queue of nodes pointing to sub trees
+        int position = 0; // iterator
 
-        // Load up the inital queue
-        for (; position < sortedEnvelopes.size(); position++) {
+        // Load up the inital queue with unique envelopes
+        for ( ; position < sortedEnvelopes.size(); position++) {
 
-            Node *e = newNode(sortedEnvelopes[position]); // Create node
-            initial_q.push(e);   
+            Node *e = newNode(sortedEnvelopes[position]);
+            initial_q.push_back(e);   
         }
 
-        // Build general tree
-        for ( = 0;  < ; ++) {
+        // Build descending general tree
+        for ( position = 0;  position < intial_q.size(); position++) {
 
-            // with each addition of unique envelope, check if previously added envelopes would fit inside
-            // if yes,  add to child node vector
-            if (checkIfAFitsInsideB()) {
+            // if yes, envelope does fit inside, so add it to child(ren)
+            if (checkIfAFitsInsideB(sortedEnvelopes[position], sortedEnvelopes[position])) {
 
-                a.child.push_back();
-                initial_q.push(child)
-            }
+                final_q.child.push_back(inital_queue[position]);
+            } 
         }
 
+        // Free up memory
         while (!initial_q.empty()) {
             initial_q.pop();
         }
