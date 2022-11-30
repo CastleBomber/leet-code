@@ -68,7 +68,7 @@ public:
         int position = 0; // iterator
 
         // Load up the inital queue with unique envelopes
-        for ( ; position < sortedEnvelopes.size(); position++) {
+        for ( position = 0; position < sortedEnvelopes.size(); position++) {
 
             Node *e = newNode(sortedEnvelopes[position]);
             initial_q.push_back(e);   
