@@ -65,22 +65,28 @@ public:
         // Used to create a descending general tree of nodes
         queue<Node*> initial_q; // starting queue for each unique envelope 
         queue<Node*> final_q; // queue of nodes pointing to sub trees
-        int position = 0; // iterator
+        int position = 0; // iterates through sortedEnvelopes
 
         // Load up the inital queue with unique envelopes
-        for ( position = 0; position < sortedEnvelopes.size(); position++) {
+        for (position = 0; position < sortedEnvelopes.size(); position++) {
 
             Node *e = newNode(sortedEnvelopes[position]);
             initial_q.push_back(e);   
         }
 
+        int initial_q_ptr = 0; // iterates through inital queue
+        int final_q_ptr = 0; // iterates through final queue
+
         // Build descending general tree
-        for ( position = 0;  position < intial_q.size(); position++) {
+        for (initial_q_ptr = 0;  initial_q_ptr < intial_q.size(); initial_q_ptr++) {
 
-            // if yes, envelope does fit inside, so add it to child(ren)
-            if (checkIfAFitsInsideB(sortedEnvelopes[position], sortedEnvelopes[position])) {
+            for (int final_q_ptr = 0; final_q_ptr < final_q.size; final_q_ptr++) {
 
-                final_q.child.push_back(inital_queue[position]);
+                // if yes, envelope does fit inside, so add it to child(ren)
+                if (checkIfAFitsInsideB(sortedEnvelopes[initial_q_ptr], sortedEnvelopes[final_q_ptr])) {
+
+                    final_q.child.push_back(inital_queue[initial_q_ptr]);
+                }
             } 
         }
 
