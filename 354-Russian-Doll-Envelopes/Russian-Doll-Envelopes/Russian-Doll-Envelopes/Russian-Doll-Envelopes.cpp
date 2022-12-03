@@ -63,36 +63,38 @@ public:
         sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
         // Used to create a descending general tree of nodes
-        queue<Node*> initial_q; // starting queue for each unique envelope 
-        queue<Node*> final_q; // queue of nodes pointing to sub trees
+        queue<Node*> initialQueue; // starting queue for each unique envelope 
+        queue<Node*> finalQueue; // queue of nodes pointing to sub trees
         int position = 0; // iterates through sortedEnvelopes
 
         // Load up the inital queue with unique envelopes
         for (position = 0; position < sortedEnvelopes.size(); position++) {
 
             Node *e = newNode(sortedEnvelopes[position]);
-            initial_q.push_back(e);   
+            initialQueue.push_back(e);   
         }
 
-        int initial_q_ptr = 0; // iterates through inital queue
-        int final_q_ptr = 0; // iterates through final queue
+        int initialQPtr = 0; // iterates through inital queue
+        int finalQPtr = 0; // iterates through final queue
 
         // Build descending general tree
-        for (initial_q_ptr = 0;  initial_q_ptr < intial_q.size(); initial_q_ptr++) {
+        for (initialQPtr = 0;  initialQPtr < initialQueue.size(); initialQPtr++) {
 
-            for (int final_q_ptr = 0; final_q_ptr < final_q.size; final_q_ptr++) {
+            finalQueue.push_back(initalQueue[initialQPtr]);
+
+            for (finalQPtr = 0; finalQPtr < finalQueue.size; finalQPtr++) {
 
                 // if yes, envelope does fit inside, so add it to child(ren)
-                if (checkIfAFitsInsideB(sortedEnvelopes[initial_q_ptr], sortedEnvelopes[final_q_ptr])) {
+                if (checkIfAFitsInsideB(sortedEnvelopes[initialQPtr], sortedEnvelopes[finalQPtr])) {
 
-                    final_q.child.push_back(inital_queue[initial_q_ptr]);
+                    finalQueue.child.push_back(initialQueue[initialQPtr]);
                 }
             } 
         }
 
         // Free up memory
-        while (!initial_q.empty()) {
-            initial_q.pop();
+        while (!initialQueue.empty()) {
+            initialQueue.pop();
         }
 
         return count;
