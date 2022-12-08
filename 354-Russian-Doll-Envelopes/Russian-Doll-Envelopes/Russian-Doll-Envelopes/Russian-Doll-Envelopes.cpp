@@ -80,9 +80,9 @@ public:
         // Build descending general tree
         for (initialQPtr = 0;  initialQPtr < initialQueue.size(); initialQPtr++) {
 
-            finalQueue.push_back(initalQueue[initialQPtr]);
+            finalQueue.push_back(initialQueue[initialQPtr]);
 
-            for (finalQPtr = 0; finalQPtr < finalQueue.size; finalQPtr++) {
+            for (finalQPtr = 0; finalQPtr < finalQueue.size(); finalQPtr++) {
 
                 // if yes, envelope does fit inside, so add it to child(ren)
                 if (checkIfAFitsInsideB(sortedEnvelopes[initialQPtr], sortedEnvelopes[finalQPtr])) {
