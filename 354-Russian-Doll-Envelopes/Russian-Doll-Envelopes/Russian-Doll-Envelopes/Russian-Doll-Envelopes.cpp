@@ -63,7 +63,7 @@ public:
         sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
         // Used to create a descending general tree of nodes
-        queue<Node*> initialQueue; // starting queue for each unique envelope 
+        queue<Node*> initialQueue; // starting queue for each unique envelope
         queue<Node*> finalQueue; // queue of nodes pointing to sub trees
         int position = 0; // iterates through sortedEnvelopes
 
@@ -71,7 +71,7 @@ public:
         for (position = 0; position < sortedEnvelopes.size(); position++) {
 
             Node *e = newNode(sortedEnvelopes[position]);
-            initialQueue.push_back(e);   
+            initialQueue.push_back(e);
         }
 
         int initialQPtr = 0; // iterates through inital queue
@@ -82,14 +82,19 @@ public:
 
             finalQueue.push_back(initialQueue[initialQPtr]);
 
-            for (finalQPtr = 0; finalQPtr < finalQueue.size(); finalQPtr++) {
+            for (finalQPtr = 0; finalQPtr < finalQueue.size() - 1; finalQPtr++) {
 
-                // if yes, envelope does fit inside, so add it to child(ren)
-                if (checkIfAFitsInsideB(sortedEnvelopes[initialQPtr], sortedEnvelopes[finalQPtr])) {
+                // Add child(ren)
+                if (isChild(sortedEnvelopes[initialQPtr], sortedEnvelopes[finalQPtr])) {
 
                     finalQueue.child.push_back(initialQueue[initialQPtr]);
                 }
-            } 
+            }
+        }
+
+        // Traverse through general tree to find count
+        for () {
+
         }
 
         // Free up memory
@@ -274,7 +279,7 @@ public:
          in = [[5,4], [6,4]     out = false
                 ^A     ^B
     */
-    int checkIfAFitsInsideB(vector<int> A, vector<int> B) {
+    int isChild(vector<int> A, vector<int> B) {
 
         int heightA = A[0];
         int widthA = A[1];
