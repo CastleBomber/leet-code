@@ -75,25 +75,28 @@ public:
 		// Load up the inital queue with unique envelopes
 		for (position = 0; position < sortedEnvelopes.size(); position++)
 		{
-			Node* e = newNode(sortedEnvelopes[position]);
-			initialQueue.push(e);
+			Node* envelope = newNode(sortedEnvelopes[position]);
+			initialQueue.push(envelope);
 		}
 
 		int initialQPtr = 0; // iterates through inital queue
 		int finalQPtr = 0;   // iterates through final queue
+		int childPosition = 0; // keeps track of node's children
 
 		// Build descending general tree
 		for (initialQPtr = 0; initialQPtr < initialQueue.size(); initialQPtr++)
 		{
 			finalQueue.push(initialQueue[initialQPtr]);
+			childPosition = 0;
 
 			for (finalQPtr = 0; finalQPtr < finalQueue.size() - 1; finalQPtr++)
 			{
 				// Add child(ren)
 				if (isChild(sortedEnvelopes[initialQPtr], sortedEnvelopes[finalQPtr]))
 				{
-					Node* e = newNode(initialQueue[initialQPtr]);
-					finalQueue.push(e->child[1]);
+					Node* envelope = newNode(initialQueue[initialQPtr]);
+					finalQueue.push(envelope->child[childPosition]);
+					childPosition++;
 				}
 			}
 		}
