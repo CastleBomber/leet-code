@@ -34,12 +34,12 @@ struct Node
 {
 	int height;
 	int width;
-	vector<Node*> child;
+	vector<Node *> child;
 };
 
-Node* newNode(vector<int> envelope)
+Node *newNode(vector<int> envelope)
 {
-	Node* tmp = new Node;
+	Node *tmp = new Node;
 	tmp->height = envelope[0];
 	tmp->width = envelope[1];
 
@@ -58,7 +58,7 @@ public:
 			 / \
 			*   *
 	*/
-	int maxEnvelopes(vector<vector<int>>& envelopes)
+	int maxEnvelopes(vector<vector<int>> &envelopes)
 	{
 		int count = 1; // Number of russian doll'd envelopes
 
@@ -68,38 +68,18 @@ public:
 		sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
 		// Used to create a descending general tree of nodes
-		queue<Node*> initialQueue; // starting queue for each unique envelope
-		queue<Node*> finalQueue;   // queue of nodes pointing to sub trees
-		int position = 0;           // iterates through sortedEnvelopes
+		queue<Node *> initialQueue; // starting queue for each unique envelope
+		queue<Node *> finalQueue;	// queue of nodes pointing to sub trees
+		int position = 0;			// iterates through sortedEnvelopes
 
 		// Load up the inital queue with unique envelopes
 		for (position = 0; position < sortedEnvelopes.size(); position++)
 		{
-			Node* envelope = newNode(sortedEnvelopes[position]);
+			Node *envelope = newNode(sortedEnvelopes[position]);
 			initialQueue.push(envelope);
 		}
 
-		int initialQPtr = 0; // iterates through inital queue
-		int finalQPtr = 0;   // iterates through final queue
-		int childPosition = 0; // keeps track of node's children
-
-		// Build descending general tree
-		for (initialQPtr = 0; initialQPtr < initialQueue.size(); initialQPtr++)
-		{
-			finalQueue.push(initialQueue[initialQPtr]);
-			childPosition = 0;
-
-			for (finalQPtr = 0; finalQPtr < finalQueue.size() - 1; finalQPtr++)
-			{
-				// Add child(ren)
-				if (isChild(sortedEnvelopes[initialQPtr], sortedEnvelopes[finalQPtr]))
-				{
-					Node* envelope = newNode(initialQueue[initialQPtr]);
-					finalQueue.push(envelope->child[childPosition]);
-					childPosition++;
-				}
-			}
-		}
+		finalQueue = buildDescendingGeneralTree(initialQueue);
 
 		// Traverse through general tree to find count
 		/*for ()
@@ -115,14 +95,42 @@ public:
 		return count;
 	}
 
+	queue<Node *> buildDescendingGeneralTree(queue<Node *> startingQueue)
+	{
+
+		queue<Node *> initialQueue = startingQueue;
+		queue<Node *> finalQueue;
+		int initialQPtr = 0;   // iterates through inital queue
+		int finalQPtr = 0;	   // iterates through final queue
+		int childPosition = 0; // keeps track of node's children
+
+		// Build descending general tree
+		for (initialQPtr = 0; initialQPtr < initialQueue.size(); initialQPtr++)
+		{
+			finalQueue.push(initialQueue[initialQPtr]);
+			childPosition = 0;
+
+			for (finalQPtr = 0; finalQPtr < finalQueue.size() - 1; finalQPtr++)
+			{
+				// Add child(ren)
+				// should i be comparing by envelopes || nodes
+				if (isChild(sortedEnvelopes[initialQPtr], sortedEnvelopes[finalQPtr]))
+				{
+					finalQueue.push(initialQueue[initialQPtr]->child[childPosition]);
+					childPosition++;
+				}
+			}
+		}
+	}
+
 	/*
 		compares smallest height of sortedEnvelopes with the current envelope from envelopes,
 		if the current envelope is smaller in height, it will be put in appropriately
 		if the current envelope is larger in height, same deal
 	*/
-	vector<vector<int>> sortEnvelopesByHeights(vector<vector<int>>& envelopes)
+	vector<vector<int>> sortEnvelopesByHeights(vector<vector<int>> &envelopes)
 	{
-		int e = 0;  // envelopes position
+		int e = 0;	// envelopes position
 		int sE = 0; // sortedEnvelopes position
 		int sortedHeight = 0;
 		int sortedWidth = 0;
@@ -182,9 +190,9 @@ public:
 		return sortedEnvelopes;
 	}
 
-	vector<vector<int>> sortEnvelopesByWidths(vector<vector<int>>& envelopes)
+	vector<vector<int>> sortEnvelopesByWidths(vector<vector<int>> &envelopes)
 	{
-		int e = 0;  // envelopes position
+		int e = 0;	// envelopes position
 		int sE = 0; // sortedEnvelopes position
 		int sortedHeight = 0;
 		int sortedWidth = 0;
@@ -244,7 +252,7 @@ public:
 
 		*algorithm could use more work
 	*/
-	vector<vector<int>> sortEnvelopesBySumOfSides(vector<vector<int>>& envelopes)
+	vector<vector<int>> sortEnvelopesBySumOfSides(vector<vector<int>> &envelopes)
 	{
 		int i = 1;
 		int j = 0;
@@ -336,7 +344,7 @@ int main()
 	int count = 0; // russian doll'd envelopes
 
 	vector<vector<int>> envelopes = {
-		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}} };
+		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}}};
 
 	count = solution.maxEnvelopes(envelopes);
 
