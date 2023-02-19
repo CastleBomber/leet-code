@@ -103,11 +103,11 @@ public:
 	queue<Node *> buildDescendingGeneralTree(queue<Node *> startingQueue)
 	{
 		queue<Node *> initialQueue = startingQueue; // loaded up from sortedEnvelopes
-		queue<Node*> tmpQueue;
-		queue<Node *> finalQueue; // builds descending general tree
-		int initialQPtr = 0;   // iterates through inital queue
-		int finalQPtr = 0;	   // iterates through final queue
-		int childPosition = 0; // keeps track of node's children
+		queue<Node *> tmpQueue;						// x
+		queue<Node *> finalQueue;					// builds descending general tree
+		int initialQPtr = 0;						// iterates through inital queue
+		int finalQPtr = 0;							// iterates through final queue
+		int childPosition = 0;						// keeps track of node's children
 
 		// Build descending general tree
 		for (initialQPtr = 0; initialQPtr < initialQueue.size(); initialQPtr++)
