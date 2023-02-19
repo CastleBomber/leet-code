@@ -17,7 +17,12 @@
 
 
 	Shortcuts:
+	VS Code:
 		c++ VS Code clang-formatter: shift+alt+f
+
+	Visual Studio:
+		code folding: select region, ctrl+m+m
+		full screen: shift+alt+enter
 */
 
 #include <stdio.h>
@@ -97,9 +102,9 @@ public:
 
 	queue<Node *> buildDescendingGeneralTree(queue<Node *> startingQueue)
 	{
-
-		queue<Node *> initialQueue = startingQueue;
-		queue<Node *> finalQueue;
+		queue<Node *> initialQueue = startingQueue; // loaded up from sortedEnvelopes
+		queue<Node*> tmpQueue;
+		queue<Node *> finalQueue; // builds descending general tree
 		int initialQPtr = 0;   // iterates through inital queue
 		int finalQPtr = 0;	   // iterates through final queue
 		int childPosition = 0; // keeps track of node's children
@@ -108,13 +113,13 @@ public:
 		for (initialQPtr = 0; initialQPtr < initialQueue.size(); initialQPtr++)
 		{
 			finalQueue.push(initialQueue[initialQPtr]);
+			tmpQueue.push(initialQueue[initialQPtr]);
 			childPosition = 0;
 
 			for (finalQPtr = 0; finalQPtr < finalQueue.size() - 1; finalQPtr++)
 			{
-				// Add child(ren)
-				// should i be comparing by envelopes || nodes
-				if (isChild(sortedEnvelopes[initialQPtr], sortedEnvelopes[finalQPtr]))
+				// Add child(ren) if applicable
+				if (isChild(finalQueue.front(), finalQueue.back()))
 				{
 					finalQueue.push(initialQueue[initialQPtr]->child[childPosition]);
 					childPosition++;
@@ -299,13 +304,13 @@ public:
 		 in = [[5,4], [6,4]     out = false
 				^A     ^B
 	*/
-	int isChild(vector<int> A, vector<int> B)
+	int isChild(Node *A, Node *B)
 	{
 
-		int heightA = A[0];
-		int widthA = A[1];
-		int heightB = B[0];
-		int widthB = B[1];
+		int heightA = A->height;
+		int widthA = A->width;
+		int heightB = B->height;
+		int widthB = B->width;
 
 		if ((heightB > heightA) && (widthB > widthA))
 		{
