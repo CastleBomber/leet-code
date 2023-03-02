@@ -103,17 +103,18 @@ public:
 	queue<Node *> buildDescendingGeneralTree(queue<Node *> startingQueue)
 	{
 		queue<Node *> initialQueue = startingQueue; // loaded up from sortedEnvelopes
-		queue<Node *> tmpQueue;						// x
 		queue<Node *> finalQueue;					// builds descending general tree
 		int initialQPtr = 0;						// iterates through inital queue
 		int finalQPtr = 0;							// iterates through final queue
 		int childPosition = 0;						// keeps track of node's children
+		int sizeInitialQueue = initialQueue.size(); // determines number of times for outer loop
 
 		// Build descending general tree
-		for (initialQPtr = 0; initialQPtr < initialQueue.size(); initialQPtr++)
+		for (initialQPtr = 0; initialQPtr < sizeInitialQueue; initialQPtr++)
 		{
-			finalQueue.push(initialQueue[initialQPtr]);
-			tmpQueue.push(initialQueue[initialQPtr]);
+			Node* p = initialQueue.front();
+			initialQueue.pop();
+			finalQueue.push(p);
 			childPosition = 0;
 
 			for (finalQPtr = 0; finalQPtr < finalQueue.size() - 1; finalQPtr++)
@@ -344,7 +345,6 @@ public:
 
 int main()
 {
-
 	Solution solution;
 	int count = 0; // russian doll'd envelopes
 
