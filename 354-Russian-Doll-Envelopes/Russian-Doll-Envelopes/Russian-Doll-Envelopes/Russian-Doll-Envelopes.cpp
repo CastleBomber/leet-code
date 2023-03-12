@@ -106,25 +106,28 @@ public:
 		queue<Node *> finalQueue;					// builds descending general tree
 		int initialQPtr = 0;						// iterates through inital queue
 		int finalQPtr = 0;							// iterates through final queue
-		int childPosition = 0;						// keeps track of node's children
+		int childPosition = 0;						// node will have 0 to many children
 		int sizeInitialQueue = initialQueue.size(); // determines number of times for outer loop
 
 		// Build descending general tree
-		for (initialQPtr = 0; initialQPtr < sizeInitialQueue; initialQPtr++)
+		for (initialQPtr = 0; initialQPtr < sizeInitialQueue - 1; initialQPtr++)
 		{
-			Node* p = initialQueue.front();
-			initialQueue.pop();
-			finalQueue.push(p);
+			queue<Node *> checkerQueue(finalQueue); // will be a copy of finalQueue for children check
+			Node *frontNode = initialQueue.front(); // reference first node
+			finalQueue.push(frontNode);				// add node to the back of final queue
+			initialQueue.pop();						// removes first node from initial quue
 			childPosition = 0;
 
-			for (finalQPtr = 0; finalQPtr < finalQueue.size() - 1; finalQPtr++)
+			for (finalQPtr = 0; finalQPtr < finalQueue.size() - 2; finalQPtr++)
 			{
-				// Add child(ren) if applicable
-				if (isChild(finalQueue.front(), finalQueue.back()))
+				// Add child(ren) if they are smaller
+				if (hasChildAbility(finalQueue.back(), checkerQueue.front()))
 				{
-					finalQueue.push(initialQueue[initialQPtr]->child[childPosition]);
+					(finalQueue.back()).push_back(checkerQueue.front());
 					childPosition++;
 				}
+
+				checkerQueue.pop();
 			}
 		}
 	}
@@ -293,19 +296,19 @@ public:
 	}
 
 	/**
-		 Checks if envelope A will fit inside B
-		 needs to at least be B(Wi + 1, Hi + 1) vs A(Wi, Hi)
+		 Checks if envelope A could have a child envelope B fit inside
+		 needs to at least be A(Wi + 1, Hi + 1) vs B(Wi, Hi)
 
 		 ex1:
-		 in = [[2,3], [5,4]     out = true
+		 in = [[5,4], [2,3]     out = true
 				^A     ^B
 
 
 		 ex2:
-		 in = [[5,4], [6,4]     out = false
+		 in = [[6,4], [5,4]     out = false
 				^A     ^B
 	*/
-	int isChild(Node *A, Node *B)
+	int hasChildAbility(Node *A, Node *B)
 	{
 
 		int heightA = A->height;
@@ -313,7 +316,7 @@ public:
 		int heightB = B->height;
 		int widthB = B->width;
 
-		if ((heightB > heightA) && (widthB > widthA))
+		if ((heightA > heightB) && (widthA > widthB))
 		{
 			return 1;
 		}
