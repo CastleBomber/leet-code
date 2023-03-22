@@ -63,12 +63,12 @@ public:
 			 / \
 			*   *
 	*/
-	int maxEnvelopes(vector<vector<int>> &envelopes)
+	int maxEnvelopes(vector<vector<int> > &envelopes)
 	{
 		int count = 1; // Number of russian doll'd envelopes
 
 		// Organize envelopes and remove duplicates
-		vector<vector<int>> sortedEnvelopes;
+		vector<vector<int> > sortedEnvelopes;
 		sortedEnvelopes = sortEnvelopesByHeights(envelopes);
 		sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
@@ -120,16 +120,18 @@ public:
 
 			for (finalQPtr = 0; finalQPtr < finalQueue.size() - 2; finalQPtr++)
 			{
-				// Add child(ren) if they are smaller
+				// Add child to the last envelope in finalQueue
 				if (hasChildAbility(finalQueue.back(), checkerQueue.front()))
 				{
-					(finalQueue.back()).push_back(checkerQueue.front());
+					(finalQueue.back()->child).push_back(checkerQueue.front());
 					childPosition++;
 				}
 
 				checkerQueue.pop();
 			}
 		}
+
+		return finalQueue;
 	}
 
 	/*
@@ -137,7 +139,7 @@ public:
 		if the current envelope is smaller in height, it will be put in appropriately
 		if the current envelope is larger in height, same deal
 	*/
-	vector<vector<int>> sortEnvelopesByHeights(vector<vector<int>> &envelopes)
+	vector<vector<int> > sortEnvelopesByHeights(vector<vector<int> > &envelopes)
 	{
 		int e = 0;	// envelopes position
 		int sE = 0; // sortedEnvelopes position
@@ -145,7 +147,7 @@ public:
 		int sortedWidth = 0;
 		int unsortedHeight = 0;
 		int unsortedWidth = 0;
-		vector<vector<int>> sortedEnvelopes;
+		vector<vector<int> > sortedEnvelopes;
 
 		sortedEnvelopes.push_back(envelopes[0]);
 
@@ -199,7 +201,7 @@ public:
 		return sortedEnvelopes;
 	}
 
-	vector<vector<int>> sortEnvelopesByWidths(vector<vector<int>> &envelopes)
+	vector<vector<int> > sortEnvelopesByWidths(vector<vector<int> > &envelopes)
 	{
 		int e = 0;	// envelopes position
 		int sE = 0; // sortedEnvelopes position
@@ -207,7 +209,7 @@ public:
 		int sortedWidth = 0;
 		int unsortedHeight = 0;
 		int unsortedWidth = 0;
-		vector<vector<int>> sortedEnvelopes;
+		vector<vector<int> > sortedEnvelopes;
 
 		sortedEnvelopes.push_back(envelopes[0]);
 
@@ -261,13 +263,13 @@ public:
 
 		*algorithm could use more work
 	*/
-	vector<vector<int>> sortEnvelopesBySumOfSides(vector<vector<int>> &envelopes)
+	vector<vector<int> > sortEnvelopesBySumOfSides(vector<vector<int> > &envelopes)
 	{
 		int i = 1;
 		int j = 0;
 		int smallSum = 0;
 		int currentSum = 0;
-		vector<vector<int>> sortedEnvelopes;
+		vector<vector<int> > sortedEnvelopes;
 		sortedEnvelopes.push_back(envelopes[0]); // initial envelope's order position is '0'
 
 		for (i = 1; i < envelopes.size(); i++)
@@ -351,7 +353,7 @@ int main()
 	Solution solution;
 	int count = 0; // russian doll'd envelopes
 
-	vector<vector<int>> envelopes = {
+	vector<vector<int> > envelopes = {
 		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}}};
 
 	count = solution.maxEnvelopes(envelopes);
