@@ -112,7 +112,7 @@ public:
 		// Build descending general tree
 		for (initialQPtr = 0; initialQPtr < sizeInitialQueue - 1; initialQPtr++)
 		{
-			queue<Node *> checkerQueue(finalQueue); // will be a copy of finalQueue for children check
+			queue<Node *> checkerQueue = createDuplicateQueue(finalQueue); // will be a copy of finalQueue for children check
 			Node *frontNode = initialQueue.front(); // reference first node
 			finalQueue.push(frontNode);				// add node to the back of final queue
 			initialQueue.pop();						// removes first node from initial quue
@@ -132,6 +132,18 @@ public:
 		}
 
 		return finalQueue;
+	}
+
+	queue<Node *> createDuplicateQueue(queue<Node*> startingQueue) 
+	{
+		queue<Node*> returnQueue;
+
+		for () {
+
+		}
+
+
+		return returnQueue;
 	}
 
 	/*
@@ -354,7 +366,9 @@ int main()
 	int count = 0; // russian doll'd envelopes
 
 	vector<vector<int> > envelopes = {
-		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}}};
+		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, 
+		{8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, 
+		{2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}}};
 
 	count = solution.maxEnvelopes(envelopes);
 
