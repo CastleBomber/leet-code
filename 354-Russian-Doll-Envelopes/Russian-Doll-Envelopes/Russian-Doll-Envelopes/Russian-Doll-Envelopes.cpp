@@ -73,15 +73,15 @@ public:
 		sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
 		// Used to create a descending general tree of nodes
-		queue<Node *> initialQueue; // starting queue for each unique envelope
-		queue<Node *> finalQueue;	// queue of nodes pointing to sub trees
+		vector<Node *> initialQueue; // starting queue for each unique envelope
+		vector<Node *> finalQueue;	// queue of nodes pointing to sub trees
 		int position = 0;			// iterates through sortedEnvelopes
 
 		// Load up the inital queue with unique envelopes
 		for (position = 0; position < sortedEnvelopes.size(); position++)
 		{
 			Node *envelope = newNode(sortedEnvelopes[position]);
-			initialQueue.push(envelope);
+			initialQueue.push_back(envelope);
 		}
 
 		finalQueue = buildDescendingGeneralTree(initialQueue);
@@ -94,16 +94,18 @@ public:
 		// Free up memory
 		while (!initialQueue.empty())
 		{
-			initialQueue.pop();
+			initialQueue.erase(initialQueue.begin());
 		}
 
 		return count;
 	}
 
-	queue<Node *> buildDescendingGeneralTree(queue<Node *> startingQueue)
+	vector<Node *> buildDescendingGeneralTree(vector<Node *> startingQueue)
 	{
-		queue<Node *> initialQueue = startingQueue; // loaded up from sortedEnvelopes
-		queue<Node *> finalQueue;					// builds descending general tree
+		vector<Node*> x;
+
+		vector<Node *> initialQueue = startingQueue; // loaded up from sortedEnvelopes
+		vector<Node *> finalQueue;					// builds descending general tree
 		int initialQPtr = 0;						// iterates through inital queue
 		int finalQPtr = 0;							// iterates through final queue
 		int childPosition = 0;						// node will have 0 to many children
@@ -112,10 +114,10 @@ public:
 		// Build descending general tree
 		for (initialQPtr = 0; initialQPtr < sizeInitialQueue - 1; initialQPtr++)
 		{
-			queue<Node *> checkerQueue = createDuplicateQueue(finalQueue); // will be a copy of finalQueue for children check
+			vector<Node *> checkerQueue = finalQueue; // will be a copy of finalQueue for children check
 			Node *frontNode = initialQueue.front(); // reference first node
-			finalQueue.push(frontNode);				// add node to the back of final queue
-			initialQueue.pop();						// removes first node from initial quue
+			finalQueue.push_back(frontNode);				// add node to the back of final queue
+			initialQueue.erase(initialQueue.begin());						// removes first node from initial quue
 			childPosition = 0;
 
 			for (finalQPtr = 0; finalQPtr < finalQueue.size() - 2; finalQPtr++)
@@ -132,18 +134,6 @@ public:
 		}
 
 		return finalQueue;
-	}
-
-	queue<Node *> createDuplicateQueue(queue<Node*> startingQueue) 
-	{
-		queue<Node*> returnQueue;
-
-		for () {
-
-		}
-
-
-		return returnQueue;
 	}
 
 	/*
