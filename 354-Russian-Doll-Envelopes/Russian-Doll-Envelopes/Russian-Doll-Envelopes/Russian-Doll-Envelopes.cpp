@@ -102,25 +102,25 @@ public:
 
 	vector<Node *> buildDescendingGeneralTree(vector<Node *> startingQueue)
 	{
-		vector<Node*> x;
-
-		vector<Node *> initialQueue = startingQueue; // loaded up from sortedEnvelopes
-		vector<Node *> finalQueue;					// builds descending general tree
-		int initialQPtr = 0;						// iterates through inital queue
-		int finalQPtr = 0;							// iterates through final queue
+		vector<Node *> initialQueue = startingQueue; // main queue loaded up from sortedEnvelopes
+		vector<Node *> finalQueue;					//  final queue builds descending general tree
+		vector<Node*> checkerQueue;					// tmp copy of final queue used to check if newly added has children 
+		Node* frontInitialQueue;				// references first node of initial for push to final queue
+		int initQPos = 0;						// iterates through inital queue
+		int finalQPos = 0;							// iterates through final queue
 		int childPosition = 0;						// node will have 0 to many children
-		int sizeInitialQueue = initialQueue.size(); // determines number of times for outer loop
+		int sizeInitQ = initialQueue.size(); // determines number of envelope nodes to add
 
 		// Build descending general tree
-		for (initialQPtr = 0; initialQPtr < sizeInitialQueue - 1; initialQPtr++)
+		for (initQPos = 0; initQPos < sizeInitQ - 1; initQPos++)
 		{
 			vector<Node *> checkerQueue = finalQueue; // will be a copy of finalQueue for children check
-			Node *frontNode = initialQueue.front(); // reference first node
-			finalQueue.push_back(frontNode);				// add node to the back of final queue
+			frontInitialQueue = initialQueue.front(); // reference first node
+			finalQueue.push_back(frontInitialQueue);			 	// add node to the back of final queue
 			initialQueue.erase(initialQueue.begin());						// removes first node from initial quue
 			childPosition = 0;
 
-			for (finalQPtr = 0; finalQPtr < finalQueue.size() - 2; finalQPtr++)
+			for (finalQPos = 0; finalQPos < finalQueue.size() - 2; finalQPos++)
 			{
 				// Add child to the last envelope in finalQueue
 				if (hasChildAbility(finalQueue.back(), checkerQueue.front()))
@@ -129,7 +129,7 @@ public:
 					childPosition++;
 				}
 
-				checkerQueue.pop();
+				checkerQueue.erase(checkerQueue.begin());
 			}
 		}
 
