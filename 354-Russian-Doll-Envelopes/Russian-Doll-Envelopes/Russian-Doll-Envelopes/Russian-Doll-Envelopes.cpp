@@ -112,29 +112,29 @@ public:
 	{
 		vector<Node *> initialQueue = startingQueue; // main queue, will have elements added to final queue
 		vector<Node *> finalQueue;					 // final queue built of nodes for descending general tree
-		vector<Node *> checkerQueue;				 // tmp copy of final queue used to check if newly added has children
-		Node *frontInitialQueue;					 // first node from initial that will be pushed to final queue
+		vector<Node *> checkerQueue;				 // dynamic copy of final queue used to check if newly added has children
 		int initQPos = 0;							 // iterates through inital queue
 		int finalQPos = 0;							 // iterates through final queue
-		int childPosition = 0;						 // node will have 0 to many children
+		int childPos = 0;							 // node will have 0 to many children
 		int sizeInitQ = initialQueue.size();		 // determines number of envelope nodes to add
 
 		// Build descending general tree
-		for (initQPos = 0; initQPos < sizeInitQ - 1; initQPos++)
+		// Adds each envelope from initial queue to final queue
+		for (initQPos = 0; initQPos < sizeInitQ; initQPos++)
 		{
-			vector<Node *> checkerQueue = finalQueue; // will be a copy of finalQueue for children check
-			frontInitialQueue = initialQueue.front(); // reference first node
-			finalQueue.push_back(frontInitialQueue);  // add node to the back of final queue
+			finalQueue.push_back(initialQueue.front());	// add node to the back of final queue
 			initialQueue.erase(initialQueue.begin()); // removes first node from initial quue
-			childPosition = 0;
+			checkerQueue = finalQueue;						// used to check if new node has children
+			childPos = 0;
 
-			for (finalQPos = 0; finalQPos < finalQueue.size() - 2; finalQPos++)
+			// Adds children to each node
+			for (finalQPos = 0; finalQPos < finalQueue.size() - 1; finalQPos++)
 			{
-				// Add child to the last envelope in finalQueue
+				// if the back of final queue has potential children, add them
 				if (hasChildAbility(finalQueue.back(), checkerQueue.front()))
 				{
 					(finalQueue.back()->child).push_back(checkerQueue.front());
-					childPosition++;
+					childPos++;
 				}
 
 				checkerQueue.erase(checkerQueue.begin());
