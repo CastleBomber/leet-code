@@ -1,29 +1,28 @@
-/*
-	Author: CBOMBS
-	Date: May 29th, 2022
-
-	LeetCode: #354 - Russian Doll Envelopes
-
-	You are given a 2D array of integers envelopes where envelopes[i] = [wi, hi] represents the width and the height of an envelope.
-
-	One envelope can fit into another if and only if both the width and height of one envelope are greater than the other envelope's width and height.
-
-	Return the maximum number of envelopes you can Russian doll (i.e., put one inside the other).
-
-	Note: You cannot rotate an envelope.
-
-	ex1: in = [[5,4],[6,4],[6,7],[2,3]]     out = 3
-				^A     ^B
-
-
-	Shortcuts:
-	VS Code:
-		c++ VS Code clang-formatter: shift+alt+f
-
-	Visual Studio:
-		code folding: select region, ctrl+m+m
-		full screen: shift+alt+enter
-*/
+/**
+ * Author: CBOMBS
+ * Date: May 29th, 2022
+ *
+ * LeetCode: #354 - Russian Doll Envelopes
+ *
+ * You are given a 2D array of integers envelopes where envelopes[i] = [wi, hi] represents the width and the height of an envelope.
+ *
+ * One envelope can fit into another if and only if both the width and height of one envelope are greater than the other envelope's width and height.
+ *
+ * Return the maximum number of envelopes you can Russian doll (i.e., put one inside the other).
+ *
+ * Note: You cannot rotate an envelope.
+ *
+ * ex1: in = [[5,4],[6,4],[6,7],[2,3]]     out = 3
+ * 			^A     ^B
+ *
+ * Shortcuts:
+ * VS Code:
+ * 	c++ VS Code clang-formatter: shift+alt+f
+ *
+ * Visual Studio:
+ * code folding: select region, ctrl+m+m
+ * full screen: shift+alt+enter
+ */
 
 #include <stdio.h>
 #include <iostream>
@@ -54,15 +53,16 @@ Node *newNode(vector<int> envelope)
 class Solution
 {
 public:
-	/*
-		Maximum number of envelopes that would fit inside eachother
-
-				*
-			   / \
-			  *   *
-			 / \
-			*   *
-	*/
+	/**
+	 * Maximum number of envelopes that would fit inside eachother
+	 * 				*
+	 * 			   / \
+	 * 			  *   *
+	 * 			 / \
+	 * 			*   *
+	 *
+	 *
+	 */
 	int maxEnvelopes(vector<vector<int> > &envelopes)
 	{
 		int count = 1; // Number of russian doll'd envelopes
@@ -74,8 +74,8 @@ public:
 
 		// Used to create a descending general tree of nodes
 		vector<Node *> initialQueue; // starting queue for each unique envelope
-		vector<Node *> finalQueue;	// queue of nodes pointing to sub trees
-		int position = 0;			// iterates through sortedEnvelopes
+		vector<Node *> finalQueue;	 // queue of nodes pointing to sub trees
+		int position = 0;			 // iterates through sortedEnvelopes
 
 		// Load up the inital queue with unique envelopes
 		for (position = 0; position < sortedEnvelopes.size(); position++)
@@ -100,24 +100,32 @@ public:
 		return count;
 	}
 
+	/**
+	 * General Tree from sorted envelopes
+	 * 				*
+	 * 			   / \
+	 * 			  *   *
+	 * 			 / \
+	 * 			*   *
+	 */
 	vector<Node *> buildDescendingGeneralTree(vector<Node *> startingQueue)
 	{
-		vector<Node *> initialQueue = startingQueue; // main queue loaded up from sortedEnvelopes
-		vector<Node *> finalQueue;					//  final queue builds descending general tree
-		vector<Node*> checkerQueue;					// tmp copy of final queue used to check if newly added has children 
-		Node* frontInitialQueue;				// references first node of initial for push to final queue
-		int initQPos = 0;						// iterates through inital queue
-		int finalQPos = 0;							// iterates through final queue
-		int childPosition = 0;						// node will have 0 to many children
-		int sizeInitQ = initialQueue.size(); // determines number of envelope nodes to add
+		vector<Node *> initialQueue = startingQueue; // main queue, will have elements added to final queue
+		vector<Node *> finalQueue;					 // final queue built of nodes for descending general tree
+		vector<Node *> checkerQueue;				 // tmp copy of final queue used to check if newly added has children
+		Node *frontInitialQueue;					 // first node from initial that will be pushed to final queue
+		int initQPos = 0;							 // iterates through inital queue
+		int finalQPos = 0;							 // iterates through final queue
+		int childPosition = 0;						 // node will have 0 to many children
+		int sizeInitQ = initialQueue.size();		 // determines number of envelope nodes to add
 
 		// Build descending general tree
 		for (initQPos = 0; initQPos < sizeInitQ - 1; initQPos++)
 		{
 			vector<Node *> checkerQueue = finalQueue; // will be a copy of finalQueue for children check
 			frontInitialQueue = initialQueue.front(); // reference first node
-			finalQueue.push_back(frontInitialQueue);			 	// add node to the back of final queue
-			initialQueue.erase(initialQueue.begin());						// removes first node from initial quue
+			finalQueue.push_back(frontInitialQueue);  // add node to the back of final queue
+			initialQueue.erase(initialQueue.begin()); // removes first node from initial quue
 			childPosition = 0;
 
 			for (finalQPos = 0; finalQPos < finalQueue.size() - 2; finalQPos++)
@@ -136,20 +144,20 @@ public:
 		return finalQueue;
 	}
 
-	/*
-		compares smallest height of sortedEnvelopes with the current envelope from envelopes,
-		if the current envelope is smaller in height, it will be put in appropriately
-		if the current envelope is larger in height, same deal
-	*/
+	/**
+	 * compares smallest height of sortedEnvelopes with the current envelope from envelopes,
+	 * if the current envelope is smaller in height, it will be put in appropriately
+	 * if the current envelope is larger in height, same deal
+	 */
 	vector<vector<int> > sortEnvelopesByHeights(vector<vector<int> > &envelopes)
 	{
-		int e = 0;	// envelopes position
-		int sE = 0; // sortedEnvelopes position
+		vector<vector<int> > sortedEnvelopes;
 		int sortedHeight = 0;
 		int sortedWidth = 0;
 		int unsortedHeight = 0;
 		int unsortedWidth = 0;
-		vector<vector<int> > sortedEnvelopes;
+		int e = 0;	// envelopes position
+		int sE = 0; // sortedEnvelopes position
 
 		sortedEnvelopes.push_back(envelopes[0]);
 
@@ -205,13 +213,13 @@ public:
 
 	vector<vector<int> > sortEnvelopesByWidths(vector<vector<int> > &envelopes)
 	{
-		int e = 0;	// envelopes position
-		int sE = 0; // sortedEnvelopes position
+		vector<vector<int> > sortedEnvelopes;
 		int sortedHeight = 0;
 		int sortedWidth = 0;
 		int unsortedHeight = 0;
 		int unsortedWidth = 0;
-		vector<vector<int> > sortedEnvelopes;
+		int e = 0;	// envelopes position
+		int sE = 0; // sortedEnvelopes position
 
 		sortedEnvelopes.push_back(envelopes[0]);
 
@@ -260,18 +268,19 @@ public:
 		return sortedEnvelopes;
 	}
 
-	/*
-		sort each envelope in ascending order by sum of: height + width
-
-		*algorithm could use more work
-	*/
+	/**
+	 * sort each envelope in ascending order by sum of: height + width
+	 *
+	 * (algorithm could use more work)
+	 */
 	vector<vector<int> > sortEnvelopesBySumOfSides(vector<vector<int> > &envelopes)
 	{
-		int i = 1;
-		int j = 0;
+		vector<vector<int> > sortedEnvelopes;
 		int smallSum = 0;
 		int currentSum = 0;
-		vector<vector<int> > sortedEnvelopes;
+		int i = 1;
+		int j = 0;
+
 		sortedEnvelopes.push_back(envelopes[0]); // initial envelope's order position is '0'
 
 		for (i = 1; i < envelopes.size(); i++)
@@ -300,21 +309,19 @@ public:
 	}
 
 	/**
-		 Checks if envelope A could have a child envelope B fit inside
-		 needs to at least be A(Wi + 1, Hi + 1) vs B(Wi, Hi)
-
-		 ex1:
-		 in = [[5,4], [2,3]     out = true
-				^A     ^B
-
-
-		 ex2:
-		 in = [[6,4], [5,4]     out = false
-				^A     ^B
-	*/
+	 * Checks if envelope A could have a child envelope B fit inside
+	 * needs to at least be A(Wi + 1, Hi + 1) vs B(Wi, Hi)
+	 *
+	 *  ex1:
+	 *  in = [[5,4], [2,3]     out = true
+	 * 		^A     ^B
+	 *
+	 *  ex2:
+	 *  in = [[6,4], [5,4]     out = false
+	 *		^A     ^B
+	 */
 	int hasChildAbility(Node *A, Node *B)
 	{
-
 		int heightA = A->height;
 		int widthA = A->width;
 		int heightB = B->height;
@@ -328,12 +335,11 @@ public:
 		return 0;
 	}
 
-	/*
-		Takes in three integers && returns the greatest
-	*/
+	/**
+	 * Takes in three integers && returns the greatest
+	 */
 	int getGreatestCount(int a, int b, int c)
 	{
-
 		int greatest = a;
 
 		if (b > greatest)
@@ -353,12 +359,10 @@ public:
 int main()
 {
 	Solution solution;
-	int count = 0; // russian doll'd envelopes
+	int count = 0; // maximum number of russian doll'd envelopes
 
 	vector<vector<int> > envelopes = {
-		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, 
-		{8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, 
-		{2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}}};
+		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}}};
 
 	count = solution.maxEnvelopes(envelopes);
 
