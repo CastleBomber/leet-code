@@ -31,6 +31,7 @@
 #include <vector>
 #include <regex>
 #include <queue>
+#include <map>
 
 using namespace std;
 
@@ -87,15 +88,23 @@ public:
 		finalQueue = buildDescendingGeneralTree(initialQueue);
 
 		// Traverse through general tree to find count
-		/*for ()
+		for (auto & node : finalQueue)
 		{
-		}*/
+			int childrenCount = (node->child).size();
+
+			if (childrenCount > count)
+			{
+				count = childrenCount;
+			}
+		}
+
+		map<int, int> x;
 
 		// Free up memory
-		while (!initialQueue.empty())
-		{
-			initialQueue.erase(initialQueue.begin());
-		}
+		//while (!initialQueue.empty())
+		//{
+		//	initialQueue.erase(initialQueue.begin());
+		//}
 
 		return count;
 	}
@@ -362,9 +371,12 @@ int main()
 	int count = 0; // maximum number of russian doll'd envelopes
 
 	vector<vector<int> > envelopes = {
-		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}}};
+		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}} };
 
-	count = solution.maxEnvelopes(envelopes);
+
+	vector<vector<int> > envelopes2 = { {5, 4},{6, 4},{6, 7},{2, 3} };
+
+	count = solution.maxEnvelopes(envelopes2);
 
 	cout << count << endl;
 }
