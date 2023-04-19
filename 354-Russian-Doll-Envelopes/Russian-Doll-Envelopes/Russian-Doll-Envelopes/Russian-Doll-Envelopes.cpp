@@ -16,12 +16,17 @@
  * 			^A     ^B
  *
  * Shortcuts:
- * VS Code:
- * 	c++ VS Code clang-formatter: shift+alt+f
+ *  VS Code:
+ * 	    c++ VS Code clang-formatter: shift+alt+f
  *
- * Visual Studio:
- * code folding: select region, ctrl+m+m
- * full screen: shift+alt+enter
+ *  Visual Studio:
+ *      code folding: select region, ctrl+m+m
+ *      full screen: shift+alt+enter
+ *		solution explorer: shift+alt+L
+ *      (start debugger to access watchlist)
+ *      watchlist: ctrl+alt+W,1
+ *      add to watchlist: shift+F9
+ *
  */
 
 #include <stdio.h>
@@ -39,6 +44,9 @@ struct Node
 {
 	int height;
 	int width;
+
+	int maxfromchildren;
+
 	vector<Node *> child;
 };
 
@@ -85,20 +93,9 @@ public:
 			initialQueue.push_back(envelope);
 		}
 
-		finalQueue = buildDescendingGeneralTree(initialQueue);
+		finalQueue = buildMiniDescendingGeneralTree(initialQueue); // Nodes with level 1 children
 
-		// Traverse through general tree to find count
-		for (auto & node : finalQueue)
-		{
-			int childrenCount = (node->child).size();
-
-			if (childrenCount > count)
-			{
-				count = childrenCount;
-			}
-		}
-
-		map<int, int> x;
+		count = getFinalCountFromTrees(finalQueue);
 
 		// Free up memory
 		//while (!initialQueue.empty())
@@ -110,14 +107,19 @@ public:
 	}
 
 	/**
-	 * General Tree from sorted envelopes
-	 * 				*
-	 * 			   / \
-	 * 			  *   *
-	 * 			 / \
-	 * 			*   *
+	 * Builds "Level 1" branches that wil be used for a larger general tree
+	 * Each node has a vector of children,
+	 * but they do not create a larger full descedning tree 
+	 * 
+	 * 
+	 * ex:
+	 * 						*
+	 * 						 \
+	 * 			 *			  *
+	 * 			/ \
+	 * 		   *   *
 	 */
-	vector<Node *> buildDescendingGeneralTree(vector<Node *> startingQueue)
+	vector<Node *> buildMiniDescendingGeneralTree(vector<Node *> startingQueue)
 	{
 		vector<Node *> initialQueue = startingQueue; // main queue, will have elements added to final queue
 		vector<Node *> finalQueue;					 // final queue built of nodes for descending general tree
@@ -151,6 +153,30 @@ public:
 		}
 
 		return finalQueue;
+	}
+
+	/**
+	* 
+	* 
+	*/
+	int getFinalCountFromTrees(vector<Node*> finalQueue)
+	{
+		map<int, int> mapx; // 
+		int finalCount;		// 
+		int childrenCount;  // 
+
+		// Traverse through trees to find finalCount
+		for (auto& node : finalQueue)
+		{
+			childrenCount = node->maxfromchildren;
+
+			if (childrenCount > finalCount)
+			{
+				finalCount = childrenCount;
+			}
+		}
+
+		return finalCount;
 	}
 
 	/**
@@ -374,7 +400,7 @@ int main()
 		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}} };
 
 
-	vector<vector<int> > envelopes2 = { {5, 4},{6, 4},{6, 7},{2, 3} };
+	vector<vector<int> > envelopes2 = { {13, 11},{8, 9},{5, 7} };
 
 	count = solution.maxEnvelopes(envelopes2);
 
