@@ -98,10 +98,9 @@ public:
 		count = getFinalCountFromTrees(finalQueue);
 
 		// Free up memory
-		//while (!initialQueue.empty())
-		//{
-		//	initialQueue.erase(initialQueue.begin());
-		//}
+		initialQueue.clear();
+		finalQueue.clear();
+		sortedEnvelopes.clear();
 
 		return count;
 	}
@@ -113,11 +112,10 @@ public:
 	 * 
 	 * 
 	 * ex:
-	 * 						*
-	 * 						 \
-	 * 			 *			  *
-	 * 			/ \
-	 * 		   *   *
+	 * 	   *				*
+	 *		\			   / \
+	 *		 *			  *	  *
+	 * 			
 	 */
 	vector<Node *> buildMiniDescendingGeneralTree(vector<Node *> startingQueue)
 	{
