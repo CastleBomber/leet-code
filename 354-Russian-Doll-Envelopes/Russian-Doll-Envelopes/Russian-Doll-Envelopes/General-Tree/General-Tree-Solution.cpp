@@ -3,7 +3,7 @@
     Date: August 5th, 2022
 
     *General Tree solution from geeksforgeeks*
-    
+
 */
 
 #include <stdio.h>
@@ -23,27 +23,33 @@ using namespace std;
 struct Node
 {
     int key;
-    vector<Node*>child;
+    vector<Node *> child;
 };
 
 // Utility function to create a new tree node
-Node* newNode(int key)
+Node *newNode(int key)
 {
-    Node* temp = new Node;
+    Node *temp = new Node;
     temp->key = key;
     return temp;
 }
 
-// Prints the n-ary tree level wise
-void LevelOrderTraversal(Node* root)
+/**
+ * Prints the n-ary tree level wise
+ *
+ * Starts by pushing root to queue
+ * each of root's children will be pushed to queue
+ * each of those children will have their children pushed to queue (grandchildren)
+ */
+void LevelOrderTraversal(Node *root)
 {
     if (root == NULL)
         return;
 
     // Standard level order traversal code
     // using queue
-    queue<Node*> q;  // Create a queue
-    q.push(root); // Enqueue root
+    queue<Node *> q; // Create a queue
+    q.push(root);    // Enqueue root
     while (!q.empty())
     {
         int n = q.size();
@@ -52,7 +58,7 @@ void LevelOrderTraversal(Node* root)
         while (n > 0)
         {
             // Dequeue an item from queue and print it
-            Node* p = q.front();
+            Node *p = q.front();
             q.pop();
             cout << p->key << " ";
 
@@ -70,13 +76,13 @@ void LevelOrderTraversal(Node* root)
 int main()
 {
     /*   Let us create below tree
-    *              10
-    *        /   /    \   \
-    *        2  34    56   100
-    *       / \         |   /  | \
-    *      77  88       1   7  8  9
-    */
-    Node* root = newNode(10);
+     *              10
+     *        /   /    \   \
+     *        2  34    56   100
+     *       / \         |   /  | \
+     *      77  88       1   7  8  9
+     */
+    Node *root = newNode(10);
     (root->child).push_back(newNode(2));
     (root->child).push_back(newNode(34));
     (root->child).push_back(newNode(56));

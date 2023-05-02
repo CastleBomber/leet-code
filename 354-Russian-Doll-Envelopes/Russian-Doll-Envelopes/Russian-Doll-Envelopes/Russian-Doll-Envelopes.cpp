@@ -45,9 +45,9 @@ struct Node
 	int height;
 	int width;
 
-	int maxfromchildren;
+	int highestLevelOrder;
 
-	vector<Node *> child;
+	vector<Node *> children;
 };
 
 Node *newNode(vector<int> envelope)
@@ -95,6 +95,8 @@ public:
 
 		finalQueue = buildMiniDescendingGeneralTree(initialQueue); // Nodes with level 1 children
 
+		setHighestLevelOrder(finalQueue);
+
 		count = getFinalCountFromTrees(finalQueue);
 
 		// Free up memory
@@ -108,14 +110,14 @@ public:
 	/**
 	 * Builds "Level 1" branches that wil be used for a larger general tree
 	 * Each node has a vector of children,
-	 * but they do not create a larger full descedning tree 
-	 * 
-	 * 
+	 * but they do not create a larger full descedning tree
+	 *
+	 *
 	 * ex:
 	 * 	   *				*
 	 *		\			   / \
 	 *		 *			  *	  *
-	 * 			
+	 *
 	 */
 	vector<Node *> buildMiniDescendingGeneralTree(vector<Node *> startingQueue)
 	{
@@ -131,9 +133,9 @@ public:
 		// Adds each envelope from initial queue to final queue
 		for (initQPos = 0; initQPos < sizeInitQ; initQPos++)
 		{
-			finalQueue.push_back(initialQueue.front());	// add node to the back of final queue
-			initialQueue.erase(initialQueue.begin()); // removes first node from initial quue
-			checkerQueue = finalQueue;						// used to check if new node has children
+			finalQueue.push_back(initialQueue.front()); // add node to the back of final queue
+			initialQueue.erase(initialQueue.begin());	// removes first node from initial quue
+			checkerQueue = finalQueue;					// used to check if new node has children
 			childPos = 0;
 
 			// Adds children to each node
@@ -142,7 +144,7 @@ public:
 				// if the back of final queue has potential children, add them
 				if (hasChildAbility(finalQueue.back(), checkerQueue.front()))
 				{
-					(finalQueue.back()->child).push_back(checkerQueue.front());
+					(finalQueue.back()->children).push_back(checkerQueue.front());
 					childPos++;
 				}
 
@@ -154,27 +156,49 @@ public:
 	}
 
 	/**
-	* 
-	* 
-	*/
-	int getFinalCountFromTrees(vector<Node*> finalQueue)
+	 * Go through each node and tally up their respective highest level orders
+	 * Starts by handling the smallest envelopes, working up to the bigger ones.
+	 */
+	void setHighestLevelOrder(vector<Node *> finalQueue)
 	{
-		map<int, int> mapx; // 
-		int finalCount;		// 
-		int childrenCount;  // 
+		int curMax = 0;
 
-		// Traverse through trees to find finalCount
-		for (auto& node : finalQueue)
+		for (auto &node : finalQueue)
 		{
-			childrenCount = node->maxfromchildren;
-
-			if (childrenCount > finalCount)
+			for (auto &child : node->children)
 			{
-				finalCount = childrenCount;
+				if (child->highestLevelOrder > curMax)
+				{
+					curMax = child->highestLevelOrder;
+					node->highestLevelOrder = curMax;
+				}
+			}
+
+			node->highestLevelOrder = (node->highestLevelOrder) + 1; // include itself
+		}
+	}
+
+	/**
+	 *
+	 *
+	 */
+	int getFinalCountFromTrees(vector<Node *> finalQueue)
+	{
+		int curHighestCount = 0; // highest child count to be checked
+		int finalHighestCount = 0;
+
+		// Traverse through trees to find finalHighestCount
+		for (auto &node : finalQueue)
+		{
+			curHighestCount = node->highestLevelOrder;
+
+			if (curHighestCount > finalHighestCount)
+			{
+				finalHighestCount = curHighestCount;
 			}
 		}
 
-		return finalCount;
+		return finalHighestCount;
 	}
 
 	/**
@@ -395,12 +419,14 @@ int main()
 	int count = 0; // maximum number of russian doll'd envelopes
 
 	vector<vector<int> > envelopes = {
-		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}} };
+		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}}};
 
+	vector<vector<int> > envelopes2 = {{5, 4},
+									   {6, 4},
+									   {6, 7},
+									   {2, 3}};
 
-	vector<vector<int> > envelopes2 = { {13, 11},{8, 9},{5, 7} };
-
-	count = solution.maxEnvelopes(envelopes2);
+	count = solution.maxEnvelopes(envelopes);
 
 	cout << count << endl;
 }
