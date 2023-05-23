@@ -134,6 +134,7 @@ public:
 		for (initQPos = 0; initQPos < sizeInitQ; initQPos++)
 		{
 			finalQueue.push_back(initialQueue.front()); // add node to the back of final queue
+			finalQueue.back()->highestLevelOrder = 0;
 			initialQueue.erase(initialQueue.begin());	// removes first node from initial quue
 			checkerQueue = finalQueue;					// used to check if new node has children
 			childPos = 0;
@@ -419,14 +420,21 @@ int main()
 	int count = 0; // maximum number of russian doll'd envelopes
 
 	vector<vector<int> > envelopes = {
-		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}}};
+		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}} };
+
 
 	vector<vector<int> > envelopes2 = {{5, 4},
 									   {6, 4},
 									   {6, 7},
 									   {2, 3}};
 
-	count = solution.maxEnvelopes(envelopes);
+
+	vector<vector<int> > envelopes3 = { {5, 7},
+									   {8,9},
+									   {13, 11},
+									   {18, 13}, {19, 20} };
+
+	count = solution.maxEnvelopes(envelopes3);
 
 	cout << count << endl;
 }
