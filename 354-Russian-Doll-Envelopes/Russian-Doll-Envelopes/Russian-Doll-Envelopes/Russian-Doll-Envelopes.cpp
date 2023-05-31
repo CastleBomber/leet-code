@@ -22,10 +22,11 @@
  *  Visual Studio:
  *      code folding: select region, ctrl+m+m
  *      full screen: shift+alt+enter
- *		solution explorer: shift+alt+L
+ *		solution explorer: ctrl+alt+L
  *      (start debugger to access watchlist)
  *      watchlist: ctrl+alt+W,1
  *      add to watchlist: shift+F9
+ *		terminal: 
  *
  */
 
@@ -62,6 +63,29 @@ Node *newNode(vector<int> envelope)
 class Solution
 {
 public:
+	int maxEnvelopes(vector<vector<int> >& envelopes) 
+	{
+		int countByHeights = 0;
+		int countByWidths = 0;
+		int countBySumOfSides = 0;
+		int trueCount = 0;
+
+		countByHeights = maxEnvelopesByHeights(envelopes);
+		countByWidths= maxEnvelopesByWidths(envelopes);
+		countBySumOfSides = maxEnvelopesBySumOfSides(envelopes);
+
+		if (countByHeights > countByWidths)
+		{
+			trueCount = countByHeights;
+		}
+		else
+		{
+			trueCount = countByWidths;
+		}
+
+		return trueCount;
+	}
+
 	/**
 	 * Maximum number of envelopes that would fit inside eachother
 	 * 				*
@@ -141,6 +165,42 @@ public:
 
 		return count;
 	}
+
+	int maxEnvelopesBySumOfSides(vector<vector<int> >& envelopes)
+	{
+		int count = 1; // Number of russian doll'd envelopes
+
+		// Organize envelopes and remove duplicates
+		vector<vector<int> > sortedEnvelopes;
+		sortedEnvelopes = sortEnvelopesBySumOfSides(envelopes);
+		sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
+
+		// Used to create a descending general tree of nodes
+		vector<Node*> initialQueue; // starting queue for each unique envelope
+		vector<Node*> finalQueue;	 // queue of nodes pointing to sub trees
+		int position = 0;			 // iterates through sortedEnvelopes
+
+		// Load up the inital queue with unique envelopes
+		for (position = 0; position < sortedEnvelopes.size(); position++)
+		{
+			Node* envelope = newNode(sortedEnvelopes[position]);
+			initialQueue.push_back(envelope);
+		}
+
+		finalQueue = buildMiniDescendingGeneralTree(initialQueue); // Nodes with level 1 children
+
+		setHighestLevelOrder(finalQueue);
+
+		count = getFinalCountFromTrees(finalQueue);
+
+		// Free up memory
+		initialQueue.clear();
+		finalQueue.clear();
+		sortedEnvelopes.clear();
+
+		return count;
+	}
+
 
 	/**
 	 * Builds "Level 1" branches that wil be used for a larger general tree
@@ -454,40 +514,16 @@ public:
 int main()
 {
 	Solution solution;
-	int countByHeights = 0;
-	int countByWidths = 0;
-	int trueCount = 0; // maximum number of russian doll'd envelopes
+	int count = 0; // maximum number of russian doll'd envelopes
 
 	vector<vector<int> > envelopes = {
-		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, {18, 19}} };
+		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, 
+		{11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, 
+		{13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, 
+		{18, 19}} };
 
 
-	vector<vector<int> > envelopes2 = {{5, 4},
-									   {6, 4},
-									   {6, 7},
-									   {2, 3}};
+	count = solution.maxEnvelopes(envelopes);
 
-
-	vector<vector<int> > envelopes3 = { {5, 7},
-									   {8,9},
-									   {13, 11},
-									   {18, 13}, {19, 20} };
-
-
-	vector<vector<int>> envelopes4 = {
-		{{2, 100},{3, 200},{4, 300},{5, 500},{5, 400},{5, 250},{6, 370},{6, 360},{7, 380}}
-	};
-
-	countByHeights = solution.maxEnvelopesByHeights(envelopes4);
-	countByWidths = solution.maxEnvelopesByWidths(envelopes4);
-
-	if (countByHeights > countByWidths) 
-	{
-		trueCount = countByHeights;
-	} else 
-	{
-		trueCount = countByWidths;
-	}
-
-	cout << trueCount << endl;
+	cout << count << endl;
 }
