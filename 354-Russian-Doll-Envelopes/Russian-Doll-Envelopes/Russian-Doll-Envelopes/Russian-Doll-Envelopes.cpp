@@ -26,7 +26,7 @@
  *      (start debugger to access watchlist)
  *      watchlist: ctrl+alt+W,1
  *      add to watchlist: shift+F9
- *		terminal: 
+ *		terminal: ctrl + `
  *
  */
 
@@ -70,9 +70,9 @@ public:
 		int countBySumOfSides = 0;
 		int trueCount = 0;
 
-		countByHeights = maxEnvelopesByHeights(envelopes);
-		countByWidths= maxEnvelopesByWidths(envelopes);
-		countBySumOfSides = maxEnvelopesBySumOfSides(envelopes);
+		countByHeights = maxEnvelopesByDimensions(envelopes, 1);
+		countByWidths= maxEnvelopesByDimensions(envelopes, 2);
+		countBySumOfSides = maxEnvelopesByDimensions(envelopes, 3);
 
 		if (countByHeights > countByWidths)
 		{
@@ -96,13 +96,26 @@ public:
 	 *
 	 *
 	 */
-	int maxEnvelopesByHeights(vector<vector<int> > &envelopes)
+	int maxEnvelopesByDimensions(vector<vector<int> > &envelopes, int dimension)
 	{
 		int count = 1; // Number of russian doll'd envelopes
+		int option = dimension;
 
 		// Organize envelopes and remove duplicates
 		vector<vector<int> > sortedEnvelopes;
-		sortedEnvelopes = sortEnvelopesByHeights(envelopes);
+
+
+		// Choose Dimension
+		if (option = 1) {
+			sortedEnvelopes = sortEnvelopesByHeights(envelopes);
+		}
+		else if(option = 2) {
+			sortedEnvelopes = sortEnvelopesByWidths(envelopes);
+		}
+		else if(option = 3) {
+			sortedEnvelopes = sortEnvelopesBySumOfSides(envelopes);
+		}
+		
 		sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
 		// Used to create a descending general tree of nodes
@@ -117,10 +130,13 @@ public:
 			initialQueue.push_back(envelope);
 		}
 
+		// Build mini trees
 		finalQueue = buildMiniDescendingGeneralTree(initialQueue); // Nodes with level 1 children
 
+		// Set stack count for each mini sub tree
 		setHighestLevelOrder(finalQueue);
 
+		// Tally up the final stack count
 		count = getFinalCountFromTrees(finalQueue);
 
 		// Free up memory
@@ -130,77 +146,6 @@ public:
 
 		return count;
 	}
-
-	int maxEnvelopesByWidths(vector<vector<int> >& envelopes)
-	{
-		int count = 1; // Number of russian doll'd envelopes
-
-		// Organize envelopes and remove duplicates
-		vector<vector<int> > sortedEnvelopes;
-		sortedEnvelopes = sortEnvelopesByWidths(envelopes);
-		sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
-
-		// Used to create a descending general tree of nodes
-		vector<Node*> initialQueue; // starting queue for each unique envelope
-		vector<Node*> finalQueue;	 // queue of nodes pointing to sub trees
-		int position = 0;			 // iterates through sortedEnvelopes
-
-		// Load up the inital queue with unique envelopes
-		for (position = 0; position < sortedEnvelopes.size(); position++)
-		{
-			Node* envelope = newNode(sortedEnvelopes[position]);
-			initialQueue.push_back(envelope);
-		}
-
-		finalQueue = buildMiniDescendingGeneralTree(initialQueue); // Nodes with level 1 children
-
-		setHighestLevelOrder(finalQueue);
-
-		count = getFinalCountFromTrees(finalQueue);
-
-		// Free up memory
-		initialQueue.clear();
-		finalQueue.clear();
-		sortedEnvelopes.clear();
-
-		return count;
-	}
-
-	int maxEnvelopesBySumOfSides(vector<vector<int> >& envelopes)
-	{
-		int count = 1; // Number of russian doll'd envelopes
-
-		// Organize envelopes and remove duplicates
-		vector<vector<int> > sortedEnvelopes;
-		sortedEnvelopes = sortEnvelopesBySumOfSides(envelopes);
-		sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
-
-		// Used to create a descending general tree of nodes
-		vector<Node*> initialQueue; // starting queue for each unique envelope
-		vector<Node*> finalQueue;	 // queue of nodes pointing to sub trees
-		int position = 0;			 // iterates through sortedEnvelopes
-
-		// Load up the inital queue with unique envelopes
-		for (position = 0; position < sortedEnvelopes.size(); position++)
-		{
-			Node* envelope = newNode(sortedEnvelopes[position]);
-			initialQueue.push_back(envelope);
-		}
-
-		finalQueue = buildMiniDescendingGeneralTree(initialQueue); // Nodes with level 1 children
-
-		setHighestLevelOrder(finalQueue);
-
-		count = getFinalCountFromTrees(finalQueue);
-
-		// Free up memory
-		initialQueue.clear();
-		finalQueue.clear();
-		sortedEnvelopes.clear();
-
-		return count;
-	}
-
 
 	/**
 	 * Builds "Level 1" branches that wil be used for a larger general tree
