@@ -15,6 +15,13 @@
  * ex1: in = [[5,4],[6,4],[6,7],[2,3]]     out = 3
  * 			^A     ^B
  *
+ * 
+ * Final Results: 
+ * 79 / 87 testcases passed
+ * Time limit exceeded on large envelope test cases
+ * 
+ * 
+ * 
  * Shortcuts:
  *  VS Code:
  * 	    c++ VS Code clang-formatter: shift+alt+f
@@ -63,7 +70,7 @@ Node *newNode(vector<int> envelope)
 class Solution
 {
 public:
-	int maxEnvelopes(vector<vector<int> >& envelopes) 
+	int maxEnvelopes(vector<vector<int> >& envelopes)
 	{
 		int countByHeights = 0;
 		int countByWidths = 0;
@@ -115,7 +122,7 @@ public:
 		else if(option = 3) {
 			sortedEnvelopes = sortEnvelopesBySumOfSides(envelopes);
 		}
-		
+
 		sortedEnvelopes.erase(unique(sortedEnvelopes.begin(), sortedEnvelopes.end()), sortedEnvelopes.end());
 
 		// Used to create a descending general tree of nodes
@@ -207,22 +214,25 @@ public:
 
 		for (auto &node : finalQueue)
 		{
+			curMax = 0;
+
 			for (auto &child : node->children)
 			{
-				if (child->highestLevelOrder > curMax)
+				if (child->highestLevelOrder >= curMax)
 				{
 					curMax = child->highestLevelOrder;
 					node->highestLevelOrder = curMax;
 				}
 			}
 
-			tmp = (node->highestLevelOrder);
+			tmp = curMax;
 			node->highestLevelOrder = tmp + 1; // include itself
 		}
 	}
 
 	/**
-	 *
+	 * Tally up highest level orders from each of the mini sub-tree
+	 * Behavior mimics creating a whole sub tree
 	 *
 	 */
 	int getFinalCountFromTrees(vector<Node *> finalQueue)
@@ -462,9 +472,9 @@ int main()
 	int count = 0; // maximum number of russian doll'd envelopes
 
 	vector<vector<int> > envelopes = {
-		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7}, 
-		{11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11}, 
-		{13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17}, 
+		{{15, 8}, {2, 20}, {2, 14}, {4, 17}, {8, 19}, {8, 9}, {5, 7},
+		{11, 19}, {8, 11}, {13, 11}, {2, 13}, {11, 19}, {8, 11},
+		{13, 11}, {2, 13}, {11, 19}, {16, 1}, {18, 13}, {14, 17},
 		{18, 19}} };
 
 
