@@ -19,6 +19,6 @@ import math
 
 
 def main():
-   HelloWorld(1)
+   helloWorld(1)
 
 main()

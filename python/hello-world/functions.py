@@ -1,4 +1,4 @@
-def HelloWorld(number):
+def helloWorld(number):
     sum = number
 
     return sum
