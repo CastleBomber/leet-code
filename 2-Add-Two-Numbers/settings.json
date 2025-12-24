@@ -1,0 +1,25 @@
+// Toggeling suggestions
+// Command Pallete - shift+cmd+p
+// Then type in: Preferences: Open User Settings (JSON), will open up the proper settings.json
+// Put the contents of this file (w/o comments) into:
+// Users > cbombs > Library > Application Support > Code > User > settings.json
+{
+  // ** Turns suggestions OFF ** // 
+
+  
+  "editor.quickSuggestions": false, // Disable popup suggestions
+  "editor.inlineSuggest.enabled": false, // Disable ghost-text suggestions (AI or IntelliSense)
+  "editor.suggestOnTriggerCharacters": false, // Prevent suggestions from showing by typing a dot or other triggers
+  "editor.acceptSuggestionOnEnter": "off", // Avoid accidentally accepting suggestions with Enter
+  "editor.suggest.showWords": true // Optional: still allow manual Ctrl+Space to trigger suggestions
+
+
+
+  // ** Suggestions ON ** //
+  // "editor.quickSuggestions": true,
+  // "editor.inlineSuggest.enabled": true,
+  // "editor.suggestOnTriggerCharacters": true,
+  // "editor.acceptSuggestionOnEnter": "on"
+}
+
+
