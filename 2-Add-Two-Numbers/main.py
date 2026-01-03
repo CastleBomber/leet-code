@@ -73,7 +73,7 @@ class Solution:
         str1 = ""
         str2 = ""
 
-        # Calculate the numbers represented by the reverse ordered Nodes
+        # Calculate the numbers represented by the Nodes
         while curr1:
             str1 = str(curr1.val) + str1
             curr1 = curr1.next
@@ -82,7 +82,7 @@ class Solution:
             str2 = str(curr2.val) + str2
             curr2 = curr2.next
 
-        # Sum of the node representations
+        # Sum of the Node representations
         sum = str(int(str1)+int(str2))
 
         # Creates the first Node w/ the base being the first digit from the sum

@@ -38,6 +38,12 @@ class Solution:
         dummyHead.next = None
         return result
     
+    def printNodeValues(self, nodes: Optional[ListNode]):
+        tmp = nodes
+        while tmp is not None:
+            print(tmp.val)
+            tmp = tmp.next
+    
 if __name__ == "__main__":
     # Sample inputs from problem
     # Build l1 = 342, so the reverse nodes are: 2 -> 4 -> 3 -> None
@@ -53,3 +59,5 @@ if __name__ == "__main__":
     # Create solution instance and call the function
     sol = Solution()
     result = sol.addTwoNumbers(l1_head, l2_head)
+    
+    sol.printNodeValues(result)

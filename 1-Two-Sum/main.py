@@ -32,7 +32,7 @@
         Case 1-3
 
     Notes:
-        LeetCode 
+     
 
 *********************************************************
 """
@@ -78,5 +78,5 @@ if __name__ == "__main__":
     sol = Solution()
     result = sol.twoSum(nums, target)
 
-    print(result)
+    print(result) # [2,1]
 
