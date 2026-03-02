@@ -1,0 +1,33 @@
+Boost is newer so i will practice with this one more
+GMP is fastest, so i will practice randomly
+
+
+
+
+best?
+GMP → best for raw performance, precision arithmetic
+(but requires linking of C libraries)
+Boost.Multiprecision → best for C++ integration, cleaner templates
+(does not require linking to C libraries )
+
+
+longer-standing?
+GMP: 1991
+Boost.Multiprecision: 2011
+
+
+popular?
+Boost: More popular overall 
+Boost.Multiprecision alone is less commonly deployed.
+GMP: Still the industry standard 
+
+
+future?
+Boost.Multiprecision is rising 
+GMP will remain entrenched
+
+
+
+GMP
+Install command:
+brew install gmp

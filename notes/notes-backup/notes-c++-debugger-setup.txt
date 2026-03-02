@@ -1,0 +1,16 @@
+launch.json vs tasks.json
+preLaunchTask names must match with label
+specified each file (main.cpp, helloWorld.cpp, helloWorld.h) in the args[]. 
+
+make sure you are in the appropraite root folder.
+.
+├── .vscode
+│   ├── launch.json
+│   └── tasks.json
+├── helloWorld.cpp
+├── helloWorld.h
+├── main.cpp
+
+
+make sure you have the library:
+#include <iostream>

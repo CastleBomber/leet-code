@@ -34,6 +34,7 @@
         python3 main.py
 
     Solution:
+        Accepted - 2098 / 2098 testcases passed
 
     Notes:
         TYPE HINTING REFERENCE: list vs. List
@@ -63,7 +64,13 @@
         ----------------------------------------------
 
 
-        TIME AND SPACE COMPLEXITY: 
+        TIME AND SPACE COMPLEXITY: Binary Search Partition Approach
+        ----------------------------------------------------------
+        Metric           | Complexity            | Reason
+        ----------------------------------------------------------
+        Time Complexity  | O(log(min(m, n)))     | Binary search is performed only on the smaller array; each iteration halves the search space.
+        Space Complexity | O(1)                  | Uses a constant number of variables; no extra data structures proportional to input size.
+        ----------------------------------------------------------
         
 *********************************************************
 """
@@ -72,25 +79,31 @@ import math
 
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        # [* * | * *]
         # Always binary search the smaller array
         # nums1 smaller, nums2 bigger
         if len(nums1) > len(nums2):
             nums1, nums2 = nums2, nums1
 
-        # Handles an empty array
-        if len(num1) == 0:
-            return 0
-        
         m, n = len(nums1), len(nums2)
-        total = m + n
+        total = m + n 
 
         # Number of elements that should be on the left side when we split the two arrays around the median
         # -inf [LEFT (x items) | RIGHT (y items)] +inf
-        # If total is odd → left side has one extra
-        # If total is even → left and right are equal
-        half = (total + 1) // 2     # left side size
+        # If total is odd → left side has one extra      # [* * *|* *]
+        # If total is even → left and right are equal    # [* *|* *]
+        half = (total + 1) // 2     # left side size    
 
+        # Handles two empty arrays
+        if m == 0 and n == 0:
+            return 0
+        
+        # Handles if just empty array
+        if m == 0:
+            if total%2 == 0:
+                return (nums2[half] + nums2[half-1])/2
+            else:
+                return nums2[half-1]
+            
         lo, hi = 0, m # cut1 ranges from 0..m
         
         while lo <= hi:
@@ -106,15 +119,20 @@ class Solution:
             # Check if partition is valid
             if max(left1, left2) <= min(right1, right2):
                 # Computes median from boundary values (depends on odd/even total)
-                if total%2 != 0:
-                    # the median is the max value on the left side of the partition
-                    return max(left1, left2)
-                else:
-                    x = (right1 + left2)/2
+                # Total is even
+                if total%2 == 0:
+                    left_max = max(left1, left2)
+                    right_min = min(right1, right2)
+                    x = (left_max + right_min)/2
                     if math.isfinite(x):
                         return  x
                     else:
                         return (left1 + right2)/2
+                # Total is odd
+                else:
+                    # the median is the max value on the left side of the partition
+                    return max(left1, left2)
+
             
             # Move binary search window
             if left1 > right2:
@@ -123,8 +141,6 @@ class Solution:
                 lo = cut1 + 1   # cut1 too far left, increment it to the right
             
         raise ValueError("Inputs not sorted or unexpected case")
-
-        
 
 if __name__ == "__main__":
     # nums1 = [2,2,4,4]
@@ -145,8 +161,12 @@ if __name__ == "__main__":
     # nums2 = [3,4]
     #nums1 = [1,3]
     #nums2 = [2,7]
-    nums1 = []
-    nums2 = [2,3]
+    # nums1 = []
+    # nums2 = [2,3]
+    # nums1 = []
+    # nums2 = [1]
+    nums1 = [1,2]
+    nums2 = [-1,3]
 
     sol = Solution()
     result = sol.findMedianSortedArrays(nums1, nums2)

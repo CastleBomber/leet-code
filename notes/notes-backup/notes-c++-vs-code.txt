@@ -1,0 +1,23 @@
+Requirements: C++ extension, clang compiler
+
+Running the program in VS Code will create an executable. 
+You will need to run the executable to start the code.
+
+
+Compiling one file:
+clang++ main.cpp -o output
+./output
+
+Compiling multiple files: 
+# Only list .cpp files (exclude .h)
+clang++ main.cpp helloWorld.cpp -o output && ./output
+
+VS
+
+Compiling multiple files (long):
+# Step 1: Compile each .cpp to .o (object files)
+clang++ -c main.cpp             # Generates main.o
+clang++ -c helloWorld.cpp       # Generates helloWorld.o
+
+# Step 2: Link all .o files into one executable
+clang++ main.o helloWorld.o -o output 

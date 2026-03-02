@@ -8,6 +8,7 @@
     Metric           | Complexity | Reason
     ----------------------------------------------------
     Time Complexity  | O(n)       | Each char is added/removed from deque at most once.
+                      *O(n²)      | In the worst case
     Space Complexity | O(min(n,m))| Deque size depends on string (n) or alphabet (m).
     ----------------------------------------------------
 

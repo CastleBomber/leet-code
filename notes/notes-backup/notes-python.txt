@@ -1,0 +1,18 @@
+// Run code 
+python3 main.py
+
+// Make it executable
+// Add a shebang and give it execute permission
+#!/usr/bin/env python3
+chmod +x optimal-solution.py
+
+./optimal-solution.py
+
+
+
+
+.env
+You created a sandboxed Python environment inside your project (in the .venv folder).
+When it’s active, your terminal shows (.venv) so you know any Python commands or installs (pip install ...) will only affect this project, not your system-wide Python.
+When you’re done working, you can deactivate it anytime with:
+deactivate
