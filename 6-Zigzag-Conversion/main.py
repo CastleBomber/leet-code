@@ -64,10 +64,19 @@ class Solution:
         @param numRows: 
         @return: 
         """
-        start = 0
+        output = ""
+        row = 0
+        i = 0
 
+        while (row < numRows):
+            i = row
+            while (i < len(s)):
+                output += s[i]
+                i = i + numRows + 1
+            
+            row += 1
 
-        return start
+        return output
 
 
 if __name__ == "__main__":
