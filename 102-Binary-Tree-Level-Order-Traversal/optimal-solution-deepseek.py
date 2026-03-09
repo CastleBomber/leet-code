@@ -40,6 +40,7 @@
     Time Complexity  | O(n)       | Every node is visited exactly once.
                                     Each node's value is appended to its level list,
                                     and children are enqueued – all constant time per node.
+                                    
     Space Complexity | O(n)       | In the worst case (a complete tree at its last level),
                                     the queue holds up to roughly n/2 nodes (the maximum width).
                                     The result list also stores n values, but this is required output.

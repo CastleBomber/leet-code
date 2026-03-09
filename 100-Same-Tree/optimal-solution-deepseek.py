@@ -39,6 +39,7 @@
     Time Complexity  | O(n)       | Each node is visited exactly once, performing
                                     constant-time comparisons (value checks + recursion).
                                     n = total number of nodes in both trees.
+                                    
     Space Complexity | O(h)       | Recursion stack depth equals the tree height h.
                                     Worst-case O(n) for a skewed tree (like a linked list),
                                     best/average O(log n) for balanced trees.
