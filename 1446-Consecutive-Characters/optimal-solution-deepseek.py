@@ -28,7 +28,8 @@
         python3 optimal-solution-deepseek.py
 
     Notes:
-        TIME AND SPACE COMPLEXITY: Single Pass Scan
+    
+    TIME AND SPACE COMPLEXITY: Single Pass Scan
     ----------------------------------------------------
     Metric           | Complexity | Reason
     ----------------------------------------------------

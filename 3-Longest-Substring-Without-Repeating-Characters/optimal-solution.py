@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 ''' 
-    LeetCode: #3 Longest Substring Without Repeating Characters (Best)
+    LeetCode: #3 Longest Substring Without Repeating Characters (Best >)
     Authors: Rahul Varma's Optimal Solution + CBombs (edits)
 
     Given a string s, 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 ''' 
-    ChatGPT's Optimal Solution
+    ChatGPT's Optimal Solution (best)
     Approach: Manacher's Algorithm
     
     LeetCode: #5 Longest Palindromic Substring

@@ -43,6 +43,7 @@
     ----------------------------------------------------
     Time Complexity  | O(n)       | Single pass through the n points, computing
                                     constant-time operations per adjacent pair.
+                                    
     Space Complexity | O(1)       | Only a few integer variables (total_time, dx, dy, i)
                                     used; no additional data structures scale with input.
     ----------------------------------------------------
