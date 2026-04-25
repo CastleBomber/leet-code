@@ -28,6 +28,9 @@
     Constraints:
         -231 <= x <= 231 - 1
 
+    Solution
+        Accepted - 11511 / 11511 testcases passed
+
 
 *********************************************************
 """
@@ -41,14 +44,31 @@ import itertools
 import functools
 
 class Solution:
-    def reverse(self, x: int) -> int:
+    def isPalindrome(self, x: int) -> bool:
+        s = str(x)
 
+        halfwayPoint = len(s) // 2
 
+        pStart = 0
+        pEnd = len(s) - 1
+
+        while pStart < halfwayPoint:
+            if s[pStart] != s[pEnd]:
+                return False
+            
+            pStart += 1
+            pEnd -= 1
+            
+        return True
 
 if __name__ == "__main__":
-    x = 1534236469
+    x1 = 121
+    x2 = -121
+    x3 = 10
+    x4 = 11
+
     sol = Solution()
-    result = sol.reverse(x)
+    result = sol.isPalindrome(x4)
 
     print(result)
 

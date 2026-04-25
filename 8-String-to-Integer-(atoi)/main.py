@@ -12,13 +12,13 @@
 
     Whitespace: Ignore any leading whitespace (" ").
     Signedness: Determine the sign by checking if the next character is '-' or '+', assuming positivity if neither present.
-    Conversion: Read the integer by skipping leading zeros until a non-digit character is encountered or the end of the string is reached. 
+    Conversion: Read the integer by skipping leading zeros until a non-digit character is encountered or the end of the string is reached.
     If no digits were read, then the result is 0.
-    Rounding: If the integer is out of the 32-bit signed integer range [-231, 231 - 1], then round the integer to remain in the range. 
+    Rounding: If the integer is out of the 32-bit signed integer range [-231, 231 - 1], then round the integer to remain in the range.
     Specifically, integers less than -231 should be rounded to -231, and integers greater than 231 - 1 should be rounded to 231 - 1.
     Return the integer as the final result.
 
-    
+
     Example 1:
         Input: s = "42"
 
@@ -88,12 +88,16 @@
 
         Reading stops at the first non-digit character 'w'.
 
-    
+
 
     Constraints:
 
     0 <= s.length <= 200
     s consists of English letters (lower-case and upper-case), digits (0-9), ' ', '+', '-', and '.'.
+
+    Solution
+        Almost complete
+        x5 = "   -042" # not solved
 
 *********************************************************
 """
@@ -106,14 +110,46 @@ import bisect
 import itertools
 import functools
 
-class Solution:
-    def reverse(self, x: int) -> int:
 
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        build = ""
+        sign = "+"
+
+        s = s.lstrip()  # removes leading whitespaces
+        n = len(s)
+
+        # Return 0 if first char is a letter
+        if s[0].isalpha():
+            build = 0
+            return build
+
+        # If sign present, log it, remove from string
+        if s[0] == "+" or s[0] == "-":
+            sign = s[i]
+            s = s[1:]
+
+        for i in range(0, n):
+            if not s[i].isnumeric():
+                break
+            build = build + s[i]
+
+        answer = int(build)
+
+        if sign == "-":
+            answer = answer * -1
+
+        return answer
 
 
 if __name__ == "__main__":
-    x = 1534236469
+    x1 = "42"
+    x2 = "-042"
+    x3 = "1337c0d3"
+    x4 = "0-1"
+    x5 = "   -042" # not solved
+
     sol = Solution()
-    result = sol.reverse(x)
+    result = sol.myAtoi(x5)
 
     print(result)
