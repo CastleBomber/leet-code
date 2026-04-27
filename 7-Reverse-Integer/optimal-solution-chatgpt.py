@@ -46,11 +46,10 @@ class Solution:
         # Process digits until x becomes 0
         while x != 0:
 
-            # Python modulo with negatives behaves differently,
-            # so force digit extraction manually.
+            # Set to the right most digit
             digit = int(x % 10)
 
-            # Move x toward zero
+            # Remove the right most digit
             x = int(x / 10)
 
             # Overflow check BEFORE multiplying by 10
@@ -64,14 +63,16 @@ class Solution:
             ):
                 return 0
 
-            # Shift result left one decimal place and add digit
+            # Build result by shifting left one decimal place 
+            # and add digit on the right
             result = result * 10 + digit
 
         return result
 
 
 if __name__ == "__main__":
-    x = 1534236469
+    x1 = 321
+    x2 = 1534236469
 
     sol = Solution()
-    print(sol.reverse(x))   # 0 (overflow)
+    print(sol.reverse(x2))   # 0 (overflow)

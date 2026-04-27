@@ -28,16 +28,12 @@
     
     Constraints:
         -231 <= x <= 231 - 1
-        
-
-
 
     Usage:
         python3 main.py
 
     Solution:
         Accepted - 1045 / 1045 testcases passed    
-    
 
     Notes:
 
@@ -87,7 +83,6 @@ class Solution:
             s = 0
         
         return s
-
 
 if __name__ == "__main__":
     x = 1534236469
