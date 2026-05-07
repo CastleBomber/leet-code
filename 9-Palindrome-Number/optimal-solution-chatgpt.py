@@ -14,25 +14,14 @@
         -121  -> False
         10    -> False
 
+    TIME AND SPACE COMPLEXITY: Half‑Digit Reversal without String Conversion
     ----------------------------------------------------
-    Time / Space Complexity
+    Metric           | Complexity | Reason
     ----------------------------------------------------
-    Let d = number of digits in x
+    Time Complexity  | O(d)       | Scan string once; Reverses only HALF the number
+    |
+    Space Complexity | O(1)       | Only a few variables used
 
-    Time Complexity:
-        O(d)
-        - Reverse half the digits
-
-    Space Complexity:
-        O(1)
-        - Only integer variables used
-
-    ----------------------------------------------------
-    Why This Is Optimal
-    ----------------------------------------------------
-    - No string conversion needed
-    - Uses math only
-    - Reverses only HALF the number
 ********************************************************
 """
 
@@ -75,10 +64,10 @@ if __name__ == "__main__":
     sol = Solution()
 
     # Test 1: even length palindrome
-    print(sol.isPalindrome(1221))     # True
+    #print(sol.isPalindrome(1221))     # True
 
     # Test 2: negative number
-    print(sol.isPalindrome(-121))     # False
+    #print(sol.isPalindrome(-121))     # False
 
     # Test 3: odd length palindrome
     print(sol.isPalindrome(12321))    # True

@@ -16,25 +16,15 @@
     5. Clamp to 32-bit signed range:
        [-2147483648, 2147483647]
 
+    TIME AND SPACE COMPLEXITY: Single‑Pass with Overflow Prevention
     ----------------------------------------------------
-    Time / Space Complexity
+    Metric           | Complexity | Reason
     ----------------------------------------------------
-    Let n = len(s)
+    Time Complexity  | O(n)       | Scan string once
+    |
+    Space Complexity | O(1)       | Only a few variables used
 
-    Time Complexity:
-        O(n)
-        - Scan string once
 
-    Space Complexity:
-        O(1)
-        - Only a few variables used
-
-    ----------------------------------------------------
-    Why This Is Optimal
-    ----------------------------------------------------
-    - Single pass
-    - No split / regex / extra arrays
-    - Handles overflow while building number
 ********************************************************
 """
 
@@ -93,10 +83,10 @@ if __name__ == "__main__":
     sol = Solution()
 
     # Test 1: normal positive
-    print(sol.myAtoi("42"))              # 42
+    #print(sol.myAtoi("42"))              # 42
 
     # Test 2: leading spaces + negative + zeros
-    print(sol.myAtoi("   -042"))        # -42
+    #print(sol.myAtoi("   -042"))        # -42
 
     # Test 3: overflow case
     print(sol.myAtoi("91283472332"))    # 2147483647
