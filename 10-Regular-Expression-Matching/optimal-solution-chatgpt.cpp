@@ -4,6 +4,8 @@
  * Date:   May 7th, 2026
  *
  * LeetCode: #10 Regular Expression Matching
+ * 
+ * "String goes into pattern"
  *
  * Match entire string s against pattern p where:
  *
@@ -30,6 +32,11 @@
  *
  * Why?
  *   Each state (i, j) is solved once and cached.
+ * 
+ * Notes:
+ *   Memo is filled with -1, serving as a "not yet calculated" flag 
+ *   We are using "+1" to handle empty strings
+ *   Memo magic
  *
  * ------------------------------------------------------
  * Compile & Run
@@ -72,9 +79,11 @@ private:
      * j = current index in pattern p
      */
     bool dfs(int i, int j, string& s, string& p) {
+        cout << "dfs(" << i << "," << j << ")" << endl;
 
-        // If already solved, return cached answer
+        // If already solved, return cached answer (MEMO MAGIC)
         if (memo[i][j] != -1) {
+            cout << "memo hit: (" << i << "," << j << ")" << endl;
             return memo[i][j];
         }
 
@@ -118,7 +127,7 @@ private:
                 dfs(i, j + 2, s, p) ||
                 (firstMatch && dfs(i + 1, j, s, p));
 
-            return memo[i][j] = answer;
+            return memo[i][j] = answer; // <---- (*good match)
         }
 
         // ------------------------------------------------
@@ -127,11 +136,11 @@ private:
         // ------------------------------------------------
         if (firstMatch) {
             return memo[i][j] =
-                dfs(i + 1, j + 1, s, p);
+                dfs(i + 1, j + 1, s, p); // <---- (~firstMatch, the rest bad)
         }
 
         // Otherwise: no match
-        return memo[i][j] = false;
+        return memo[i][j] = false; // <---- (~all bad)
     }
 };
 
@@ -141,20 +150,44 @@ int main() {
 
     // Test 1:
     // '*' repeating previous char
-    cout << solution.isMatch("aa", "a*") << endl;
+    //cout << solution.isMatch("aa", "a*") << endl;
     // true
 
 
     // Test 2:
     // '.' matches any char
-    cout << solution.isMatch("ab", ".*") << endl;
+    //cout << solution.isMatch("ab", ".*") << endl;
     // true
 
 
     // Test 3:
     // Complex mixed pattern
-    cout << solution.isMatch("aab", "c*a*b") << endl;
+    //cout << solution.isMatch("aab", "c*a*b") << endl;
     // true
 
+    // Test 4:
+    //cout << solution.isMatch("ra", "rb*") << endl;
+    // false
+
+    // Test 5:
+    //cout << solution.isMatch("r", "s") << endl;
+    // false
+
+    // Test 6:
+    //cout << solution.isMatch("aaa", "a*a") << endl;
+    // true
+
+    // Test 7:
+    //cout << solution.isMatch("mississippi", "mis*is*p*.") << endl;
+    // ..
+
+    // Test 8:
+    // Loads of memo hits
+    cout << solution.isMatch("aaaaaaaaaa","a*a*a*a*a*a*a*a*a*b") << endl;
+
+    // Test X:
+    //cout << solution.isMatch("aaaa", "a*a*a") << endl;
+    //cout << solution.isMatch("aaa", "a*a*") << endl;
+    
     return 0;
 }

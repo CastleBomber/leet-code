@@ -28,6 +28,9 @@
  * Why Two Pointers?
  *   Move the SHORTER wall inward.
  *   The shorter wall limits the water height.
+ * 
+ * Link:
+ *   https://leetcode.com/problems/container-with-most-water/
  *
  * ******************************************************
  */
@@ -88,13 +91,13 @@ int main() {
 
     // Test 1: classic example
     vector<int> h1 = {1,8,6,2,5,4,8,3,7};
-    cout << solution.maxArea(h1) << endl;
+    //cout << solution.maxArea(h1) << endl;
     // 49
 
 
     // Test 2: small/simple case
     vector<int> h2 = {1,1};
-    cout << solution.maxArea(h2) << endl;
+    //cout << solution.maxArea(h2) << endl;
     // 1
 
 
