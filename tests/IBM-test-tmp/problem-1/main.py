@@ -2,9 +2,9 @@
 """
 ********************************************************
     Author: CBOMBS
-    Date:   
+    Date:
 
-    LeetCode: #
+    HackerRank: IBM Coding Test # 1
 
 
 *********************************************************
@@ -29,16 +29,20 @@ import re
 import sys
 import os
 
+def func(arr):
+    """
+    Solves the problem.
 
-class Solution:
-    def func(self, root) -> bool:
-        
-        return True
+    @param arr - input list
+    @return result - final answer
+    """
+
+    result = 0
+
+    return result
 
 
 if __name__ == "__main__":
-    root = 1
+    arr = [1, 2, 3, 4, 1]
 
-    sol = Solution()
-
-    print(sol.func(root))      
+    print(func(arr))

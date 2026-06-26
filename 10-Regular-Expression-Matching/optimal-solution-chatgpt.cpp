@@ -17,26 +17,15 @@
  *   "aa"   vs "a*"   -> true
  *   "ab"   vs ".*"   -> true
  * 
- * 
- * Time and Space Complexity: Top-Down Dynamic Programming + Memoization
  * ------------------------------------------------------
- * Let:
- *   n = s.length()
- *   m = p.length()
+ * Time & Space Complexity: Top-Down DP + Memoization
+ * ------------------------------------------------------
+ * Let:           n = s.length()
+ * Let:           m = p.length()
  *
- * Time Complexity:
- *   O(n * m)
- *
- * Space Complexity:
- *   O(n * m)
- *
- * Why?
- *   Each state (i, j) is solved once and cached.
- * 
- * Notes:
- *   Memo is filled with -1, serving as a "not yet calculated" flag 
- *   We are using "+1" to handle empty strings
- *   Memo magic
+ * Time Complexity:  O(n * m)   | Each dfs(i, j) state is solved once
+ * Space Complexity: O(n * m)   | Memo table, plus recursion stack
+ * ------------------------------------------------------
  *
  * ------------------------------------------------------
  * Compile & Run

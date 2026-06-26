@@ -1,29 +1,29 @@
 #!/usr/bin/env python3
 """
 ********************************************************
-    Author: ChatGPT + CBOMBS
-    Date:   April 25th, 2026
+Author: ChatGPT + CBOMBS
+Date:   April 25th, 2026
 
-    LeetCode: #8 String to Integer (atoi)
+LeetCode: #8 String to Integer (atoi)
 
-    Convert a string into a 32-bit signed integer.
+Convert a string into a 32-bit signed integer.
 
-    Rules:
-    1. Ignore leading spaces
-    2. Optional '+' or '-'
-    3. Read digits until non-digit
-    4. If no digits found -> 0
-    5. Clamp to 32-bit signed range:
-       [-2147483648, 2147483647]
+Rules:
+1. Ignore leading spaces
+2. Optional '+' or '-'
+3. Read digits until non-digit
+4. If no digits found -> 0
+5. Clamp to 32-bit signed range:
+    [-2147483648, 2147483647]
 
-    TIME AND SPACE COMPLEXITY: Single‑Pass with Overflow Prevention
-    ----------------------------------------------------
-    Metric           | Complexity | Reason
-    ----------------------------------------------------
-    Time Complexity  | O(n)       | Scan string once
-    |
-    Space Complexity | O(1)       | Only a few variables used
+------------------------------------------------------
+Time & Space Complexity: Single-Pass + Overflow Prevention
+------------------------------------------------------
+Let:           n = len(s)
 
+Time Complexity:  O(n)       | Scan each character at most once
+Space Complexity: O(1)       | Constant extra variables
+------------------------------------------------------
 
 ********************************************************
 """
@@ -31,6 +31,16 @@
 
 class Solution:
     def myAtoi(self, s: str) -> int:
+        """
+        Convert a string to a 32-bit signed integer using atoi-style parsing.
+
+        Args:
+            s (str): The input string to parse.
+
+        Returns:
+            int: The parsed integer clamped to the 32-bit signed integer range.
+        """
+
         INT_MIN = -2**31
         INT_MAX = 2**31 - 1
 

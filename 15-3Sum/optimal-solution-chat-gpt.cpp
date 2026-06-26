@@ -44,7 +44,7 @@
  *
  *
  * Compile and run:
- * g++ -std=c++23 main.cpp -o main && ./main
+ * g++ -std=c++23 optimal-solution-chat-gpt.cpp -o optimal-solution-chat-gpt && ./optimal-solution-chat-gpt
  *
  * Solution:
  * Accepted

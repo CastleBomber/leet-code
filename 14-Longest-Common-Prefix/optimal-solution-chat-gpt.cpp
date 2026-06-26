@@ -11,30 +11,6 @@
  * If there is no common prefix, return an empty string "".
  *
  *
- * Example 1:
- * strs = ["flower", "flow", "flight"]
- *
- * "flower"
- * "flow"
- * "flight"
- *
- * Common prefix = "fl"
- *
- * Output: "fl"
- *
- *
- * Example 2:
- * strs = ["dog", "racecar", "car"]
- *
- * "dog"
- * "racecar"
- * "car"
- *
- * No common prefix.
- *
- * Output: ""
- *
- *
  * Key Idea:
  *
  * The longest common prefix can NEVER be longer
@@ -77,33 +53,10 @@
  *
  *
  * Compile and run:
- * g++ -std=c++23 main.cpp -o main && ./main
+ * g++ -std=c++23 optimal-solution-chat-gpt.cpp -o optimal-solution-chat-gpt && ./optimal-solution-chat-gpt
  *
- *
- * ------------------------------------------------------
- * Time & Space Complexity: Shortest String + Vertical Scan
- * ------------------------------------------------------
- * Let:
- *   n = strs.size()
- *   m = length of the shortest string
- *
- *
- * Time Complexity:  O(n * m)
- *
- *   - We compare up to m characters
- *   - For each character, we may check all n strings
- *   - Worst case happens when all strings share the same prefix
- *
- *
- * Space Complexity: O(1)
- *
- *   - We only use a few variables
- *   - No extra data structure grows with input size
- *
- *   Note:
- *   Returning substr(0, i) creates the answer string,
- *   but this output string is usually not counted
- *   as extra algorithm space.
+ * Solution:
+ * Accepted
  *
  *
  * ------------------------------------------------------
@@ -115,18 +68,6 @@
  * Time Complexity:  O(n * m)   | Compare each prefix char across all strings
  * Space Complexity: O(1)       | Constant extra variables
  * ------------------------------------------------------
- *
- * Why this approach?
- *
- * The answer cannot be longer than the shortest word.
- *
- * By scanning vertically:
- *
- * strs[0][i]
- * strs[1][i]
- * strs[2][i]
- *
- * we stop immediately when one character does not match.
  *
  * ******************************************************
  */
@@ -141,6 +82,12 @@ using namespace std;
 class Solution
 {
 public:
+    /**
+     * Finds the longest common prefix among all strings.
+     *
+     * @param strs - input vector of strings
+     * @return shortest - longest common prefix
+     */
     string longestCommonPrefix(vector<string>& strs)
     {
         // Start by assuming the first string is the shortest
@@ -171,7 +118,7 @@ public:
                     return shortest.substr(0, i);
                 }
             }
-        }  
+        }
 
         // If no mismatch was found,
         // the whole shortest string is the common prefix

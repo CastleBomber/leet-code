@@ -1,26 +1,27 @@
 #!/usr/bin/env python3
 """
 ********************************************************
-    Author: ChatGPT + CBOMBS
-    Date:   April 25th, 2026
+Author: ChatGPT + CBOMBS
+Date:   April 25th, 2026
 
-    LeetCode: #9 Palindrome Number
+LeetCode: #9 Palindrome Number
 
-    Return True if integer x reads the same
-    forward and backward.
+Return True if integer x reads the same
+forward and backward.
 
-    Example:
-        121   -> True
-        -121  -> False
-        10    -> False
+Example:
+    121   -> True
+    -121  -> False
+    10    -> False
 
-    TIME AND SPACE COMPLEXITY: Half‑Digit Reversal without String Conversion
-    ----------------------------------------------------
-    Metric           | Complexity | Reason
-    ----------------------------------------------------
-    Time Complexity  | O(d)       | Scan string once; Reverses only HALF the number
-    |
-    Space Complexity | O(1)       | Only a few variables used
+------------------------------------------------------
+Time & Space Complexity: Half-Digit Reversal
+------------------------------------------------------
+Let:           d = number of digits in x
+
+Time Complexity:  O(d)       | Reverse at most half of the digits
+Space Complexity: O(1)       | Constant extra variables
+------------------------------------------------------
 
 ********************************************************
 """
@@ -28,6 +29,15 @@
 
 class Solution:
     def isPalindrome(self, x: int) -> bool:
+        """
+        Determine whether an integer reads the same forward and backward.
+
+        Args:
+            x (int): The integer to check.
+
+        Returns:
+            bool: True if x is a palindrome integer, otherwise False.
+        """
 
         # Negative numbers cannot be palindromes
         # Example: -121 != 121-
