@@ -7,7 +7,7 @@ Date:   June 28th, 2026
 HackerRank
 IBM Problem #2: Maximum Cost to Segregate a Binary String
 
-You are given a binary string s containing only '0' and '1'.
+Yoy are given a binary string s containing only '0' and '1'.
 
 The string is segregated when all '1' characters appear after
 all '0' characters.
@@ -34,10 +34,10 @@ Constraints:
 ------------------------------------------------------
 Time & Space Complexity: Single Pass + Zero Blocks
 ------------------------------------------------------
-Let:           n = len(s)
+Let:          n = len(s)
 
-Time Complexity:  O(n)       | Scan each character once
-Space Complexity: O(1)       | Constant extra variables
+Time Complexity:  O(n) | Scan each charcter once
+Space Complexity: O(1) | Constant extra variales
 ------------------------------------------------------
 
 ********************************************************
@@ -48,19 +48,19 @@ def getMaxCost(s: str) -> int:
     """
     Find the maximum cost to segregate a binary string
 
-    Args:
+    Args: 
         s: Binary string containing only '0' and '1'
 
     Returns:
-        Maximum total cost to move all '1' characters right
+        Maximum total cost to move all '1' characters right 
     """
 
     ones = 0
     cost = 0
     zero_block = False
 
-    for digit in s:
-        if digit == "1":
+    for ch in s:
+        if ch == "1":
             ones += 1
             zero_block = False
         else:
@@ -77,13 +77,27 @@ def getMaxCost(s: str) -> int:
 
 def main() -> None:
     # Test 1: problem example with mixed blocks
-    print(getMaxCost("10100"))    # 8
+    # print(getMaxCost("10100"))    # 8
 
     # Test 2: problem example with one trailing zero
     # print(getMaxCost("01110"))    # 6
 
     # Test 3: already segregated
-    # print(getMaxCost("000111"))    # 0
+    print(getMaxCost("000111"))    # 0
+    print(getMaxCost("000111")) #0
 
 
 main()
+
+
+
+
+
+
+
+
+
+
+
+
+
