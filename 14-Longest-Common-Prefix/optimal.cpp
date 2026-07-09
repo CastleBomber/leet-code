@@ -1,59 +1,62 @@
 /**
  * ******************************************************
  * Author: ChatGPT + CBOMBS
- * Date:   June 13th, 2026
+ * Date:   July 9th, 2026
  *
  * LeetCode: #14 Longest Common Prefix
  *
- * Write a function to find the longest common prefix string
- * amongst an array of strings.
+ * Write a function to find the longest common prefix string amongst an array of strings.
  *
  * If there is no common prefix, return an empty string "".
  *
  *
  * Key Idea:
  *
- * The longest common prefix can NEVER be longer
- * than the shortest string in the vector.
+ * The longest common prefix can never be longer
+ * than the shortest string in the vector
  *
  * So:
  *
- * 1. Find the shortest string.
- * 2. Use each character in the shortest string as the reference.
- * 3. Compare that character against the same index
- *    in every other string.
- * 4. If there is a mismatch, return everything before that index.
+ * 1 - Find the shortest string
+ * 2 - Use each character in the shortest string as the reference
+ * 3 - Compare that character against the same index
+ *    in every other string
+ * 4 - If there is a mismatch, return everything before that index
  *
  *
  * Example:
  * strs = ["flower", "flow", "flight"]
  *
- * Shortest string = "flow"
+ * Use the shortest string as the reference:
+ * reference = "flow"
  *
  * index 0:
+ * flower[0] == flow[0] == flight[0]
  * f == f == f
  *
  * index 1:
+ * flower[1] == flow[1] == flight[1]
  * l == l == l
  *
  * index 2:
+ * flower[2] == flow[2]
+ * flower[2] != flight[2]
  * o != i
  *
- * Stop.
+ * Mismatch found at index 2
  *
  * Return "fl"
  *
  *
  * Constraints:
  *
- * 1 <= strs.length <= 200
- * 0 <= strs[i].length <= 200
- * strs[i] consists of only lowercase English letters
- * if it is non-empty.
+ * 1 <= strs length <= 200
+ * 0 <= each string length <= 200
+ * Each string consists of lowercase English letters when non-empty
  *
  *
  * Compile and run:
- * g++ -std=c++23 optimal-solution-chat-gpt.cpp -o optimal-solution-chat-gpt && ./optimal-solution-chat-gpt
+ * Use g++ with C++23 on this source file
  *
  * Solution:
  * Accepted
@@ -62,7 +65,7 @@
  * ------------------------------------------------------
  * Time & Space Complexity: Shortest String + Vertical Scan
  * ------------------------------------------------------
- * Let:           n = strs.size()
+ * Let:           n = strs size
  * Let:           m = shortest string length
  *
  * Time Complexity:  O(n * m)   | Compare each prefix char across all strings
@@ -75,7 +78,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -83,12 +85,12 @@ class Solution
 {
 public:
     /**
-     * Finds the longest common prefix among all strings.
+     * Finds the longest common prefix among all strings
      *
      * @param strs - input vector of strings
      * @return shortest - longest common prefix
      */
-    string longestCommonPrefix(vector<string>& strs)
+    string longestCommonPrefix(vector<string> &strs)
     {
         // Start by assuming the first string is the shortest
         string shortest = strs[0];
@@ -111,8 +113,7 @@ public:
             // Check this same character position in every string
             for (int j = 0; j < strs.size(); j++)
             {
-                // If any string has a different character,
-                // return everything before this index
+                // Return the prefix before the first mismatch
                 if (strs[j][i] != currentChar)
                 {
                     return shortest.substr(0, i);
@@ -120,8 +121,7 @@ public:
             }
         }
 
-        // If no mismatch was found,
-        // the whole shortest string is the common prefix
+        // If no mismatch was found, the whole shortest string is the answer
         return shortest;
     }
 };

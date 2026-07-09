@@ -1,7 +1,7 @@
 /**
  * ******************************************************
- * Author: Codex + CBOMBS
- * Date:   June 23rd, 2026
+ * Author: ChatGPT + CBOMBS
+ * Date:   July 9th, 2026
  *
  * LeetCode: #15 3Sum
  *
@@ -15,16 +15,16 @@
  *
  * Key Idea:
  *
- * Sort the array.
+ * Sort the array
  *
  * Then fix one number nums[i], and use two pointers:
  *
  * left  = i + 1
- * right = nums.size() - 1
+ * right = nums size - 1
  *
- * If sum < 0, move left forward.
- * If sum > 0, move right backward.
- * If sum == 0, save the triplet and skip duplicates.
+ * If sum < 0, move left forward
+ * If sum > 0, move right backward
+ * If sum == 0, save the triplet
  *
  *
  * Example:
@@ -39,12 +39,12 @@
  *
  * Constraints:
  *
- * 3 <= nums.length <= 3000
+ * 3 <= nums length <= 3000
  * -10^5 <= nums[i] <= 10^5
  *
  *
  * Compile and run:
- * g++ -std=c++23 optimal-solution-codex.cpp -o main && ./main
+ * Use g++ with C++23 on this source file
  *
  * Solution:
  * Accepted
@@ -53,7 +53,7 @@
  * ------------------------------------------------------
  * Time & Space Complexity: Sort + Two Pointers
  * ------------------------------------------------------
- * Let:           n = nums.size()
+ * Let:           n = nums size
  *
  * Time Complexity:  O(n^2)     | Sort + two-pointer scan
  * Space Complexity: O(log n)   | Sort stack, excluding answer
@@ -62,9 +62,9 @@
  * ******************************************************
  */
 
-#include <algorithm>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -72,7 +72,7 @@ class Solution
 {
 public:
     /**
-     * Finds all unique triplets that sum to zero.
+     * Finds all unique triplets that sum to zero
      *
      * @param nums - input vector of integers
      * @return result - vector of unique triplets
@@ -81,28 +81,30 @@ public:
     {
         vector<vector<int>> result;
 
+        // Sort first so duplicate values are next to each other
         sort(nums.begin(), nums.end());
 
-        const int n = static_cast<int>(nums.size());
-
-        for (int i = 0; i < n - 2; i++)
+        for (int i = 0; i < nums.size(); i++)
         {
+            // Skip duplicate fixed numbers
             if (i > 0 && nums[i] == nums[i - 1])
             {
                 continue;
             }
 
+            // If nums[i] is positive, all numbers after it are positive too
             if (nums[i] > 0)
             {
                 break;
             }
 
             int left = i + 1;
-            int right = n - 1;
+            int right = nums.size() - 1;
 
+            // Find two numbers that pair with nums[i]
             while (left < right)
             {
-                long long sum = static_cast<long long>(nums[i]) + nums[left] + nums[right];
+                int sum = nums[i] + nums[left] + nums[right];
 
                 if (sum == 0)
                 {
@@ -111,11 +113,13 @@ public:
                     left++;
                     right--;
 
+                    // Skip duplicate left values
                     while (left < right && nums[left] == nums[left - 1])
                     {
                         left++;
                     }
 
+                    // Skip duplicate right values
                     while (left < right && nums[right] == nums[right + 1])
                     {
                         right--;
@@ -123,10 +127,12 @@ public:
                 }
                 else if (sum < 0)
                 {
+                    // Need a bigger sum
                     left++;
                 }
                 else
                 {
+                    // Need a smaller sum
                     right--;
                 }
             }
@@ -137,7 +143,7 @@ public:
 };
 
 /**
- * Prints a 2D vector in LeetCode-style format.
+ * Prints a 2D vector in LeetCode-style format
  *
  * @param result - vector of triplets
  * @return void
@@ -146,15 +152,15 @@ void print2DVector(const vector<vector<int>>& result)
 {
     cout << "[";
 
-    for (int i = 0; i < static_cast<int>(result.size()); i++)
+    for (int i = 0; i < result.size(); i++)
     {
         cout << "[";
 
-        for (int j = 0; j < static_cast<int>(result[i].size()); j++)
+        for (int j = 0; j < result[i].size(); j++)
         {
             cout << result[i][j];
 
-            if (j < static_cast<int>(result[i].size()) - 1)
+            if (j < result[i].size() - 1)
             {
                 cout << ",";
             }
@@ -162,7 +168,7 @@ void print2DVector(const vector<vector<int>>& result)
 
         cout << "]";
 
-        if (i < static_cast<int>(result.size()) - 1)
+        if (i < result.size() - 1)
         {
             cout << ",";
         }

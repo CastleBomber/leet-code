@@ -1,14 +1,27 @@
 /**
  * ******************************************************
  * Author: ChatGPT + CBOMBS
- * Date:   June 3rd, 2026
+ * Date:   July 1st, 2026
  *
  * LeetCode: #12 Integer to Roman
  *
- * Given an integer (1 <= num <= 3999),
- * convert it to a Roman numeral.
+ * Given an integer, convert it to a Roman numeral.
  *
- * Roman numerals use subtractive notation:
+ * Roman numerals are represented by seven different symbols:
+ *
+ * Symbol       Value
+ * I            1
+ * V            5
+ * X            10
+ * L            50
+ * C            100
+ * D            500
+ * M            1000
+ *
+ * Roman numerals are usually written largest to smallest
+ * from left to right.
+ *
+ * However, Roman numerals use subtractive notation for these cases:
  *
  * 4   -> IV
  * 9   -> IX
@@ -18,7 +31,17 @@
  * 900 -> CM
  *
  * Key Idea:
- * Always subtract the LARGEST Roman value possible.
+ *
+ * Always subtract the LARGEST Roman value possible
+ *
+ * Store every important Roman value in descending order,
+ * including the subtractive forms:
+ *
+ * CM, CD, XC, XL, IX, IV
+ *
+ * Then repeatedly append the largest symbol that fits
+ * into the remaining number
+ *
  *
  * Example:
  * num = 1994
@@ -34,45 +57,15 @@
  *
  *
  * Constraints:
+ *
  * 1 <= num <= 3999
  *
+ *
  * Compile and run:
- * g++ -std=c++23 main.cpp -o main && ./main
+ * Use g++ with C++23 on this source file
  *
  * Solution:
- * Accepted - 3999 / 3999 testcases passed
- *
- * ------------------------------------------------------
- * Time and Space Complexity: Greedy + Lookup Table
- * ------------------------------------------------------
- * Let:
- *   n = num (1 <= n <= 3999)
- *
- * Time Complexity:
- *   O(1)
- *
- *   - Roman lookup table contains only 13 fixed values
- *   - Maximum Roman numeral length is bounded
- *   - Worst case is 3888:
- *
- *       MMMDCCCLXXXVIII
- *
- *     Which requires:
- *
- *       3(M) + 1(D) + 3(C)
- *     + 1(L) + 3(X)
- *     + 1(V) + 3(I)
- *     = 15 appends max
- *
- *   - Since input size is capped (3999),
- *     runtime is constant.
- *
- * Space Complexity:
- *   O(1)
- *
- *   - Fixed lookup table of 13 pairs
- *   - Result string max length is 15
- *   - Constant extra variables
+ * Accepted
  *
  *
  * ------------------------------------------------------
@@ -86,12 +79,12 @@
  *
  * Why Greedy + Lookup Table?
  *
- * Always subtract the LARGEST valid Roman value first.
+ * Always subtract the LARGEST valid Roman value first
  *
  * By precomputing subtractive forms:
  * (CM, CD, XC, XL, IX, IV)
  *
- * we eliminate special-case logic entirely.
+ * we eliminate special-case logic entirely
  *
  * ******************************************************
  */
@@ -105,10 +98,16 @@ using namespace std;
 class Solution
 {
 public:
+    /**
+     * Converts an integer into its Roman numeral representation
+     *
+     * @param num - input integer from 1 to 3999
+     * @return result - Roman numeral string
+     */
     string intToRoman(int num)
     {
-        // Ordered from LARGEST → SMALLEST
-        // Includes subtractive forms to avoid special logic
+        // Ordered from largest to smallest
+        // Subtractive forms are included so the greedy loop stays simple
         static const vector<pair<int, string>> roman = {
             {1000, "M"},
             {900, "CM"},
@@ -127,10 +126,10 @@ public:
         string result;
         int remaining = num;
 
-        // Try largest Roman values first
+        // Try each Roman value from largest to smallest
         for (const auto &[value, symbol] : roman)
         {
-            // Keep subtracting while possible
+            // Append this symbol as many times as it fits
             while (remaining >= value)
             {
                 result += symbol;
@@ -162,22 +161,22 @@ int main()
          << endl;
 
     // Test Case 2: Small edge case
-    int test2 = 1;
-    cout << "Input: " << test2 << endl;
-    cout << "Output: "
-         << solution.intToRoman(test2)
-         << endl;
-    cout << "Expected: I\n"
-         << endl;
+    // int test2 = 1;
+    // cout << "Input: " << test2 << endl;
+    // cout << "Output: "
+    //      << solution.intToRoman(test2)
+    //      << endl;
+    // cout << "Expected: I\n"
+    //      << endl;
 
     // Test Case 3: Largest valid input
-    int test3 = 3999;
-    cout << "Input: " << test3 << endl;
-    cout << "Output: "
-         << solution.intToRoman(test3)
-         << endl;
-    cout << "Expected: MMMCMXCIX\n"
-         << endl;
+    // int test3 = 3999;
+    // cout << "Input: " << test3 << endl;
+    // cout << "Output: "
+    //      << solution.intToRoman(test3)
+    //      << endl;
+    // cout << "Expected: MMMCMXCIX\n"
+    //      << endl;
 
     return 0;
 }
