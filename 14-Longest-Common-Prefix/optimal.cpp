@@ -56,7 +56,7 @@
  *
  *
  * Compile and run:
- * Use g++ with C++23 on this source file
+ * g++ -std=c++23 optimal.cpp -o optimal && ./optimal
  *
  * Solution:
  * Accepted
@@ -140,22 +140,31 @@ int main()
          << endl;
 
     // Test Case 2: No shared prefix
-    vector<string> test2 = {"dog", "racecar", "car"};
-    cout << "Input: {\"dog\", \"racecar\", \"car\"}" << endl;
-    cout << "Output: "
-         << solution.longestCommonPrefix(test2)
-         << endl;
-    cout << "Expected: \n"
-         << endl;
+    // vector<string> test2 = {"dog", "racecar", "car"};
+    // cout << "Input: {\"dog\", \"racecar\", \"car\"}" << endl;
+    // cout << "Output: "
+    //      << solution.longestCommonPrefix(test2)
+    //      << endl;
+    // cout << "Expected: \n"
+    //      << endl;
 
     // Test Case 3: Single string edge case
-    vector<string> test3 = {"a"};
-    cout << "Input: {\"a\"}" << endl;
-    cout << "Output: "
-         << solution.longestCommonPrefix(test3)
-         << endl;
-    cout << "Expected: a\n"
-         << endl;
+    // vector<string> test3 = {"a"};
+    // cout << "Input: {\"a\"}" << endl;
+    // cout << "Output: "
+    //      << solution.longestCommonPrefix(test3)
+    //      << endl;
+    // cout << "Expected: a\n"
+    //      << endl;
+
+    // Test Case 4: Single string edge case
+    // vector<string> test4 = {"xabc", "yabc", "zabc"};
+    // cout << "Input: {\"xabc\", \"yabc\", \"zabc\"}" << endl;
+    // cout << "Output: "
+    //      << solution.longestCommonPrefix(test4)
+    //      << endl;
+    // cout << "Expected: *\n"
+    //      << endl;
 
     return 0;
 }

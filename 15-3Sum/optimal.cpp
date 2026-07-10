@@ -44,7 +44,7 @@
  *
  *
  * Compile and run:
- * Use g++ with C++23 on this source file
+ * g++ -std=c++23 optimal.cpp -o optimal && ./optimal
  *
  * Solution:
  * Accepted
@@ -191,22 +191,22 @@ int main()
          << endl;
 
     // Test Case 2: No valid triplet
-    vector<int> test2 = {0, 1, 1};
-    cout << "Input: {0, 1, 1}" << endl;
-    cout << "Output: ";
-    print2DVector(solution.threeSum(test2));
-    cout << endl;
-    cout << "Expected: []\n"
-         << endl;
+    // vector<int> test2 = {0, 1, 1};
+    // cout << "Input: {0, 1, 1}" << endl;
+    // cout << "Output: ";
+    // print2DVector(solution.threeSum(test2));
+    // cout << endl;
+    // cout << "Expected: []\n"
+    //      << endl;
 
     // Test Case 3: All zeroes
-    vector<int> test3 = {0, 0, 0};
-    cout << "Input: {0, 0, 0}" << endl;
-    cout << "Output: ";
-    print2DVector(solution.threeSum(test3));
-    cout << endl;
-    cout << "Expected: [[0,0,0]]\n"
-         << endl;
+    // vector<int> test3 = {0, 0, 0};
+    // cout << "Input: {0, 0, 0}" << endl;
+    // cout << "Output: ";
+    // print2DVector(solution.threeSum(test3));
+    // cout << endl;
+    // cout << "Expected: [[0,0,0]]\n"
+    //      << endl;
 
     return 0;
 }

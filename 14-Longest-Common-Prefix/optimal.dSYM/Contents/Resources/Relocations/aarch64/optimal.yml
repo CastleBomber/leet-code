@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/cbombs/github/leet-code/14-Longest-Common-Prefix/optimal'
+relocations:     []
+...
