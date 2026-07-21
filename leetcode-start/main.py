@@ -5,6 +5,7 @@
     Date:   
 
     LeetCode: #
+    Usage: python3 ./main.py
 
     (new version available)
 
@@ -40,7 +41,10 @@ class Solution:
 
 if __name__ == "__main__":
     root = 1
+    expected = True
 
     sol = Solution()
+    result = sol.func(root)
 
-    print(sol.func(root))      
+    print(f"Result:   {result}")
+    print(f"Expected: {expected}")

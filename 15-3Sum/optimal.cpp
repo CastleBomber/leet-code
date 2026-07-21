@@ -45,6 +45,7 @@
  *
  * Compile and run:
  * g++ -std=c++23 optimal.cpp -o optimal && ./optimal
+ * g++ -std=c++23 -g -O0 optimal.cpp -o optimal && ./optimal
  *
  * Solution:
  * Accepted
@@ -206,6 +207,15 @@ int main()
     // print2DVector(solution.threeSum(test3));
     // cout << endl;
     // cout << "Expected: [[0,0,0]]\n"
+    //      << endl;
+
+    // Test Case 4
+    // vector<int> test4 = {-2, -2, 4};
+    // cout << "Input: {-2, -2, 4}" << endl;
+    // cout << "Output: ";
+    // print2DVector(solution.threeSum(test4));
+    // cout << endl;
+    // cout << "Expected: [[-2, -2, 4]]\n"
     //      << endl;
 
     return 0;
