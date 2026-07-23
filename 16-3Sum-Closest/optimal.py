@@ -77,11 +77,14 @@ class Solution:
 if __name__ == "__main__":
     sol = Solution()
 
-    # Test 1: standard example
-    print(sol.threeSumClosest([-1, 2, 1, -4], 1))  # 2
+    # Test 1: move both pointers
+    #print(sol.threeSumClosest([-1, 2, 1, -4], 1))  # 2
 
-    # Test 2: all zeros
-    # print(sol.threeSumClosest([0, 0, 0], 1))      # 0
+    # Test 2: keep the initial closest sum
+    #print(sol.threeSumClosest([0, 0, 0], 1))      # 0
 
     # Test 3: exact match
-    # print(sol.threeSumClosest([-2, 0, 1, 2], 0))  # 0
+    #print(sol.threeSumClosest([-2, 0, 1, 2], 0))  # 0
+
+    # Test 4: longer pointer walk with a duplicate fixed value
+    print(sol.threeSumClosest([0, 0, 3, 6, 7, 10, 13, 16], 14))  # 13
