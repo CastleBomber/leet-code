@@ -27,12 +27,12 @@ Constraints:
     Each character is a digit from 2 through 9.
 
 ------------------------------------------------------
-Time & Space Complexity: Backtracking
+Time & Space Complexity: Recursion + Backtracking
 ------------------------------------------------------
 Let:               n = len(digits), c = number of combinations
 
 Time Complexity:   O(n * c)  | Build every n-letter combination
-Space Complexity:  O(n * c)  | Store results plus an O(n) path
+Space Complexity:  O(n * c)  | Store results plus an O(n) active path
 ------------------------------------------------------
 
 ********************************************************
@@ -44,7 +44,7 @@ from typing import List
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         """
-        Generate every letter combination represented by the digits
+        Generate every letter combination using recursion and backtracking
 
         @param digits: String containing digits from 2 through 9
         @result: List of all possible letter combinations
@@ -70,9 +70,12 @@ class Solution:
             """
             Build combinations one digit at a time
 
+            Uses recursion
+
             @param index: Position of the digit currently being processed
             @result: None, completed combinations are added to result
             """
+            # Base case stops after every digit is used
             if index == len(digits):
                 result.append("".join(path))
                 return
@@ -80,9 +83,12 @@ class Solution:
             # Try each letter mapped to the current digit
             for letter in phone_map[digits[index]]:
                 path.append(letter)
+
+                # Recursion advances to the next digit
                 backtrack(index + 1)
                 path.pop()
 
+        # Start at the first digit
         backtrack(0)
         return result
 
@@ -91,10 +97,13 @@ if __name__ == "__main__":
     sol = Solution()
 
     # Test 1: two digits
-    print(sol.letterCombinations("23"))  # [ad, ae, af, bd, be, bf, cd, ce, cf]
+    #print(sol.letterCombinations("23"))  # [ad, ae, af, bd, be, bf, cd, ce, cf]
 
     # Test 2: one digit
     # print(sol.letterCombinations("2"))  # [a, b, c]
 
     # Test 3: empty input
     # print(sol.letterCombinations(""))   # []
+
+    # Test 4: mixed branching across three digits
+    print(sol.letterCombinations("279"))  # 48 combinations
