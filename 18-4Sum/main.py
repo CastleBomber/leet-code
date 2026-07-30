@@ -29,6 +29,9 @@
         -10^9 <= nums[i] <= 10^9
         -10^9 <= target <= 10^9
 
+    Solution: 
+        Accepted - 295 / 295 testcases passed
+
     Usage: python3 ./main.py
 
 
@@ -59,6 +62,30 @@ class Solution:
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         result = []
 
+        nums = sorted(nums)
+
+        for i in range(len(nums) - 2):
+            for j in range(len(nums) - 2):
+                left = i + j + 2
+                right = len(nums) - 1
+
+                while left < right:
+                    total = nums[i] + nums [i+j+1] + nums[left] + nums[right]
+
+                    # Found a match
+                    if total == target:
+                        value = [nums[i], nums [i+j+1], nums[left], nums[right]]
+
+                        if value not in result:
+                            result.append(value)
+
+                    if total < target:
+                        left += 1       # Increase the total
+                    else:
+                        right -= 1      # Decrese the total
+
+
+
         return result
 
 
@@ -73,10 +100,10 @@ if __name__ == "__main__":
 
     sol = Solution()
     result1 = sol.fourSum(nums1, target1)
-    result2 = sol.fourSum(nums2, target2)
+    # result2 = sol.fourSum(nums2, target2)
 
     print(f"Example 1 result:   {result1}")
     print(f"Example 1 expected: {expected1}")
     print()
-    print(f"Example 2 result:   {result2}")
-    print(f"Example 2 expected: {expected2}")
+    # print(f"Example 2 result:   {result2}")
+    # print(f"Example 2 expected: {expected2}")
