@@ -69,6 +69,7 @@ class Solution:
         return result
 
 
+# Build a linked list from LeetCode's example values for local testing.
 def build_linked_list(values: List[int]) -> Optional[ListNode]:
     dummy = ListNode()
     current = dummy
@@ -80,6 +81,7 @@ def build_linked_list(values: List[int]) -> Optional[ListNode]:
     return dummy.next
 
 
+# Convert a linked list to a Python list for readable output.
 def linked_list_to_list(head: Optional[ListNode]) -> List[int]:
     values = []
     current = head

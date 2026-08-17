@@ -32,6 +32,21 @@
     Solution: 
         Accepted - 295 / 295 testcases passed
 
+    ------------------------------------------------------
+    Time & Space Complexity: Nested Two-Pointer Search
+    ------------------------------------------------------
+    Let:
+        n = len(nums)
+        q = number of unique quadruplets stored in result
+
+    Sorting:           O(n log n)
+    Candidate Search:  O(n^3)
+    Duplicate Check:   O(q) per match | Linear search through result
+
+    Time Complexity:   O(n^3 * q)      | O(n^6) worst case when q = O(n^3)
+    Space Complexity:  O(n + q)        | Sorted copy plus returned results
+    ------------------------------------------------------
+
     Usage: python3 ./main.py
 
 
