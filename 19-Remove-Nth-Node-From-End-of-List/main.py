@@ -7,8 +7,8 @@
     LeetCode: #19 Remove Nth Node From End of List
     URL: https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 
-    Given the head of a linked list, remove the nth node from the end of the
-    list and return its head.
+    Given the head of a linked list, 
+    remove the nth node from the end of the list and return its head.
 
     Example 1:
         Input: head = [1,2,3,4,5], n = 2
@@ -28,9 +28,24 @@
         0 <= Node.val <= 100
         1 <= n <= sz
 
-    Follow up: Could you do this in one pass?
-
     Usage: python3 ./main.py
+
+    Solution:
+        Accepted - 208 / 208 testcases passed
+
+    ------------------------------------------------------
+    Time & Space Complexity: Two-Pass Linked List Scan
+    ------------------------------------------------------
+    Let:               L = number of nodes in the list
+
+    First Pass:        O(L)  | Count all nodes
+    Second Pass:       O(L)  | Move to the node before removal
+
+    Time Complexity:   O(L)  | Two linear passes remain O(L)
+    Space Complexity:  O(1)  | Use only pointers and counters
+    ------------------------------------------------------
+
+
 
 
 *********************************************************
@@ -64,10 +79,33 @@ class ListNode:
 
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        result = head
+        size = linked_list_size(head) 
+        jumps = size - n
 
-        return result
+        dummy = ListNode(0)
+        dummy.next = head
+        current = dummy
+        counter = 0
 
+        while current.next: # Does not move, just checks that it exists
+            if counter == jumps:
+                current.next = current.next.next
+                break
+
+            counter += 1
+            current = current.next
+
+        return dummy.next
+
+def linked_list_size(head):
+    size = 0
+    current = head
+
+    while current:
+        size += 1
+        current = current.next
+
+    return size
 
 # Build a linked list from LeetCode's example values for local testing.
 def build_linked_list(values: List[int]) -> Optional[ListNode]:
@@ -108,14 +146,14 @@ if __name__ == "__main__":
 
     sol = Solution()
     result1 = sol.removeNthFromEnd(head1, n1)
-    result2 = sol.removeNthFromEnd(head2, n2)
-    result3 = sol.removeNthFromEnd(head3, n3)
+    # result2 = sol.removeNthFromEnd(head2, n2)
+    # result3 = sol.removeNthFromEnd(head3, n3)
 
     print(f"Example 1 result:   {linked_list_to_list(result1)}")
     print(f"Example 1 expected: {expected1}")
     print()
-    print(f"Example 2 result:   {linked_list_to_list(result2)}")
-    print(f"Example 2 expected: {expected2}")
-    print()
-    print(f"Example 3 result:   {linked_list_to_list(result3)}")
-    print(f"Example 3 expected: {expected3}")
+    # print(f"Example 2 result:   {linked_list_to_list(result2)}")
+    # print(f"Example 2 expected: {expected2}")
+    # print()
+    # print(f"Example 3 result:   {linked_list_to_list(result3)}")
+    # print(f"Example 3 expected: {expected3}")

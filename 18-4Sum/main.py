@@ -29,6 +29,8 @@
         -10^9 <= nums[i] <= 10^9
         -10^9 <= target <= 10^9
 
+    Usage: python3 ./main.py
+
     Solution: 
         Accepted - 295 / 295 testcases passed
 
@@ -46,9 +48,6 @@
     Time Complexity:   O(n^3 * q)      | O(n^6) worst case when q = O(n^3)
     Space Complexity:  O(n + q)        | Sorted copy plus returned results
     ------------------------------------------------------
-
-    Usage: python3 ./main.py
-
 
 *********************************************************
 """
