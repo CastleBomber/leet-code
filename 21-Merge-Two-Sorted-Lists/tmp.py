@@ -9,8 +9,9 @@
 
     You are given the heads of two sorted linked lists list1 and list2.
 
-    Merge the two lists into one sorted list. The list should be made by
-    splicing together the nodes of the first two lists.
+    Merge the two lists into one sorted list. 
+    The list should be made by splicing together 
+    the nodes of the first two lists.
 
     Return the head of the merged linked list.
 
@@ -31,7 +32,19 @@
         -100 <= Node.val <= 100
         Both list1 and list2 are sorted in non-decreasing order.
 
-    Usage: python3 ./main.py
+    ------------------------------------------------------
+    Time & Space Complexity: Intended Two-Pointer Merge
+    ------------------------------------------------------
+    Let:               m = nodes in list1, n = nodes in list2
+
+    Algorithm:         Compare both current nodes, splice the smaller
+                       node into the result, and advance that pointer
+
+    Time Complexity:   O(m + n)  | Visit each node once
+    Space Complexity:  O(1)      | Reuse nodes with fixed pointers
+    ------------------------------------------------------
+
+    Usage: python3 ./tmp.py
 
 
 *********************************************************
@@ -68,7 +81,32 @@ class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         result = None
         dummy = ListNode(0, list1)
+        current = dummy
+        cur1 = list1
+        cur2 = list2
         x, y = 0
+
+        # If list is empty, return the other
+        if list1 is None:
+            return list2
+        
+        if list2 is None:
+            return list1
+
+        while cur1.next:
+            if cur1.value >= cur2.value:
+                current.next = cur1
+            else:
+                current.next = cur2
+
+
+
+
+
+
+
+
+
 
         while x < linked_list_size(list1) and y < linked_list_size(list2):
             # End of the list checks
@@ -78,8 +116,6 @@ class Solution:
             if list2[y] == null:
                 add list1[x]
                 x++
-
-            # Normal
             if list1[x] >= list2[y]:
                 add list1[x]
                 x++
@@ -87,6 +123,8 @@ class Solution:
                 add list2[y]
                 y++
 
+
+            
 
         return result
 

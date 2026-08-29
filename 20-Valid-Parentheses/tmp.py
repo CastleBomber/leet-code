@@ -40,7 +40,19 @@
         1 <= s.length <= 10^4
         s consists of parentheses only '()[]{}'.
 
-    Usage: python3 ./main.py
+    ------------------------------------------------------
+    Time & Space Complexity: Intended Stack Scan
+    ------------------------------------------------------
+    Let:               n = len(s)
+
+    Algorithm:         Scan left to right, push opening brackets,
+                       and match each closer with the stack top
+
+    Time Complexity:   O(n)  | Examine each bracket once
+    Space Complexity:  O(n)  | Store unmatched opening brackets
+    ------------------------------------------------------
+
+    Usage: python3 ./tmp.py
 
 
 *********************************************************
@@ -71,17 +83,6 @@ class Solution:
         result = False
         stack = []
 
-        # Check that the # elements is not odd
-        if len(s) % 2 == 1:
-            return result
-        
-        brackets = set("()[]{}")
-
-        # Check that each character is a valid
-        for c in s:
-            if c not in brackets:
-                return result
-
         pairs = {
             ")": "(",
             "]": "[",
@@ -91,16 +92,26 @@ class Solution:
             "{": "}",
         }
 
-        # Split in half for string comparison
-        middle = len(s) // 2
-        left = s[:middle]
-        right = s[middle:]
-        right = right[::-1] # flip for easy comparisons
+        # Check that the # elements is not odd
+        if len(s) % 2 == 1:
+            return result
+        
+        brackets = set("()[]{}")
+        check = set()
 
-        # Check that the halves have mirrored pairings
-        for i in range(len(left)):
-            if pairs.get(left[i]) != right[i]:
+        for c in s:
+            # Check that each character is a valid
+            if c not in brackets:
                 return result
+            # Check if it is in the set
+            if c not in check:
+                check.add(c)
+
+
+
+        if pairs.get(c) != right_char:
+
+
 
         result = True
 
