@@ -52,8 +52,16 @@ class ListNode:
         self.val = val
         self.next = next
 
+    def __repr__(self) -> str:
+        """Show a compact value in the debugger."""
+        return f"ListNode({self.val})"
+
 
 class Solution:
+    def __repr__(self) -> str:
+        """Avoid Python's noisy default debugger representation."""
+        return "Solution"
+
     def mergeTwoLists(
         self,
         list1: Optional[ListNode],

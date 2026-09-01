@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File (Clean Debugger)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "showReturnValue": false,
+      "variablePresentation": {
+        "special": "hide"
+      }
+    }
+  ]
+}

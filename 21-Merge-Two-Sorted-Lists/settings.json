@@ -11,8 +11,8 @@
   "editor.inlineSuggest.enabled": false, // Disable ghost-text suggestions (AI or IntelliSense)
   "editor.suggestOnTriggerCharacters": false, // Prevent suggestions from showing by typing a dot or other triggers
   "editor.acceptSuggestionOnEnter": "off", // Avoid accidentally accepting suggestions with Enter
-  "editor.suggest.showWords": true // Optional: still allow manual Ctrl+Space to trigger suggestions
-
+  "editor.suggest.showWords": true, // Optional: still allow manual Ctrl+Space to trigger suggestions
+  "debug.inlineValues": "off" // Debugger, make neater, remove excess
 
 
   // ** Suggestions ON ** //
