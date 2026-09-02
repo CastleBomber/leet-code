@@ -9,7 +9,8 @@
       "console": "integratedTerminal",
       "showReturnValue": false,
       "variablePresentation": {
-        "special": "hide"
+        "special": "hide",
+        "function": "hide"
       }
     }
   ]

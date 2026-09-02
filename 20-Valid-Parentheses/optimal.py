@@ -36,6 +36,10 @@ Space Complexity:  O(n)  | Store unmatched opening brackets
 
 
 class Solution:
+    def __repr__(self) -> str:
+        """Show a compact value in the debugger."""
+        return "Solution"
+
     def isValid(self, s: str) -> bool:
         """
         Determine whether all brackets close in the correct order
