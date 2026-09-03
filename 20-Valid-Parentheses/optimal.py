@@ -47,7 +47,9 @@ class Solution:
         @param s: String containing only bracket characters
         @result: True when the bracket sequence is valid
         """
-        matching_openers = {
+
+        # Holds closing symbols
+        pairs = {
             ")": "(",
             "]": "[",
             "}": "{",
@@ -55,32 +57,35 @@ class Solution:
 
         stack = []
 
-        for bracket in s:
-            if bracket not in matching_openers:
-                stack.append(bracket)
+        for symbol in s:
+            # The symbol is an opener
+            if symbol not in pairs:
+                stack.append(symbol)
                 continue
 
             # A closer must match the most recent unmatched opener
-            if not stack or stack[-1] != matching_openers[bracket]:
+            # The stack is empty or
+            # The latest opening bracket is the wrong type
+            if not stack or stack[-1] != pairs[symbol]:
                 return False
 
             stack.pop()
 
-        # Any remaining opener was never closed
-        return not stack
+        # Returns False if any opening symbols remain unmatched
+        return False if stack else True
 
 
 if __name__ == "__main__":
     sol = Solution()
 
     # Test 1: valid nesting with every bracket type
-    print(sol.isValid("{[()]}"))  # True
+    #print(sol.isValid("{[()]}"))  # True
 
     # Test 2: closing brackets appear in the wrong order
-    # print(sol.isValid("([)]"))  # False
+    #print(sol.isValid("([)]"))  # False
 
     # Test 3: closing bracket has no opening bracket
-    # print(sol.isValid("]"))     # False
+    #print(sol.isValid("]"))     # False
 
     # Test 4: opening brackets remain unmatched
-    # print(sol.isValid("(("))    # False
+    print(sol.isValid("(("))    # False
