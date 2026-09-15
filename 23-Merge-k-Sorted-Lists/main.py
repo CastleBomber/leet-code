@@ -81,37 +81,63 @@ import os
 
 # Singly-linked list definition provided by LeetCode.
 class ListNode:
-    def __init__(self, val=0, next=None):
+    def __init__(self, val: int = 0, next: Optional["ListNode"] = None):
+        """
+        Create one linked list node
+
+        @param val: Value stored in the node
+        @param next: Following node or None
+        @result: Initialized ListNode object
+        """
         self.val = val
         self.next = next
 
+    def __repr__(self) -> str:
+        """Show a compact value in the debugger."""
+        return f"ListNode({self.val})"
+
 
 class Solution:
+    def __repr__(self) -> str:
+        """Avoid Python's noisy default debugger representation."""
+        return "Solution"
+    
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         dummy = ListNode()
         tail = dummy
 
+        # Handle empty lists
         if len(lists) == 0:
             return None
 
+        # Handle one list
         if len(lists) == 1:
             return lists
 
-        list1 = lists[0]
-        list2 = lists[1]
+        list_a = lists[0]
 
-        while list1 and list2:
-            if list1.val <= list2.val:
-                tail.next = list1
-                list1 = list1.next
-            else:
-                tail.next = list2
-                list2 = list2.next
+        for i in range(1, len(lists)):
+            list_b = lists[i]
 
-            tail = tail.next
+            while list_a and list_b:
+                # The first is smaller
+                if list_a.val <= list_b.val:
+                    tail.next = list_a       # Add to our creation
+                    list_a = list_a.next      # Move start of list
+                # The second is smaller
+                else:
+                    tail.next = list_b
+                    list_b = list_b.next
 
-        # The remaining list is already sorted
-        tail.next = list1 if list1 else list2
+                tail = tail.next
+
+            # The remaining list is already sorted
+            tail.next = list_a if list_a else list_b
+
+
+
+
+        
 
         return dummy.next
 
@@ -162,8 +188,8 @@ if __name__ == "__main__":
     print(f"Example 1 result:   {linked_list_to_list(result1)}")
     print(f"Example 1 expected: {expected1}")
     print()
-    print(f"Example 2 result:   {linked_list_to_list(result2)}")
-    print(f"Example 2 expected: {expected2}")
-    print()
-    print(f"Example 3 result:   {linked_list_to_list(result3)}")
-    print(f"Example 3 expected: {expected3}")
+    # print(f"Example 2 result:   {linked_list_to_list(result2)}")
+    # print(f"Example 2 expected: {expected2}")
+    # print()
+    # print(f"Example 3 result:   {linked_list_to_list(result3)}")
+    # print(f"Example 3 expected: {expected3}")

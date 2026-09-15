@@ -7,8 +7,8 @@ Date:   September 9th, 2026
 LeetCode: #22 Generate Parentheses
 URL: https://leetcode.com/problems/generate-parentheses/
 
-Given n pairs of parentheses, generate every combination of
-well-formed parentheses.
+Given n pairs of parentheses, 
+generate every combination of well-formed parentheses.
 
 Examples:
     n = 3  -> ["((()))", "(()())", "(())()", "()(())", "()()()"]
@@ -33,6 +33,10 @@ from typing import List
 
 
 class Solution:
+    def __repr__(self) -> str:
+        """Avoid Python's noisy default debugger representation."""
+        return "Solution"
+
     def generateParenthesis(self, n: int) -> List[str]:
         """
         Generate every well-formed arrangement of n parenthesis pairs
@@ -75,11 +79,11 @@ if __name__ == "__main__":
     sol = Solution()
 
     # Test 1: standard example with multiple nesting patterns
-    print(sol.generateParenthesis(3))
+    #print(sol.generateParenthesis(3))
     # ["((()))", "(()())", "(())()", "()(())", "()()()"]
 
     # Test 2: minimum input
-    # print(sol.generateParenthesis(1))  # [()]
+    #print(sol.generateParenthesis(1))  # [()]
 
     # Test 3: deeper branching with fourteen valid results
-    # print(sol.generateParenthesis(4))  # 14 combinations
+    print(sol.generateParenthesis(4))  # 14 combinations

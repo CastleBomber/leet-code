@@ -34,6 +34,10 @@ import os
 
 
 class Solution:
+    def __repr__(self) -> str:
+        """Avoid Python's noisy default debugger representation."""
+        return "Solution"
+
     def func(self, root) -> bool:
         
         return True
