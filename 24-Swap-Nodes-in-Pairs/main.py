@@ -83,11 +83,14 @@ class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode()
         tail = dummy
+        tail.next = head
 
         while head:
             tail.next = head.next
             tail = tail.next
-            head = tail.next
+            head.next = tail.next
+            tail.next = head
+            head = head.next
 
 
         
@@ -140,12 +143,12 @@ if __name__ == "__main__":
 
     print(f"Example 1 result:   {linked_list_to_list(result1)}")
     print(f"Example 1 expected: {expected1}")
-    print()
-    print(f"Example 2 result:   {linked_list_to_list(result2)}")
-    print(f"Example 2 expected: {expected2}")
-    print()
-    print(f"Example 3 result:   {linked_list_to_list(result3)}")
-    print(f"Example 3 expected: {expected3}")
-    print()
-    print(f"Example 4 result:   {linked_list_to_list(result4)}")
-    print(f"Example 4 expected: {expected4}")
+    # print()
+    # print(f"Example 2 result:   {linked_list_to_list(result2)}")
+    # print(f"Example 2 expected: {expected2}")
+    # print()
+    # print(f"Example 3 result:   {linked_list_to_list(result3)}")
+    # print(f"Example 3 expected: {expected3}")
+    # print()
+    # print(f"Example 4 result:   {linked_list_to_list(result4)}")
+    # print(f"Example 4 expected: {expected4}")

@@ -41,17 +41,9 @@
         lists[i] is sorted in ascending order.
         The sum of lists[i].length will not exceed 10^4.
 
-    ------------------------------------------------------
-    Time & Space Complexity: Intended Sequential Merge
-    ------------------------------------------------------
-    Let:               N = total nodes, k = number of lists
+    Solution:
+        Accepted - 134 / 134 testcases passed
 
-    Algorithm:         Merge two lists with pointers, then repeatedly
-                       merge each remaining list into the result
-
-    Time Complexity:   O(N * k)  | Earlier nodes may be scanned repeatedly
-    Space Complexity:  O(1)      | Reuse nodes with fixed pointers
-    ------------------------------------------------------
 
     Usage: python3 ./main.py
 
@@ -104,7 +96,6 @@ class Solution:
     
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         dummy = ListNode()
-        tail = dummy
 
         # Handle empty lists
         if len(lists) == 0:
@@ -112,32 +103,28 @@ class Solution:
 
         # Handle one list
         if len(lists) == 1:
-            return lists
+            return lists[0]
 
-        list_a = lists[0]
+        list1 = lists[0]
 
         for i in range(1, len(lists)):
-            list_b = lists[i]
+            list2 = lists[i]
+            tail = dummy
 
-            while list_a and list_b:
-                # The first is smaller
-                if list_a.val <= list_b.val:
-                    tail.next = list_a       # Add to our creation
-                    list_a = list_a.next      # Move start of list
-                # The second is smaller
-                else:
-                    tail.next = list_b
-                    list_b = list_b.next
+            while list1 and list2:
+                
+                if list1.val <= list2.val:  # The first is smaller
+                    tail.next = list1       # Add to our creation  (fix!!! making a loop)
+                    list1 = list1.next      # Move start of list
+                else:                       # The second is smaller
+                    tail.next = list2
+                    list2 = list2.next
 
                 tail = tail.next
 
             # The remaining list is already sorted
-            tail.next = list_a if list_a else list_b
-
-
-
-
-        
+            tail.next = list1 if list1 else list2
+            list1 = dummy.next
 
         return dummy.next
 
@@ -160,7 +147,7 @@ def linked_list_to_list(head: Optional[ListNode]) -> List[int]:
     current = head
 
     while current:
-        values.append(current.val)
+        values.append(current.val)  # WARNING: REQUIRES SPECIFIC RETURN OUTPUTS
         current = current.next
 
     return values
@@ -188,8 +175,8 @@ if __name__ == "__main__":
     print(f"Example 1 result:   {linked_list_to_list(result1)}")
     print(f"Example 1 expected: {expected1}")
     print()
-    # print(f"Example 2 result:   {linked_list_to_list(result2)}")
-    # print(f"Example 2 expected: {expected2}")
-    # print()
-    # print(f"Example 3 result:   {linked_list_to_list(result3)}")
-    # print(f"Example 3 expected: {expected3}")
+    print(f"Example 2 result:   {linked_list_to_list(result2)}")
+    print(f"Example 2 expected: {expected2}")
+    print()
+    print(f"Example 3 result:   {linked_list_to_list(result3)}")
+    print(f"Example 3 expected: {expected3}")
