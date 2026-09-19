@@ -34,7 +34,6 @@ Let: N = total nodes, k = number of lists
 
 Time Complexity: O(N log k) | Push and pop each node once
 Space Complexity: O(k) | Store at most one node per list
-
 ------------------------------------------------------
 
 ********************************************************
@@ -59,9 +58,33 @@ class ListNode:
 
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        """
+        Merga all sorted linked lists using a min-heap
 
+        @param lists: Heads of the sorted linked lists
+        @result: Head of the merged sorted linked list
+        """
+        min_heap = []
 
-        return 0
+        # Add the first node from every nonempty list
+        for list_index, node in enumerate(lists):
+            if node:
+                heappush(min_heap, (node.val, list_index, node))
+
+        dummy = ListNode()
+        tail = dummy
+
+        while min_heap:
+            _, list_index, node = heappop(min_heap)
+
+            tail.next = node
+            tail = tail.next
+
+            # Replace the removed node with the next node from its list
+            if node.next:
+                heappush(min_heap, (node.next.val, list_index, node.next))
+
+        return dummy.next
 
 
 def build_linked_list(values: List[int]) -> Optional[ListNode]:
@@ -126,3 +149,4 @@ if __name__ == "__main__":
     # merged = sol.mergeKLists(lists)
     # print(linked_list_to_list(merged))
     # [-3, -2, -1, -1, 0, 0, 3, 4, 5]
+

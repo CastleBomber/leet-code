@@ -44,6 +44,17 @@
     Solution:
         Accepted - 134 / 134 testcases passed
 
+    ------------------------------------------------------
+    Time & Space Complexity: Sequential Two-List Merge 
+    ------------------------------------------------------
+    Let:               N = total nodes, k = number of lists
+
+    Each Merge:        O(nodes merged so far + nodes in next list)
+
+    Time Complexity:   O(N * k)  | Earlier nodes may be scanned again
+    Space Complexity:  O(1)      | Reuse nodes with fixed pointers
+    ------------------------------------------------------
+
 
     Usage: python3 ./main.py
 
