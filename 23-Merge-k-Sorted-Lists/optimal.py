@@ -55,8 +55,16 @@ class ListNode:
         self.val = val
         self.next = next
 
+    def __repr__(self) -> str:
+        """Show a compact value in the debugger."""
+        return f"ListNode({self.val})"
+
 
 class Solution:
+    def __repr__(self) -> str:
+            """Avoid Python's noisy default debugger representation."""
+            return "Solution"
+    
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         """
         Merge all sorted linked lists using a min-heap
@@ -69,13 +77,13 @@ class Solution:
         # Add the first node from every nonempty list
         for list_index, node in enumerate(lists):
             if node:
-                heappush(min_heap, (node.val, list_index, node))
+                heappush(min_heap, (node.val, list_index, node)) # Push: heap and tuple containing (value, list index, node)
 
         dummy = ListNode()
         tail = dummy
 
         while min_heap:
-            _, list_index, node = heappop(min_heap)
+            _, list_index, node = heappop(min_heap)  # Pop smallest tuple; value unpacked (unused), index, node
 
             tail.next = node
             tail = tail.next
@@ -125,27 +133,27 @@ if __name__ == "__main__":
     sol = Solution()
 
     # Test 1: standard example with three lists
-    lists = [
-        build_linked_list([1, 4, 5]),
-        build_linked_list([1, 3, 4]),
-        build_linked_list([2, 6]),
-    ]
-    merged = sol.mergeKLists(lists)
-    print(linked_list_to_list(merged))  # [1, 1, 2, 3, 4, 4, 5, 6]
-
-    # Test 2: no lists
-    # print(linked_list_to_list(sol.mergeKLists([])))  # []
-
-    # Test 3: one empty list
-    # print(linked_list_to_list(sol.mergeKLists([None])))  # []
-
-    # Test 4: empty lists with negatives and duplicates
     # lists = [
-    #     build_linked_list([-3, -1, 4]),
-    #     None,
-    #     build_linked_list([-2, -1, 3]),
-    #     build_linked_list([0, 0, 5]),
+    #     build_linked_list([1, 4, 5]),
+    #     build_linked_list([1, 3, 4]),
+    #     build_linked_list([2, 6]),
     # ]
     # merged = sol.mergeKLists(lists)
-    # print(linked_list_to_list(merged))
-    # [-3, -2, -1, -1, 0, 0, 3, 4, 5]
+    # print(linked_list_to_list(merged))  # [1, 1, 2, 3, 4, 4, 5, 6]
+
+    # Test 2: no lists
+    #print(linked_list_to_list(sol.mergeKLists([])))  # []
+
+    # Test 3: one empty list
+    #print(linked_list_to_list(sol.mergeKLists([None])))  # []
+
+    # Test 4: empty list, negatives and duplicates
+    lists = [
+        build_linked_list([-3, -1, 4]),
+        None,
+        build_linked_list([-2, -1, 3]),
+        build_linked_list([0, 0, 5]),
+    ]
+    merged = sol.mergeKLists(lists)
+    print(linked_list_to_list(merged))
+    [-3, -2, -1, -1, 0, 0, 3, 4, 5]

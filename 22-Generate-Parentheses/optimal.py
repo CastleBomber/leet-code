@@ -17,6 +17,9 @@ Examples:
 Constraints:
     1 <= n <= 8
 
+Notes:
+    Catalan number - # of valid arrangements that exist for a nested structure
+
 ------------------------------------------------------
 Time & Space Complexity: Recursion + Backtracking
 ------------------------------------------------------
@@ -44,8 +47,8 @@ class Solution:
         @param n: Number of parenthesis pairs
         @result: List of every valid parenthesis string
         """
-        result = []
-        path = []
+        result = [] # Holds all valid combinations
+        path = []   # Holds current combination 
 
         def backtrack(open_count: int, close_count: int) -> None:
             """
@@ -55,6 +58,7 @@ class Solution:
             @param close_count: Number of closing parentheses in the path
             @result: None, completed strings are added to result
             """
+            # Save a valid combination
             if len(path) == 2 * n:
                 result.append("".join(path))
                 return
