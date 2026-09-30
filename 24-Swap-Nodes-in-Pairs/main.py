@@ -34,17 +34,20 @@
         The number of nodes in the list is in the range [0, 100].
         0 <= Node.val <= 100
 
-    Usage: python3 ./main.py
+    Usage: 
+        python3 ./main.py
+
+    Solution: 
+        55 / 55 testcases passed
 
 ------------------------------------------------------
-Time & Space Complexity: Intended Iterative Pair Swapping
+Time & Space Complexity: Iterative Pair Swapping
 ------------------------------------------------------
 Let:               n = number of nodes
 
 Time Complexity:   O(n)  | Visit each pair once and rewire its links
 Space Complexity:  O(1)  | Reuse nodes with a dummy node and fixed pointers
 
-Describes the intended approach; the implementation is unfinished
 Auxiliary space excludes the local test helpers
 ------------------------------------------------------
 
@@ -99,7 +102,7 @@ class Solution:
         tail = dummy
         tail.next = head
 
-        while head:
+        while head and head.next:
             tail.next = head.next
             tail = head
             head = head.next.next
@@ -148,18 +151,18 @@ if __name__ == "__main__":
 
     sol = Solution()
     result1 = sol.swapPairs(head1)
-    # result2 = sol.swapPairs(head2)
-    # result3 = sol.swapPairs(head3)
-    # result4 = sol.swapPairs(head4)
+    result2 = sol.swapPairs(head2)
+    result3 = sol.swapPairs(head3)
+    result4 = sol.swapPairs(head4)
 
     print(f"Example 1 result:   {linked_list_to_list(result1)}")
     print(f"Example 1 expected: {expected1}")
-    # print()
-    # print(f"Example 2 result:   {linked_list_to_list(result2)}")
-    # print(f"Example 2 expected: {expected2}")
-    # print()
-    # print(f"Example 3 result:   {linked_list_to_list(result3)}")
-    # print(f"Example 3 expected: {expected3}")
-    # print()
-    # print(f"Example 4 result:   {linked_list_to_list(result4)}")
-    # print(f"Example 4 expected: {expected4}")
+    print()
+    print(f"Example 2 result:   {linked_list_to_list(result2)}")
+    print(f"Example 2 expected: {expected2}")
+    print()
+    print(f"Example 3 result:   {linked_list_to_list(result3)}")
+    print(f"Example 3 expected: {expected3}")
+    print()
+    print(f"Example 4 result:   {linked_list_to_list(result4)}")
+    print(f"Example 4 expected: {expected4}")
