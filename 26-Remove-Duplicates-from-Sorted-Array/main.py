@@ -7,15 +7,17 @@
     LeetCode: #26 Remove Duplicates from Sorted Array
     URL: https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 
-    Given an integer array nums sorted in non-decreasing order, remove the
-    duplicates in-place such that each unique element appears only once. The
-    relative order of the elements should be kept the same.
+    Given an integer array nums sorted in non-decreasing order, 
+    remove the duplicates in-place such that each unique element appears only once. 
+    The relative order of the elements should be kept the same.
 
-    Let k be the number of unique elements in nums. After removing the
-    duplicates, return k.
+    Let k be the number of unique elements in nums. 
+    After removing the duplicates, 
+    return k.
 
-    The first k elements of nums should contain the unique numbers in sorted
-    order. The remaining elements beyond index k - 1 can be ignored.
+    The first k elements of nums 
+    should contain the unique numbers in sorted order. 
+    The remaining elements beyond index k - 1 can be ignored.
 
     Custom Judge:
         The judge calls removeDuplicates(nums), verifies that the returned k
@@ -73,6 +75,13 @@ class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
         result = 0
 
+        x = nums[0]
+
+        for i, value in enumerate(nums):
+            print(i)
+            print(value)
+
+
         return result
 
 
@@ -87,14 +96,14 @@ if __name__ == "__main__":
 
     sol = Solution()
     result1 = sol.removeDuplicates(nums1)
-    result2 = sol.removeDuplicates(nums2)
+    # result2 = sol.removeDuplicates(nums2)
 
     print(f"Example 1 k result:    {result1}")
     print(f"Example 1 k expected:  {expected_k1}")
     print(f"Example 1 nums result: {nums1[:result1]}")
     print(f"Example 1 nums expected: {expected_nums1}")
     print()
-    print(f"Example 2 k result:    {result2}")
-    print(f"Example 2 k expected:  {expected_k2}")
-    print(f"Example 2 nums result: {nums2[:result2]}")
-    print(f"Example 2 nums expected: {expected_nums2}")
+    # print(f"Example 2 k result:    {result2}")
+    # print(f"Example 2 k expected:  {expected_k2}")
+    # print(f"Example 2 nums result: {nums2[:result2]}")
+    # print(f"Example 2 nums expected: {expected_nums2}")
