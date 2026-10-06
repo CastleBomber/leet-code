@@ -36,6 +36,20 @@
 
     Usage: python3 ./main.py
 
+    Solution:
+        Accepted - 62 / 62 testcases passed
+
+------------------------------------------------------
+Time & Space Complexity: Stack-Based Group Reversal
+------------------------------------------------------
+Let:               n = number of nodes, k = group size
+
+Time Complexity:   O(n)  | Push each node once; pop each complete group
+Space Complexity:  O(k)  | Store up to k node references in the stack
+
+An incomplete final group keeps its original links
+Auxiliary space excludes the local test helpers
+------------------------------------------------------
 
 *********************************************************
 """
@@ -84,15 +98,37 @@ class Solution:
         return "Solution"
 
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        dummy = ListNode(next=head)
+        tail = dummy
 
+        stack = []
 
+        while head:
+            s = 0
 
+            # Push to stack
+            while s < k:
+                if head:
+                    stack.append(head)
+                    head = head.next
+                s = s + 1
 
+            # Breaks loop after k elements not met
+            if len(stack) < k:
+                return dummy.next
 
+            t = 0
 
-        
+            # Pop from stack
+            while t < k:
+                node = stack.pop()
+                tail.next = node 
+                tail = tail.next
+                t = t + 1
 
-        return 0
+            tail.next = head
+
+        return dummy.next
 
 
 # Build a linked list from LeetCode's example values for local testing.
@@ -128,12 +164,20 @@ if __name__ == "__main__":
     k2 = 3
     expected2 = [3, 2, 1, 4, 5]
 
+    head3 = build_linked_list([1, 2])
+    k3 = 2
+    expected3 = [2,1] # testing
+
     sol = Solution()
     result1 = sol.reverseKGroup(head1, k1)
     result2 = sol.reverseKGroup(head2, k2)
+    result3 = sol.reverseKGroup(head3, k3)
 
     print(f"Example 1 result:   {linked_list_to_list(result1)}")
     print(f"Example 1 expected: {expected1}")
     print()
     print(f"Example 2 result:   {linked_list_to_list(result2)}")
     print(f"Example 2 expected: {expected2}")
+    print()
+    print(f"Example 3 result:   {linked_list_to_list(result3)}")
+    print(f"Example 3 expected: {expected3}")
