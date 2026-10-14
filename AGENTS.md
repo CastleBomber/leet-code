@@ -14,14 +14,21 @@ When the user requests a "golden Python LeetCode skeleton":
   - Problem number, official title, and LeetCode URL
   - Complete problem statement, official examples with explanations,
     constraints, and any official follow-ups
+  - A `Hints` section when LeetCode provides official hints, with each
+    hint labeled `Hint 1`, `Hint 2`, etc., in the original order and in
+    sentence/paragraph form
   - `Usage: python3 ./main.py`
 - Use the supplied problem statement or verify the official LeetCode
-  source. Do not invent missing problem details or follow-ups.
+  source, including its hints. Include all available official hints in
+  the top module docstring, preserving their meaning and paragraph form.
+  Omit the Hints section when none are provided. Do not invent missing
+  problem details, follow-ups, or hints.
 - Preserve LeetCode's Python 3 solution class and exact method signature,
   including parameter names and type annotations.
 - Leave the algorithm unimplemented. Add a clear TODO and a minimal
   placeholder return compatible with the expected return type so the
-  local examples can run. Do not add solution hints unless requested.
+  local examples can run. Include the official LeetCode hints as required
+  above, but do not add extra solution hints unless requested.
 - Add `Solution.__repr__` returning `"Solution"` to reduce debugger noise.
 - Include any required LeetCode structures, such as `ListNode` or
   `TreeNode`, with compatible constructors and compact, nonrecursive

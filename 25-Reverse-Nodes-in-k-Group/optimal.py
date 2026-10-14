@@ -7,9 +7,11 @@ Date:   October 5th, 2026
 LeetCode: #25 Reverse Nodes in k-Group
 URL: https://leetcode.com/problems/reverse-nodes-in-k-group/
 
-Reverse the linked list's nodes in groups of k and return
-the modified head. Keep any incomplete final group unchanged.
-Change the links, not the values stored in the nodes.
+Reverse the linked list's nodes in groups of k and 
+return the modified head. 
+Keep any incomplete final group unchanged.
+Change the links, 
+not the values stored in the nodes.
 
 Examples:
     head = [1, 2, 3, 4, 5], k = 2  -> [2, 1, 4, 3, 5]
@@ -67,6 +69,7 @@ class Solution:
         @param k: Number of nodes per group, with k >= 1
         @result: Modified head, with any incomplete final group unchanged
         """
+        # Handle empty list or list with one node
         if head is None or k == 1:
             return head
 
@@ -78,6 +81,8 @@ class Solution:
             group_end = group_previous
             for _ in range(k):
                 group_end = group_end.next
+
+                # We have reached the end of the list
                 if group_end is None:
                     return dummy.next
 

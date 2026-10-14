@@ -41,8 +41,22 @@
         -100 <= nums[i] <= 100
         nums is sorted in non-decreasing order.
 
+    Solution:
+        Accepted - 362 / 362 testcases passed
+
     Usage: python3 ./main.py
 
+------------------------------------------------------
+Time & Space Complexity: Two Pointers + Duplicate Counting
+------------------------------------------------------
+Let:               n = len(nums)
+
+Time Complexity:   O(n)  | head scans once; tail advances for unique values
+Space Complexity:  O(1)  | Modify nums in place with fixed indices and a counter
+
+Duplicate markers overwrite existing slots without growing the list
+Auxiliary space excludes slices used only to display local test results
+------------------------------------------------------
 
 *********************************************************
 """
@@ -73,16 +87,24 @@ class Solution:
         return "Solution"
 
     def removeDuplicates(self, nums: List[int]) -> int:
-        result = 0
+        tail = 0
+        head = 1
+        hyphens = 0
 
-        x = nums[0]
+        if len(nums) <= 1:
+            return len(nums)
 
-        for i, value in enumerate(nums):
-            print(i)
-            print(value)
+        while head < len(nums):
+            # If the next eleemnt exists and matches the current
+            if nums[tail] == nums[head]:
+                nums[head] = "_"
+                hyphens = hyphens + 1
+            else:
+                tail = tail + 1
+                nums[tail] = nums[head]
+            head = head + 1
 
-
-        return result
+        return len(nums) - hyphens
 
 
 if __name__ == "__main__":
@@ -94,16 +116,36 @@ if __name__ == "__main__":
     expected_k2 = 5
     expected_nums2 = [0, 1, 2, 3, 4]
 
+    nums3 = [] # New test
+    expected_k3 = 0
+    expected_nums3 = []
+
+    nums4 = [1] # New test
+    expected_k4 = 1
+    expected_nums4 = [1]
+
     sol = Solution()
     result1 = sol.removeDuplicates(nums1)
-    # result2 = sol.removeDuplicates(nums2)
+    result2 = sol.removeDuplicates(nums2)
+    result3 = sol.removeDuplicates(nums3)
+    result4 = sol.removeDuplicates(nums4)
 
     print(f"Example 1 k result:    {result1}")
     print(f"Example 1 k expected:  {expected_k1}")
     print(f"Example 1 nums result: {nums1[:result1]}")
     print(f"Example 1 nums expected: {expected_nums1}")
     print()
-    # print(f"Example 2 k result:    {result2}")
-    # print(f"Example 2 k expected:  {expected_k2}")
-    # print(f"Example 2 nums result: {nums2[:result2]}")
-    # print(f"Example 2 nums expected: {expected_nums2}")
+    print(f"Example 2 k result:    {result2}")
+    print(f"Example 2 k expected:  {expected_k2}")
+    print(f"Example 2 nums result: {nums2[:result2]}")
+    print(f"Example 2 nums expected: {expected_nums2}")
+    print()
+    print(f"Example 3 k result:    {result3}")
+    print(f"Example 3 k expected:  {expected_k3}")
+    print(f"Example 3 nums result: {nums3[:result3]}")
+    print(f"Example 3 nums expected: {expected_nums3}")
+    print()
+    print(f"Example 4 k result:    {result4}")
+    print(f"Example 4 k expected:  {expected_k4}")
+    print(f"Example 4 nums result: {nums4[:result4]}")
+    print(f"Example 4 nums expected: {expected_nums4}")
