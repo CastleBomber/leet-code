@@ -7,24 +7,21 @@
     LeetCode: #28 Find the Index of the First Occurrence in a String
     URL: https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/
 
-    Problem statement (paraphrased):
-        Locate needle within haystack and return its earliest starting
-        index (zero-based). Return -1 when no matching substring exists.
+    Given two strings needle and haystack, 
+    return the index of the first occurrence of needle in haystack, 
+    or -1 if needle is not part of haystack.
 
     Example 1:
         Input: haystack = "sadbutsad", needle = "sad"
         Output: 0
-        Explanation: Matches begin at positions 0 and 6; choose 0 because
-        it is the earlier position.
 
     Example 2:
         Input: haystack = "leetcode", needle = "leeto"
         Output: -1
-        Explanation: There is no matching substring, so the result is -1.
 
     Constraints:
-        Each string has between 1 and 10,000 characters, inclusive.
-        Both strings use lowercase English letters exclusively.
+        1 <= haystack.length, needle.length <= 10^4
+        haystack and needle consist of only lowercase English characters.
 
     Usage: python3 ./main.py
 *********************************************************
@@ -56,7 +53,23 @@ class Solution:
         return "Solution"
 
     def strStr(self, haystack: str, needle: str) -> int:
-        # TODO: Implement the solution
+        i = 0
+        
+        # Check on the needle and haystack sizes
+        if len(needle) > len(haystack):
+            return -1
+
+        for i in range(0, len(haystack)):
+            j = 0
+            letters_matched = 0
+
+            while j < len(needle) and needle[j] == haystack[i+j]:
+                letters_matched = letters_matched + 1
+                j = j + 1
+
+            if letters_matched == len(needle):
+                return i
+
         return -1
 
 
@@ -69,12 +82,20 @@ if __name__ == "__main__":
     needle2 = "leeto"
     expected2 = -1
 
-    sol = Solution()
-    result1 = sol.strStr(haystack1, needle1)
-    result2 = sol.strStr(haystack2, needle2)
+    haystack3 = "mississippi"
+    needle3 = "issip"
+    expected3 = 4
 
-    print(f"Example 1 result:   {result1}")
-    print(f"Example 1 expected: {expected1}")
+    sol = Solution()
+    # result1 = sol.strStr(haystack1, needle1)
+    #result2 = sol.strStr(haystack2, needle2)
+    result3 = sol.strStr(haystack3, needle3)
+
+    # print(f"Example 1 result:   {result1}")
+    # print(f"Example 1 expected: {expected1}")
+    # print()
+    # print(f"Example 2 result:   {result2}")
+    # print(f"Example 2 expected: {expected2}")
     print()
-    print(f"Example 2 result:   {result2}")
-    print(f"Example 2 expected: {expected2}")
+    print(f"Example 3 result:   {result3}")
+    print(f"Example 3 expected: {expected3}")

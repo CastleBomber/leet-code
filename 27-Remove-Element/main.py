@@ -7,29 +7,29 @@
     LeetCode: #27 Remove Element
     URL: https://leetcode.com/problems/remove-element/
 
-    Problem statement (paraphrased):
-        Modify the integer array nums in place to exclude every occurrence
-        of val. Return k, the count of retained elements. Store those
-        elements in nums[:k]; their order is unrestricted. Entries beyond
-        that prefix and the array's final size do not affect correctness.
+    Given an integer array nums and an integer val, 
+    remove all occurrences val in nums in-place. 
+    The order of the elements may be changed.
 
-    Custom judge behavior:
-        The judge supplies nums, val, and a sorted expected array without
-        val. It calls removeElement, checks that k equals the expected
-        length, sorts the first k entries, and compares each against the
-        expected array. Every check must succeed.
+    Then return the number of elements in nums 
+    which are not equal to val.
+
+    Consider the number of elements in nums 
+    which are not equal to val be k,
+    to get accepted, you need to do the following things:
+
+    - Change the array nums such that the first k elements of nums contain
+      the elements which are not equal to val. The remaining elements of
+      nums are not important as well as the size of nums.
+    - Return k.
 
     Example 1:
         Input: nums = [3,2,2,3], val = 3
         Output: 2, nums = [2,2,_,_]
-        Explanation: Return 2 and place two 2s in the leading positions.
-        Underscores denote ignored entries.
 
     Example 2:
         Input: nums = [0,1,2,2,3,0,4,2], val = 2
         Output: 5, nums = [0,1,4,0,3,_,_,_]
-        Explanation: Return 5. The prefix must contain 0, 0, 1, 3, and 4
-        in any order; subsequent entries are ignored.
 
     Constraints:
         0 <= nums.length <= 100
@@ -66,8 +66,22 @@ class Solution:
         return "Solution"
 
     def removeElement(self, nums: List[int], val: int) -> int:
-        # TODO: Implement the solution
-        return 0
+        count = 0
+        start = 0
+        end = len(nums) - 1
+
+        while start < end:
+            if nums[start] == val:
+                # Swap
+                tmp = nums[start]
+                nums[start] = nums[end]
+                nums[end] = tmp
+                end = end - 1
+                count = count + 1
+            else:
+                start = start + 1
+
+        return count
 
 
 if __name__ == "__main__":
@@ -82,14 +96,14 @@ if __name__ == "__main__":
     expected_nums2 = [0, 1, 4, 0, 3]
 
     sol = Solution()
-    result1 = sol.removeElement(nums1, val1)
+    # result1 = sol.removeElement(nums1, val1)
     result2 = sol.removeElement(nums2, val2)
 
-    print(f"Example 1 result k:        {result1}")
-    print(f"Example 1 expected k:      {expected1}")
-    print(f"Example 1 nums after call: {nums1}")
-    print(f"Example 1 actual prefix:   {nums1[:result1]}")
-    print(f"Example 1 expected prefix: {expected_nums1} (any order)")
+    # print(f"Example 1 result k:        {result1}")
+    # print(f"Example 1 expected k:      {expected1}")
+    # print(f"Example 1 nums after call: {nums1}")
+    # print(f"Example 1 actual prefix:   {nums1[:result1]}")
+    # print(f"Example 1 expected prefix: {expected_nums1} (any order)")
     print()
     print(f"Example 2 result k:        {result2}")
     print(f"Example 2 expected k:      {expected2}")

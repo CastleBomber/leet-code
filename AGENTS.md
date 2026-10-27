@@ -1,3 +1,13 @@
+## Problem wording conventions
+
+- For both golden skeletons and golden solutions, use LeetCode's original
+  problem wording; do not paraphrase the statement, explanations, or hints.
+- When the full original text cannot be reproduced from an external source,
+  ask the user to provide it and preserve that supplied wording exactly.
+  Keep the official URL available; do not silently substitute a summary.
+- Do not add a `Problem statement (paraphrased):` label, custom-judge
+  sections, or `TODO: Implement the solution` comments.
+
 ## Golden Python LeetCode skeleton
 
 When the user requests a "golden Python LeetCode skeleton":
@@ -25,9 +35,10 @@ When the user requests a "golden Python LeetCode skeleton":
   problem details, follow-ups, or hints.
 - Preserve LeetCode's Python 3 solution class and exact method signature,
   including parameter names and type annotations.
-- Leave the algorithm unimplemented. Add a clear TODO and a minimal
+- Leave the algorithm unimplemented. Use a minimal
   placeholder return compatible with the expected return type so the
-  local examples can run. Include the official LeetCode hints as required
+  local examples can run. Do not add TODO comments.
+  Include the official LeetCode hints as required
   above, but do not add extra solution hints unless requested.
 - Add `Solution.__repr__` returning `"Solution"` to reduce debugger noise.
 - Include any required LeetCode structures, such as `ListNode` or
@@ -68,7 +79,8 @@ When asked for a **“golden Python LeetCode solution”**:
   - `Author: ChatGPT + CBOMBS`
   - Current date
   - LeetCode number, title, and problem URL
-  - Short problem description, examples, and constraints
+  - Original problem wording, examples, and constraints, following the
+    problem wording conventions above
   - Quick time and space complexity chart
 - Define complexity variables and distinguish auxiliary space from output storage
 - Exclude local testing helpers from the algorithm’s complexity
