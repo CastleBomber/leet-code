@@ -37,6 +37,10 @@
         0 <= val <= 100
 
     Usage: python3 ./main.py
+
+
+    Accepted - 116 / 116 testcases passed
+
 *********************************************************
 """
 
@@ -70,16 +74,16 @@ class Solution:
         start = 0
         end = len(nums) - 1
 
-        while start < end:
+        while start <= end:
             if nums[start] == val:
                 # Swap
                 tmp = nums[start]
                 nums[start] = nums[end]
                 nums[end] = tmp
                 end = end - 1
-                count = count + 1
             else:
                 start = start + 1
+                count = count + 1
 
         return count
 
